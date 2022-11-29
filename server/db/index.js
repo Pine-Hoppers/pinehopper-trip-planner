@@ -14,8 +14,8 @@ Trip.belongsTo(User);
 User.hasOne(Wishlist);
 Wishlist.belongsTo(User);
 
-Wishlist.hasMany(Activity);
-Activity.belongsTo(Wishlist);
+Activity.hasMany(Wishlist);
+Wishlist.belongsTo(Activity);
 
 Trip.hasMany(Activity);
 Activity.belongsTo(Trip);
