@@ -20,24 +20,6 @@ async function seed() {
 
   randomUsers.push(
     User.create({
-      firstName: 'Cody',
-      lastName: 'the Pug',
-      email: 'codythepug@gmail.com',
-      password: 'pug',
-    })
-  );
-
-  randomUsers.push(
-    User.create({
-      firstName: 'Murphy',
-      lastName: 'the Lizard',
-      email: 'murphythelizard@gmail.com',
-      password: 'lizard',
-    })
-  );
-
-  randomUsers.push(
-    User.create({
       firstName: 'Nadia',
       lastName: 'Harris',
       email: 'nadia.khristean@gmail.com',
@@ -66,10 +48,10 @@ async function seed() {
   Array.from({ length: 10 }).forEach(() => {
     randomUsers.push(
       User.create({
-        email: faker.internet.email(),
-        password: faker.internet.password(),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
       })
     );
   });
@@ -80,8 +62,8 @@ async function seed() {
   console.log(`seeded successfully`);
   return {
     users: {
-      cody: users[0],
-      murphy: users[1],
+      nadia: users[0],
+      christine: users[1],
     },
   };
 }
