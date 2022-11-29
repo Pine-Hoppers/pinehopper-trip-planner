@@ -17,7 +17,7 @@ const Activity = db.define("activity", {
     },
   },
   images: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.ARRAY(DataTypes.TEXT),
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -54,10 +54,6 @@ const Activity = db.define("activity", {
 
   feeDescription: {
     type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   doFeesApply: {
     type: DataTypes.STRING,
@@ -74,14 +70,10 @@ const Activity = db.define("activity", {
     },
   },
   petsDescription: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: DataTypes.TEXT,
   },
   activity_category: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -95,14 +87,10 @@ const Activity = db.define("activity", {
     },
   },
   longDescription: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: DataTypes.TEXT,
   },
   additional_category: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -116,11 +104,7 @@ const Activity = db.define("activity", {
     },
   },
   accessibilityInformation: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: DataTypes.TEXT,
   },
 
   tags: {
