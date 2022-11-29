@@ -20,6 +20,24 @@ async function seed() {
 
   randomUsers.push(
     User.create({
+      firstName: 'Cody',
+      lastName: 'the Pug',
+      email: 'codythepug@gmail.com',
+      password: 'pug',
+    })
+  );
+
+  randomUsers.push(
+    User.create({
+      firstName: 'Murphy',
+      lastName: 'the Lizard',
+      email: 'murphythelizard@gmail.com',
+      password: 'lizard',
+    })
+  );
+
+  randomUsers.push(
+    User.create({
       firstName: 'Nadia',
       lastName: 'Harris',
       email: 'nadia.khristean@gmail.com',
