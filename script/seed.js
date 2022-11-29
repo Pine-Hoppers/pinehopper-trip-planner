@@ -1,10 +1,10 @@
-"use strict";
-import { faker } from "@faker-js/faker";
+'use strict';
+import { faker } from '@faker-js/faker';
 
 const {
   db,
   models: { User },
-} = require("../server/db");
+} = require('../server/db');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,37 +12,36 @@ const {
  */
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  console.log('db synced!');
 
   // Creating Users
 
-  // ** Boilerplate format
   const randomUsers = [];
 
   randomUsers.push(
     User.create({
-      email: "nadia.khristean@gmail.com",
-      password: "123",
-      firstName: "Nadia",
-      lastName: "Harris",
+      firstName: 'Nadia',
+      lastName: 'Harris',
+      email: 'nadia.khristean@gmail.com',
+      password: '123',
     })
   );
 
   randomUsers.push(
     User.create({
-      email: "christine@gmail.com",
-      password: "321",
-      firstName: "Christine",
-      lastName: "Zheng",
+      firstName: 'Christine',
+      lastName: 'Zheng',
+      email: 'christine@gmail.com',
+      password: '321',
     })
   );
 
   randomUsers.push(
     User.create({
-      email: "lu@gmail.com",
-      password: "111",
-      firstName: "Lu",
-      lastName: "Miao",
+      firstName: 'Lu',
+      lastName: 'Miao',
+      email: 'lu@gmail.com',
+      password: '111',
     })
   );
 
@@ -75,16 +74,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...');
   try {
     await seed();
   } catch (err) {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log("closing db connection");
+    console.log('closing db connection');
     await db.close();
-    console.log("db connection closed");
+    console.log('db connection closed');
   }
 }
 
