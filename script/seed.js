@@ -90,6 +90,7 @@ async function seed() {
     User.create({
       firstName: 'Nadia',
       lastName: 'Harris',
+      username: 'nadia',
       email: 'nadia.khristean@gmail.com',
       password: '123',
     })
@@ -99,6 +100,7 @@ async function seed() {
     User.create({
       firstName: 'Christine',
       lastName: 'Zheng',
+      username: 'zzz',
       email: 'christine@gmail.com',
       password: '321',
     })
@@ -108,6 +110,7 @@ async function seed() {
     User.create({
       firstName: 'Lu',
       lastName: 'Miao',
+      username: 'lu',
       email: 'lu@gmail.com',
       password: '111',
     })
@@ -118,6 +121,7 @@ async function seed() {
       User.create({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        username: faker.internet.userName(),
         email: faker.internet.email(),
         password: faker.internet.password(),
       })
