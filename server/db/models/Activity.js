@@ -10,7 +10,7 @@ const Activity = db.define('activity', {
     },
   },
   url: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -31,7 +31,7 @@ const Activity = db.define('activity', {
     },
   },
   park_url: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -73,7 +73,7 @@ const Activity = db.define('activity', {
     type: DataTypes.TEXT,
   },
   activity_category: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -90,7 +90,7 @@ const Activity = db.define('activity', {
     type: DataTypes.TEXT,
   },
   additional_category: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -109,10 +109,6 @@ const Activity = db.define('activity', {
 
   tags: {
     type: DataTypes.ARRAY(DataTypes.STRING),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
 });
 
