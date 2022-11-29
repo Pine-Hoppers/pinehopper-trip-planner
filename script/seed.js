@@ -17,30 +17,47 @@ async function seed() {
   // Creating Users
 
   // ** Boilerplate format
-  const users = await Promise.all([
+  const randomUsers = [];
+
+  randomUsers.push(
     User.create({
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-    }),
-  ]);
+      email: "nadia.khristean@gmail.com",
+      password: "123",
+      firstName: "Nadia",
+      lastName: "Harris",
+    })
+  );
 
-  // ** Fakerjs format
-  const USERS: User[] = [];
+  randomUsers.push(
+    User.create({
+      email: "christine@gmail.com",
+      password: "321",
+      firstName: "Christine",
+      lastName: "Zheng",
+    })
+  );
 
-  function createRandomUser(): User {
-    return {
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-    };
-  }
+  randomUsers.push(
+    User.create({
+      email: "lu@gmail.com",
+      password: "111",
+      firstName: "Lu",
+      lastName: "Miao",
+    })
+  );
 
   Array.from({ length: 10 }).forEach(() => {
-    USERS.push(createRandomUser());
+    randomUsers.push(
+      User.create({
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+      })
+    );
   });
+
+  const users = await Promise.all(randomUsers);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
