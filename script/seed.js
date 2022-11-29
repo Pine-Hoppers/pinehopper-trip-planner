@@ -1,9 +1,10 @@
 'use strict';
-import { faker } from '@faker-js/faker';
 const {
   db,
   models: { User, Activity },
 } = require('../server/db');
+
+const { faker } = require('@faker-js/faker');
 
 /**
  * seed - this function clears the database, updates tables to

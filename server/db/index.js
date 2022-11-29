@@ -8,6 +8,17 @@ const Wishlist = require('./models/Wishlist');
 const Trip = require('./models/Trip');
 
 //associations could go here!
+User.hasMany(Trip);
+Trip.belongsTo(User);
+
+User.hasOne(Wishlist);
+Wishlist.belongsTo(User);
+
+Wishlist.hasMany(Activity);
+Activity.belongsTo(Wishlist);
+
+Trip.hasMany(Activity);
+Activity.belongsTo(Trip);
 
 module.exports = {
   db,
