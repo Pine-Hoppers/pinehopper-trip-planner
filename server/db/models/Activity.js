@@ -1,7 +1,7 @@
-const { DataTypes } = require("sequelize");
-const db = require("../db");
+const { DataTypes } = require('sequelize');
+const db = require('../db');
 
-const Activity = db.define("activity", {
+const Activity = db.define('activity', {
   activity_name: {
     type: DataTypes.STRING,
     allowNull: false,
