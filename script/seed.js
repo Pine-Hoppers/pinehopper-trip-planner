@@ -84,9 +84,9 @@ async function seed() {
   const trips = await Promise.all(tripsArr);
 
   // associate trips with a user
-  await trips[0].setUser(1);
-  await trips[1].setUser(2);
-  await trips[2].setUser(3);
+  await trips[0].setUser(users[0].id);
+  await trips[1].setUser(users[1].id);
+  await trips[2].setUser(users[2].id);
 
   console.log(`seeded ${trips.length} trips`);
 
