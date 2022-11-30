@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
 
+//TODO: Rename this file to Login and create a new component called Sign Up to add extra inputs
+
 /**
  * COMPONENT
  */
