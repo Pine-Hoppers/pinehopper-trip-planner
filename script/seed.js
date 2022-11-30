@@ -1,7 +1,7 @@
 'use strict';
 const {
   db,
-  models: { User, Activity },
+  models: { User, Activity, Trip, Wishlist },
 } = require('../server/db');
 
 const { faker } = require('@faker-js/faker');
@@ -14,7 +14,83 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
 
-  // Creating Users
+  // Create Users
+  const randomUsers = [];
+
+  randomUsers.push(
+    User.create({
+      firstName: 'Nadia',
+      lastName: 'Harris',
+      username: 'nadia',
+      email: 'nadia.khristean@gmail.com',
+      password: '123',
+    })
+  );
+
+  randomUsers.push(
+    User.create({
+      firstName: 'Christine',
+      lastName: 'Zheng',
+      username: 'zzz',
+      email: 'christine@gmail.com',
+      password: '321',
+    })
+  );
+
+  randomUsers.push(
+    User.create({
+      firstName: 'Lu',
+      lastName: 'Miao',
+      username: 'lu',
+      email: 'lu@gmail.com',
+      password: '111',
+    })
+  );
+
+  Array.from({ length: 10 }).forEach(() => {
+    randomUsers.push(
+      User.create({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      })
+    );
+  });
+  const users = await Promise.all(randomUsers);
+
+  console.log(`seeded ${users.length} users`);
+
+  // Create Trips
+  const tripsArr = [
+    Trip.create({
+      tripName: 'March Trip',
+      startDate: '2022-03-11',
+      endDate: '2022-03-18',
+    }),
+    Trip.create({
+      tripName: 'Yellowstone Trip',
+      startDate: '2022-04-02',
+      endDate: '2022-04-12',
+    }),
+    Trip.create({
+      tripName: 'Yellowstone',
+      startDate: '2022-07-05',
+      endDate: '2022-07-19',
+    }),
+  ];
+
+  const trips = await Promise.all(tripsArr);
+
+  // associate trips with a user
+  await trips[0].setUser(1);
+  await trips[1].setUser(2);
+  await trips[2].setUser(3);
+
+  console.log(`seeded ${trips.length} trips`);
+
+  // Creating Activities
   const activities = await Promise.all([
     Activity.create({
       activity_name: 'Bannock Ski Trail',
@@ -66,7 +142,337 @@ async function seed() {
       duration: '1-2 Hours',
       accessibilityInformation:
         '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
+      tags: [
+        'Yellowstone National Park',
+        'Yellowstone National Park ski trail',
+        'ski trail',
+        'snowshoe trail',
+        'snowshoeing',
+        'cross country skiing',
+        'Northeast Area',
+        'easy ski',
+        'forested trail',
+        'mountains',
+        'recreation',
+        'winter recreation',
+      ],
+    }),
+    Activity.create({
+      activity_name: 'Bannock Ski Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      images: [
+        JSON.stringify({
+          credit: '',
+          crops: [
+            {
+              aspectratio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+            {
+              aspectratio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+          ],
+          altText: 'The Bannock Trail is a mostly flat through mature forest.',
+          title: '',
+          caption: '',
+          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+        }),
+      ],
+      park_fullName: 'Yellowstone National Park',
+      park_url: 'https://www.nps.gov/yell/index.htm',
+      parkCode: 'yell',
+      isReservationRequired: 'false',
 
+      feeDescription: '',
+      doFeesApply: 'false',
+      arePetsPermittedWithRestrictions: 'false',
+      petsDescription:
+        'Qualified service animals are welcome throughout the park and in all park facilities. However, they must be leashed and under your control at all times. This trail requires a backcountry access pass for service animals.<br />\n<br />\n<br />\n ',
+      activity_category: [
+        JSON.stringify({
+          id: 'F9B1D433-6B86-4804-AED7-B50A519A3B7C',
+          name: 'Skiing',
+        }),
+      ],
+      activityDescription: 'Easiest',
+      longDescription:
+        '<p>The Bannock Ski Trail is a 2 mile (3.2 km) easy ski that follows the old road bed that once used to supply the mining town of Cooke City, Montana. Begin at Warm Creek picnic area, one mile west of the Northeast Entrance. This trail takes its name from the Bannock band of the Shoshone, who used this route to reach the buffalo grounds of the Great Plains. After crossing Soda Butte Creek, the terrain is mostly flat and the trail traverses open meadows and mixed conifer forests. You will reach the North Absaroka Wilderness approximately one mile (1.6 km) from the trailhead. At two miles (3.2 km) you come to Silver Gate, Montana. From here the road bed is used as a snowmobile route and is good skiing to Cooke City, 3 miles (4.8 km) to the east.</p>\n\n<p><b>Notes:</b> Bison and elk frequent this trail. Federal regulations require you to stay at least 100 yards (91 m) away from bears and wolves, and at least 25 yards (23 m) away from bison and all other wild animals.</p>\n\n<p>Check out the<a href="/thingstodo/yell-bannock-ski-trail.htm#Details" id="CP___PAGEID=5744528,yell-bannock-ski-trail.htm#Details,30639|"> ski trail details and accessibility information</a> at the bottom of this page.</p>',
+      additional_category: [
+        JSON.stringify({
+          id: '5BE55D7F-BDB6-4E3D-AC35-2D8EBB974417',
+          name: 'Trails',
+        }),
+      ],
+      duration: '1-2 Hours',
+      accessibilityInformation:
+        '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
+      tags: [
+        'Yellowstone National Park',
+        'Yellowstone National Park ski trail',
+        'ski trail',
+        'snowshoe trail',
+        'snowshoeing',
+        'cross country skiing',
+        'Northeast Area',
+        'easy ski',
+        'forested trail',
+        'mountains',
+        'recreation',
+        'winter recreation',
+      ],
+      dateOfActivity: '2022-03-13',
+      tripId: trips[0].id,
+    }),
+    Activity.create({
+      activity_name: 'Bannock Ski Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      images: [
+        JSON.stringify({
+          credit: '',
+          crops: [
+            {
+              aspectratio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+            {
+              aspectratio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+          ],
+          altText: 'The Bannock Trail is a mostly flat through mature forest.',
+          title: '',
+          caption: '',
+          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+        }),
+      ],
+      park_fullName: 'Yellowstone National Park',
+      park_url: 'https://www.nps.gov/yell/index.htm',
+      parkCode: 'yell',
+      isReservationRequired: 'false',
+
+      feeDescription: '',
+      doFeesApply: 'false',
+      arePetsPermittedWithRestrictions: 'false',
+      petsDescription:
+        'Qualified service animals are welcome throughout the park and in all park facilities. However, they must be leashed and under your control at all times. This trail requires a backcountry access pass for service animals.<br />\n<br />\n<br />\n ',
+      activity_category: [
+        JSON.stringify({
+          id: 'F9B1D433-6B86-4804-AED7-B50A519A3B7C',
+          name: 'Skiing',
+        }),
+      ],
+      activityDescription: 'Easiest',
+      longDescription:
+        '<p>The Bannock Ski Trail is a 2 mile (3.2 km) easy ski that follows the old road bed that once used to supply the mining town of Cooke City, Montana. Begin at Warm Creek picnic area, one mile west of the Northeast Entrance. This trail takes its name from the Bannock band of the Shoshone, who used this route to reach the buffalo grounds of the Great Plains. After crossing Soda Butte Creek, the terrain is mostly flat and the trail traverses open meadows and mixed conifer forests. You will reach the North Absaroka Wilderness approximately one mile (1.6 km) from the trailhead. At two miles (3.2 km) you come to Silver Gate, Montana. From here the road bed is used as a snowmobile route and is good skiing to Cooke City, 3 miles (4.8 km) to the east.</p>\n\n<p><b>Notes:</b> Bison and elk frequent this trail. Federal regulations require you to stay at least 100 yards (91 m) away from bears and wolves, and at least 25 yards (23 m) away from bison and all other wild animals.</p>\n\n<p>Check out the<a href="/thingstodo/yell-bannock-ski-trail.htm#Details" id="CP___PAGEID=5744528,yell-bannock-ski-trail.htm#Details,30639|"> ski trail details and accessibility information</a> at the bottom of this page.</p>',
+      additional_category: [
+        JSON.stringify({
+          id: '5BE55D7F-BDB6-4E3D-AC35-2D8EBB974417',
+          name: 'Trails',
+        }),
+      ],
+      duration: '1-2 Hours',
+      accessibilityInformation:
+        '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
+      tags: [
+        'Yellowstone National Park',
+        'Yellowstone National Park ski trail',
+        'ski trail',
+        'snowshoe trail',
+        'snowshoeing',
+        'cross country skiing',
+        'Northeast Area',
+        'easy ski',
+        'forested trail',
+        'mountains',
+        'recreation',
+        'winter recreation',
+      ],
+      dateOfActivity: '2022-04-05',
+      tripId: trips[1].id,
+    }),
+    Activity.create({
+      activity_name: 'Bannock Ski Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      images: [
+        JSON.stringify({
+          credit: '',
+          crops: [
+            {
+              aspectratio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+            {
+              aspectratio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+          ],
+          altText: 'The Bannock Trail is a mostly flat through mature forest.',
+          title: '',
+          caption: '',
+          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+        }),
+      ],
+      park_fullName: 'Yellowstone National Park',
+      park_url: 'https://www.nps.gov/yell/index.htm',
+      parkCode: 'yell',
+      isReservationRequired: 'false',
+
+      feeDescription: '',
+      doFeesApply: 'false',
+      arePetsPermittedWithRestrictions: 'false',
+      petsDescription:
+        'Qualified service animals are welcome throughout the park and in all park facilities. However, they must be leashed and under your control at all times. This trail requires a backcountry access pass for service animals.<br />\n<br />\n<br />\n ',
+      activity_category: [
+        JSON.stringify({
+          id: 'F9B1D433-6B86-4804-AED7-B50A519A3B7C',
+          name: 'Skiing',
+        }),
+      ],
+      activityDescription: 'Easiest',
+      longDescription:
+        '<p>The Bannock Ski Trail is a 2 mile (3.2 km) easy ski that follows the old road bed that once used to supply the mining town of Cooke City, Montana. Begin at Warm Creek picnic area, one mile west of the Northeast Entrance. This trail takes its name from the Bannock band of the Shoshone, who used this route to reach the buffalo grounds of the Great Plains. After crossing Soda Butte Creek, the terrain is mostly flat and the trail traverses open meadows and mixed conifer forests. You will reach the North Absaroka Wilderness approximately one mile (1.6 km) from the trailhead. At two miles (3.2 km) you come to Silver Gate, Montana. From here the road bed is used as a snowmobile route and is good skiing to Cooke City, 3 miles (4.8 km) to the east.</p>\n\n<p><b>Notes:</b> Bison and elk frequent this trail. Federal regulations require you to stay at least 100 yards (91 m) away from bears and wolves, and at least 25 yards (23 m) away from bison and all other wild animals.</p>\n\n<p>Check out the<a href="/thingstodo/yell-bannock-ski-trail.htm#Details" id="CP___PAGEID=5744528,yell-bannock-ski-trail.htm#Details,30639|"> ski trail details and accessibility information</a> at the bottom of this page.</p>',
+      additional_category: [
+        JSON.stringify({
+          id: '5BE55D7F-BDB6-4E3D-AC35-2D8EBB974417',
+          name: 'Trails',
+        }),
+      ],
+      duration: '1-2 Hours',
+      accessibilityInformation:
+        '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
+      tags: [
+        'Yellowstone National Park',
+        'Yellowstone National Park ski trail',
+        'ski trail',
+        'snowshoe trail',
+        'snowshoeing',
+        'cross country skiing',
+        'Northeast Area',
+        'easy ski',
+        'forested trail',
+        'mountains',
+        'recreation',
+        'winter recreation',
+      ],
+      dateOfActivity: '2022-07-10',
+      tripId: trips[2].id,
+    }),
+    Activity.create({
+      activity_name: 'Bannock Ski Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      images: [
+        JSON.stringify({
+          credit: '',
+          crops: [
+            {
+              aspectratio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+            {
+              aspectratio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+          ],
+          altText: 'The Bannock Trail is a mostly flat through mature forest.',
+          title: '',
+          caption: '',
+          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+        }),
+      ],
+      park_fullName: 'Yellowstone National Park',
+      park_url: 'https://www.nps.gov/yell/index.htm',
+      parkCode: 'yell',
+      isReservationRequired: 'false',
+
+      feeDescription: '',
+      doFeesApply: 'false',
+      arePetsPermittedWithRestrictions: 'false',
+      petsDescription:
+        'Qualified service animals are welcome throughout the park and in all park facilities. However, they must be leashed and under your control at all times. This trail requires a backcountry access pass for service animals.<br />\n<br />\n<br />\n ',
+      activity_category: [
+        JSON.stringify({
+          id: 'F9B1D433-6B86-4804-AED7-B50A519A3B7C',
+          name: 'Skiing',
+        }),
+      ],
+      activityDescription: 'Easiest',
+      longDescription:
+        '<p>The Bannock Ski Trail is a 2 mile (3.2 km) easy ski that follows the old road bed that once used to supply the mining town of Cooke City, Montana. Begin at Warm Creek picnic area, one mile west of the Northeast Entrance. This trail takes its name from the Bannock band of the Shoshone, who used this route to reach the buffalo grounds of the Great Plains. After crossing Soda Butte Creek, the terrain is mostly flat and the trail traverses open meadows and mixed conifer forests. You will reach the North Absaroka Wilderness approximately one mile (1.6 km) from the trailhead. At two miles (3.2 km) you come to Silver Gate, Montana. From here the road bed is used as a snowmobile route and is good skiing to Cooke City, 3 miles (4.8 km) to the east.</p>\n\n<p><b>Notes:</b> Bison and elk frequent this trail. Federal regulations require you to stay at least 100 yards (91 m) away from bears and wolves, and at least 25 yards (23 m) away from bison and all other wild animals.</p>\n\n<p>Check out the<a href="/thingstodo/yell-bannock-ski-trail.htm#Details" id="CP___PAGEID=5744528,yell-bannock-ski-trail.htm#Details,30639|"> ski trail details and accessibility information</a> at the bottom of this page.</p>',
+      additional_category: [
+        JSON.stringify({
+          id: '5BE55D7F-BDB6-4E3D-AC35-2D8EBB974417',
+          name: 'Trails',
+        }),
+      ],
+      duration: '1-2 Hours',
+      accessibilityInformation:
+        '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
+      tags: [
+        'Yellowstone National Park',
+        'Yellowstone National Park ski trail',
+        'ski trail',
+        'snowshoe trail',
+        'snowshoeing',
+        'cross country skiing',
+        'Northeast Area',
+        'easy ski',
+        'forested trail',
+        'mountains',
+        'recreation',
+        'winter recreation',
+      ],
+    }),
+    Activity.create({
+      activity_name: 'Bannock Ski Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      images: [
+        JSON.stringify({
+          credit: '',
+          crops: [
+            {
+              aspectratio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+            {
+              aspectratio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+            },
+          ],
+          altText: 'The Bannock Trail is a mostly flat through mature forest.',
+          title: '',
+          caption: '',
+          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+        }),
+      ],
+      park_fullName: 'Yellowstone National Park',
+      park_url: 'https://www.nps.gov/yell/index.htm',
+      parkCode: 'yell',
+      isReservationRequired: 'false',
+
+      feeDescription: '',
+      doFeesApply: 'false',
+      arePetsPermittedWithRestrictions: 'false',
+      petsDescription:
+        'Qualified service animals are welcome throughout the park and in all park facilities. However, they must be leashed and under your control at all times. This trail requires a backcountry access pass for service animals.<br />\n<br />\n<br />\n ',
+      activity_category: [
+        JSON.stringify({
+          id: 'F9B1D433-6B86-4804-AED7-B50A519A3B7C',
+          name: 'Skiing',
+        }),
+      ],
+      activityDescription: 'Easiest',
+      longDescription:
+        '<p>The Bannock Ski Trail is a 2 mile (3.2 km) easy ski that follows the old road bed that once used to supply the mining town of Cooke City, Montana. Begin at Warm Creek picnic area, one mile west of the Northeast Entrance. This trail takes its name from the Bannock band of the Shoshone, who used this route to reach the buffalo grounds of the Great Plains. After crossing Soda Butte Creek, the terrain is mostly flat and the trail traverses open meadows and mixed conifer forests. You will reach the North Absaroka Wilderness approximately one mile (1.6 km) from the trailhead. At two miles (3.2 km) you come to Silver Gate, Montana. From here the road bed is used as a snowmobile route and is good skiing to Cooke City, 3 miles (4.8 km) to the east.</p>\n\n<p><b>Notes:</b> Bison and elk frequent this trail. Federal regulations require you to stay at least 100 yards (91 m) away from bears and wolves, and at least 25 yards (23 m) away from bison and all other wild animals.</p>\n\n<p>Check out the<a href="/thingstodo/yell-bannock-ski-trail.htm#Details" id="CP___PAGEID=5744528,yell-bannock-ski-trail.htm#Details,30639|"> ski trail details and accessibility information</a> at the bottom of this page.</p>',
+      additional_category: [
+        JSON.stringify({
+          id: '5BE55D7F-BDB6-4E3D-AC35-2D8EBB974417',
+          name: 'Trails',
+        }),
+      ],
+      duration: '1-2 Hours',
+      accessibilityInformation:
+        '<p>This skier-tracked easy trail follows a fairly flat old road after crossing a narrow bridge over Soda Butte Creek at the trailhead. The trail elevation gain/loss is 132 feet. Service dogs allowed with backcountry access permit.</p>',
       tags: [
         'Yellowstone National Park',
         'Yellowstone National Park ski trail',
@@ -84,54 +490,35 @@ async function seed() {
     }),
   ]);
 
-  const randomUsers = [];
+  console.log(`seeded ${activities.length} activities`);
 
-  randomUsers.push(
-    User.create({
-      firstName: 'Nadia',
-      lastName: 'Harris',
-      username: 'nadia',
-      email: 'nadia.khristean@gmail.com',
-      password: '123',
-    })
-  );
-
-  randomUsers.push(
-    User.create({
-      firstName: 'Christine',
-      lastName: 'Zheng',
-      username: 'zzz',
-      email: 'christine@gmail.com',
-      password: '321',
-    })
-  );
-
-  randomUsers.push(
-    User.create({
-      firstName: 'Lu',
-      lastName: 'Miao',
-      username: 'lu',
-      email: 'lu@gmail.com',
-      password: '111',
-    })
-  );
-
-  Array.from({ length: 10 }).forEach(() => {
-    randomUsers.push(
-      User.create({
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-      })
-    );
+  // Create Wishlists
+  const wishlist1 = Wishlist.build();
+  wishlist1.set({
+    userId: 4,
+    activityId: activities[0].id,
   });
+  await wishlist1.save();
 
-  const users = await Promise.all(randomUsers);
+  const wishlist2 = Wishlist.build();
+  wishlist2.set({
+    userId: 5,
+    activityId: activities[4].id,
+  });
+  await wishlist2.save();
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded successfully`);
+  const wishlist3 = Wishlist.build();
+  wishlist3.set({
+    userId: 6,
+    activityId: activities[5].id,
+  });
+  await wishlist3.save();
+
+  const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
+  console.log(`seeded ${wishlists.length} wishlists`);
+
+  console.log(`seeded everything successfully`);
+
   return {
     users: {
       nadia: users[0],
