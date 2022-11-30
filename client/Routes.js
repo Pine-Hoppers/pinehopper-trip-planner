@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
+import { Login } from './components/Login';
+import { Signup } from './components/Signup';
 import Home from './components/Home';
 import { me } from './store';
 
