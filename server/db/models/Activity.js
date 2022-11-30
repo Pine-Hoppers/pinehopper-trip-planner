@@ -106,9 +106,12 @@ const Activity = db.define('activity', {
   accessibilityInformation: {
     type: DataTypes.TEXT,
   },
-
   tags: {
     type: DataTypes.ARRAY(DataTypes.STRING),
+  },
+  dateOfActivity: {
+    type: DataTypes.DATEONLY,
+    defaultValue: null,
   },
 });
 
