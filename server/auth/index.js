@@ -16,7 +16,7 @@ router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body);
 
-    //~~~~> GRACESHOPPER DID BELOW. WHATS THE DIFFERENCE?
+    //~~~~> GRACESHOPPER DID BELOW. WHICH IS BETTER PRACTICE?
     // const {username, password, email} = req.body
     // const user = await User.create({username, password, email})
     res.send({ token: await user.generateToken() });
