@@ -30,7 +30,7 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/my-planner" component={MyPlanner} />
+            <Route path="/my-planner" exact component={MyPlanner} />
             <Route path="/my-planner/:tripId" component={MySinglePlanner} />
           </Switch>
         )}
