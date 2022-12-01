@@ -5,6 +5,8 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import MyPlanner from './components/MyPlanner';
 import MySinglePlanner from './components/MySinglePlanner';
+import Explore from './components/Explore';
+import ParkActivities from './components/ParkActivities';
 import { me } from './store';
 
 /**
@@ -23,6 +25,11 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route exact path="/explore" component={Explore} />
+            <Route
+              path="/explore/:parkCode/activities"
+              component={ParkActivities}
+            />
             <Redirect to="/home" />
           </Switch>
         ) : (
