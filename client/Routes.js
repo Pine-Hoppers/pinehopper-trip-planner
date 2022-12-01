@@ -4,6 +4,10 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login } from './components/Login';
 import { Signup } from './components/Signup';
 import Home from './components/Home';
+import MyPlanner from './components/MyPlanner';
+import MySinglePlanner from './components/MySinglePlanner';
+import Explore from './components/Explore';
+import ParkActivities from './components/ParkActivities';
 import { me } from './store';
 
 /**
@@ -22,6 +26,13 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route exact path="/explore" component={Explore} />
+            <Route
+              path="/explore/:parkCode/activities"
+              component={ParkActivities}
+            />
+            <Route exact path="/my-planner" component={MyPlanner} />
+            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
             <Redirect to="/home" />
           </Switch>
         ) : (
