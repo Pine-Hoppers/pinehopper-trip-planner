@@ -22,7 +22,7 @@ export const fetchParkActivities = (parkCode) => {
         `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
       );
       dispatch(setActivities(res.data));
-      //   history.push('/login');
+      history.push(`/explore/${parkCode}/activities`);
     } catch (error) {
       console.log('Unable to fetch park activities right now: ', error);
       throw error;
