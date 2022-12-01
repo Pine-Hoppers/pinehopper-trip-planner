@@ -55,7 +55,6 @@ User.prototype.correctPassword = function (candidatePwd) {
   // We need to compare the plain version to an encrypted version of the password.
   return bcrypt.compare(candidatePwd, this.password);
 };
-console.log('--------->', process.env);
 
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);

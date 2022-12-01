@@ -82,7 +82,7 @@ const mapDispatch = (dispatch) => {
       const username = evt.target.username.value;
       const password = evt.target.password.value;
       dispatch(
-        authenticate(firstName, lastName, email, username, password, formName)
+        authenticate(username, password, formName, firstName, lastName, email)
       );
     },
   };
