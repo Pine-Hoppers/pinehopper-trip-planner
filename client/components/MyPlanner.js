@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchTrips, deleteTrip } from '../store/allTrips';
+import { fetchTrips, deleteTrip } from '../store/alltrips';
 import ClearIcon from '@material-ui/icons/Clear';
 import { IconButton } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
