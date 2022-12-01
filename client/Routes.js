@@ -30,6 +30,8 @@ class Routes extends Component {
               path="/explore/:parkCode/activities"
               component={ParkActivities}
             />
+            <Route path="/my-planner" exact component={MyPlanner} />
+            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -37,8 +39,6 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/my-planner" exact component={MyPlanner} />
-            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
           </Switch>
         )}
       </div>

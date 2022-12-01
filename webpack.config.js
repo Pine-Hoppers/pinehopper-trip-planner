@@ -23,8 +23,6 @@ module.exports = {
       },
     ],
   },
-    ],
-  },
   plugins: [
     new Dotenv({
       path: '.env',
