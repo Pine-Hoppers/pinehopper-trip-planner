@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Trip },
+  models: { Trip, Activity },
 } = require('../db/index');
 
 router.get('/', async (req, res, next) => {
@@ -14,7 +14,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:tripId', async (req, res, next) => {
   try {
-    const trip = await Trip.findByPk(req.params.tripId);
+    const trip = await Trip.findByPk(req.params.tripId, {
+      include: { model: Activity },
+    });
     res.json(trip);
   } catch (error) {
     next(error);
@@ -31,7 +33,9 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:tripId', async (req, res, next) => {
   try {
-    const trip = await Trip.findByPk(req.params.tripId);
+    const trip = await Trip.findByPk(req.params.tripId, {
+      include: { model: Activity },
+    });
     res.send(await trip.update(req.body));
   } catch (error) {
     next(error);

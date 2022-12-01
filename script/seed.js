@@ -65,17 +65,17 @@ async function seed() {
   // Create Trips
   const tripsArr = [
     Trip.create({
-      tripName: 'March Trip',
+      tripName: 'March Yellowstone Trip',
       startDate: '2022-03-11',
       endDate: '2022-03-18',
     }),
     Trip.create({
-      tripName: 'Yellowstone Trip',
+      tripName: 'April Yellowstone Trip',
       startDate: '2022-04-02',
       endDate: '2022-04-12',
     }),
     Trip.create({
-      tripName: 'Yellowstone',
+      tripName: 'July Yellowstone Trip',
       startDate: '2022-07-05',
       endDate: '2022-07-19',
     }),
@@ -158,25 +158,26 @@ async function seed() {
       ],
     }),
     Activity.create({
-      activity_name: 'Bannock Ski Trail',
-      url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
+      activity_name: 'Natural Bridge Trail',
+      url: 'https://www.nps.gov/thingstodo/yell-trail-natural-bridge.htm',
       images: [
         JSON.stringify({
+          url: 'https://www.nps.gov/common/uploads/cropped_image/F8B3FBE2-1DD8-B71B-0BEF6E7D84F0FE32.jpg',
           credit: '',
+          altText: 'Gray stone rock arches over a creek drainage.',
+          title: '',
+          description: '',
+          caption: '',
           crops: [
             {
-              aspectratio: '3',
-              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+              aspectRatio: '3',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/primary/F8B3FBE2-1DD8-B71B-0BEF6E7D84F0FE32.jpg',
             },
             {
-              aspectratio: '1',
-              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
+              aspectRatio: '1',
+              url: 'https://www.nps.gov/common/uploads/cropped_image/secondary/F8B3FBE2-1DD8-B71B-0BEF6E7D84F0FE32.jpg',
             },
           ],
-          altText: 'The Bannock Trail is a mostly flat through mature forest.',
-          title: '',
-          caption: '',
-          url: 'https://www.nps.gov/common/uploads/cropped_image/20970C88-BB81-37F7-5FB606A6D4A87D9B.jpeg',
         }),
       ],
       park_fullName: 'Yellowstone National Park',

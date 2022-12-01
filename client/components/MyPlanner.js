@@ -47,7 +47,6 @@ export class MyPlanner extends React.Component {
                 <TableCell>All Trips</TableCell>
                 <TableCell align="right">Start Date</TableCell>
                 <TableCell align="right">End Date</TableCell>
-                {/* <TableCell align="right">Remove</TableCell> */}
                 <TableCell align="right">Edit</TableCell>
               </TableRow>
             </TableHead>
@@ -66,18 +65,10 @@ export class MyPlanner extends React.Component {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {trip.tripName}
+                      <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
                     </TableCell>
                     <TableCell align="right">{trip.startDate}</TableCell>
                     <TableCell align="right">{trip.endDate}</TableCell>
-                    {/* <TableCell align="right">
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => this.props.deleteTrip(trip.id)}
-                      >
-                        <ClearIcon />
-                      </IconButton>
-                    </TableCell> */}
                     <TableCell align="right">
                       <IconButton
                         aria-label="edit"

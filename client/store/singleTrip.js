@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const SET_SINGLE_TRIP = 'SET_SINGLE_TRIP';
+const SET_TRIPS = 'SET_TRIPS';
 
 export const setSingleTrip = (trip) => {
   return {
@@ -20,8 +21,14 @@ export const fetchSingleTrip = (id) => {
   };
 };
 
-export default function singleTripReducer(state = {}, action) {
+const initialState = {
+  activities: [],
+};
+
+export default function singleTripReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_TRIPS:
+      return initialState;
     case SET_SINGLE_TRIP:
       return action.trip;
     default:

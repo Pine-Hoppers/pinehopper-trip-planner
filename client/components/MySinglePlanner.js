@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchSingleTrip, editSingelTrip } from '../store/singleTrip';
 import Calendar from './Calendar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 class SingleTrip extends React.Component {
   constructor() {
     super();
@@ -24,7 +26,7 @@ class SingleTrip extends React.Component {
         <Link to={`/my-planner`}>
           <button>All Trips</button>
         </Link>
-        <Calendar />
+        {trip.activities.length === 0 ? <CircularProgress /> : <Calendar />}
       </div>
     );
   }

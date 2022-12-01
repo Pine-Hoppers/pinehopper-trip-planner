@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -12,13 +13,11 @@ class Dnd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [
-        {
-          start: moment().toDate(),
-          end: moment().add(1, 'days').toDate(),
-          title: 'Some title',
-        },
-      ],
+      events: props.trip.activities.map((activity) => ({
+        start: activity.dateOfActivity,
+        end: activity.dateOfActivity,
+        title: activity.activity_name,
+      })),
     };
 
     this.moveEvent = this.moveEvent.bind(this);
@@ -51,9 +50,10 @@ class Dnd extends React.Component {
   render() {
     return (
       <div className="calendar-container">
+        <h1>{this.props.trip.tripName}</h1>
         <DragAndDropCalendar
           selectable
-          defaultDate={moment().toDate()}
+          defaultDate={this.props.trip.startDate}
           defaultView="month"
           events={this.state.events}
           onEventDrop={this.moveEvent}
@@ -65,4 +65,10 @@ class Dnd extends React.Component {
     );
   }
 }
-export default Dnd;
+const mapState = (state) => {
+  return {
+    trip: state.singleTrip,
+  };
+};
+
+export default connect(mapState, null)(Dnd);

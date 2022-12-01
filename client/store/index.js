@@ -9,7 +9,7 @@ import singleTripReducer from './singleTrip';
 const reducer = combineReducers({
   auth,
   trips: tripsReducer,
-  singletrip: singleTripReducer,
+  singleTrip: singleTripReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
