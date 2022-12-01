@@ -52,7 +52,7 @@ export const deleteTrip = (id) => {
 
 const initialState = [];
 
-export default function tripsReducer(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case SET_TRIPS:
       return action.trips;

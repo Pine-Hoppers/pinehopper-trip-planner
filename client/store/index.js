@@ -4,13 +4,13 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import activities from './activities';
-import tripsReducer from './allTrips';
+import trips from './alltrips';
 import singleTripReducer from './singleTrip';
 
 const reducer = combineReducers({
   auth,
   activities,
-  trips: tripsReducer,
+  trips,
   singleTrip: singleTripReducer,
 });
 
@@ -22,5 +22,5 @@ const store = createStore(reducer, middleware);
 export default store;
 export * from './auth';
 export * from './activities';
-export * from './allTrips';
+export * from './alltrips';
 export * from './singleTrip';
