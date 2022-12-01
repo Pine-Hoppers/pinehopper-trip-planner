@@ -21,20 +21,20 @@ const User = db.define('user', {
       notEmpty: true,
     },
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      notEmpty: true,
-    },
-  },
   email: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,
     validate: {
       isEmail: true,
+    },
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
     },
   },
   password: {
@@ -59,9 +59,6 @@ console.log('--------->', process.env);
 
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
-
-  //~~~~> SHOULD I JUST LEAVE THIS AS JWT SINCE WE ADDED A SECRET IN THE ENV FILE ALREADY?
-  // return jwt.sign({ id: this.id }, process.env.SECRET);
 };
 
 /**
@@ -81,9 +78,6 @@ User.findByToken = async function (token) {
   try {
     // Returns user instance from backend and gets id.
     const { id } = await jwt.verify(token, process.env.JWT);
-
-    //~~~~> SHOULD I JUST LEAVE THIS AS JWT SINCE WE ADDED A SECRET IN THE ENV FILE ALREADY?
-    // const { id } = await jwt.verify(token, process.env.SECRET);
 
     const user = User.findByPk(id);
     if (!user) {
