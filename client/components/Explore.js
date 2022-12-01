@@ -32,7 +32,6 @@ const nationalParks = [
   { parkName: 'Grand Teton National Park', parkCode: 'grte' },
   { parkName: 'Great Basin National Park', parkCode: 'grba' },
   { parkName: 'Great Sand Dunes National Park', parkCode: 'grsa' },
-  { parkName: 'Great Smoky Mountains National Park', parkCode: 'grsm' },
   { parkName: 'Guadalupe Mountains National Park', parkCode: 'gumo' },
   { parkName: 'Haleakalā National Park', parkCode: 'hale' },
   { parkName: "Hawai'i Volcanoes National Park", parkCode: 'havo' },
