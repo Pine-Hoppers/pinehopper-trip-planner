@@ -19,7 +19,7 @@ export const fetchParkActivities = (parkCode) => {
     try {
       // make the GET request to NPS
       const res = await axios.get(
-        `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
+        `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&limit=90&api_key=${process.env.API_KEY}`
       );
       dispatch(setActivities(res.data));
       history.push(`/explore/${parkCode}/activities`);
@@ -33,7 +33,7 @@ export const fetchParkActivities = (parkCode) => {
 /**
  * REDUCER
  */
-export default function (state = [], action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case SET_ACTIVITIES:
       return action.activities;
