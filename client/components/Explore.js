@@ -84,7 +84,7 @@ export const Explore = (props) => {
   });
 
   return (
-    <div>
+    <div id="explore-page">
       <h3>EXPLORE</h3>
       <Autocomplete
         id="grouped-demo"
