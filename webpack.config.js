@@ -23,9 +23,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new Dotenv({
-      path: '.env',
-    }),
-  ],
+  plugins: [new Dotenv()],
 };

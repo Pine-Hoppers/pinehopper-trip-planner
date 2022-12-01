@@ -27,13 +27,12 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route exact path="/explore" component={Explore} />
             <Route
-              exact
               path="/explore/:parkCode/activities"
               component={ParkActivities}
             />
             <Route exact path="/my-planner" component={MyPlanner} />
             <Route path="/my-planner/:tripId" component={MySinglePlanner} />
-            {/* <Redirect to="/home" /> */}
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
