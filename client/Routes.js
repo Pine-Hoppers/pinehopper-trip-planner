@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
+import MyPlanner from './components/MyPlanner';
+import MySinglePlanner from './components/MySinglePlanner';
 import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
 import { me } from './store';
@@ -28,6 +30,8 @@ class Routes extends Component {
               path="/explore/:parkCode/activities"
               component={ParkActivities}
             />
+            <Route path="/my-planner" exact component={MyPlanner} />
+            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
             <Redirect to="/home" />
           </Switch>
         ) : (
