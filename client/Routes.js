@@ -8,6 +8,7 @@ import MyPlanner from './components/MyPlanner';
 import MySinglePlanner from './components/MySinglePlanner';
 import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
+import Wishlist from './components/Wishlist';
 import { me } from './store';
 
 /**
@@ -33,6 +34,7 @@ class Routes extends Component {
             />
             <Route exact path="/my-planner" component={MyPlanner} />
             <Route path="/my-planner/:tripId" component={MySinglePlanner} />
+            <Route path="/my-planner/create-trip" component={Wishlist} />
             <Redirect to="/home" />
           </Switch>
         ) : (

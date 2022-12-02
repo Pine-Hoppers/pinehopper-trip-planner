@@ -6,12 +6,14 @@ import auth from './auth';
 import activities from './activities';
 import trips from './alltrips';
 import singleTripReducer from './singleTrip';
+import wishlists from './wishlists';
 
 const reducer = combineReducers({
   auth,
   activities,
   trips,
   singleTrip: singleTripReducer,
+  wishlists,
 });
 
 const middleware = composeWithDevTools(
@@ -24,3 +26,4 @@ export * from './auth';
 export * from './activities';
 export * from './alltrips';
 export * from './singleTrip';
+export * from './wishlists';
