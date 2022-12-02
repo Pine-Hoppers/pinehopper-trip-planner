@@ -13,7 +13,7 @@ export const setTrips = (trips) => {
   };
 };
 
-export const fetchAllTrips = () => {
+export const fetchTrips = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get('/api/trips');

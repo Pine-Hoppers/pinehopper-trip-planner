@@ -3,21 +3,7 @@ const router = express.Router();
 const {
   models: { User },
 } = require('../db');
-
-// MIDDLEWARE
-router.use(express.json());
-
-// MIDDLEWARE FUNC
-const requireToken = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    req.user = user;
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
+const { requireToken } = require('./gateKeepingMiddleware');
 
 // API/GET/
 router.get('/', requireToken, async (req, res, next) => {
@@ -32,4 +18,4 @@ router.get('/', requireToken, async (req, res, next) => {
   }
 });
 
-module.exports = { router, requireToken };
+module.exports = { router };
