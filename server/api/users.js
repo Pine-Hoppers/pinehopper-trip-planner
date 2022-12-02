@@ -4,10 +4,10 @@ const {
   models: { User },
 } = require('../db');
 
-// Middleware
+// MIDDLEWARE
 router.use(express.json());
 
-// Middleware func to check for auth headers and attach user to req
+// MIDDLEWARE FUNC
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;

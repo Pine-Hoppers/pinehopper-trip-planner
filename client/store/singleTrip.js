@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+// ACTION TYPES
 const SET_SINGLE_TRIP = 'SET_SINGLE_TRIP';
 const SET_TRIPS = 'SET_TRIPS';
 
+// ACTION CREATORS
 export const setSingleTrip = (trip) => {
   return {
     type: SET_SINGLE_TRIP,
@@ -10,6 +12,7 @@ export const setSingleTrip = (trip) => {
   };
 };
 
+// THUNKS
 export const fetchSingleTrip = (id) => {
   return async (dispatch) => {
     try {
@@ -21,6 +24,7 @@ export const fetchSingleTrip = (id) => {
   };
 };
 
+// REDUCERS
 const initialState = {
   activities: [],
 };

@@ -10,9 +10,7 @@ import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
 import { me } from './store';
 
-/**
- * COMPONENT
- */
+// COMPONENT
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -48,9 +46,7 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
@@ -68,5 +64,5 @@ const mapDispatch = (dispatch) => {
 };
 
 // The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
+// When the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));

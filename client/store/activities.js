@@ -1,19 +1,13 @@
 import axios from 'axios';
 import history from '../history';
 
-/**
- * ACTION TYPES
- */
+// ACTION TYPES
 const SET_ACTIVITIES = 'SET_ACTIVITIES';
 
-/**
- * ACTION CREATORS
- */
+// ACTION CREATORS
 const setActivities = (activities) => ({ type: SET_ACTIVITIES, activities });
 
-/**
- * THUNK CREATORS
- */
+// THUNKS
 export const fetchParkActivities = (parkCode) => {
   return async (dispatch) => {
     try {
@@ -30,9 +24,7 @@ export const fetchParkActivities = (parkCode) => {
   };
 };
 
-/**
- * REDUCER
- */
+// REDUCERS
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_ACTIVITIES:

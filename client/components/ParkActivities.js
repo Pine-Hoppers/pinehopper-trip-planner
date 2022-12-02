@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-/**
- * COMPONENT
- */
+// COMPONENT
 export const ParkActivities = (props) => {
   const { parkCode } = props.match.params;
   const { activities } = props;
@@ -41,9 +39,7 @@ export const ParkActivities = (props) => {
   );
 };
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapState = (state) => {
   return {
     activities: state.activities,

@@ -70,9 +70,7 @@ const nationalParks = [
   { parkName: 'Zion National Park', parkCode: 'zion' },
 ];
 
-/**
- * COMPONENT
- */
+// COMPONENT
 export const Explore = (props) => {
   const { username } = props;
 
@@ -115,9 +113,7 @@ export const Explore = (props) => {
   );
 };
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapState = (state) => {
   return {
     username: state.auth.username,

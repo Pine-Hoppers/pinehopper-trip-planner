@@ -1,21 +1,14 @@
 import axios from 'axios';
 import history from '../history';
 
+// ACTION TYPES
 const TOKEN = 'token';
-
-/**
- * ACTION TYPES
- */
 const SET_AUTH = 'SET_AUTH';
 
-/**
- * ACTION CREATORS
- */
+// ACTION CREATORS
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
-/**
- * THUNK CREATORS
- */
+// THUNKS
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
@@ -56,9 +49,7 @@ export const logout = () => {
   };
 };
 
-/**
- * REDUCER
- */
+// REDUCERS
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
