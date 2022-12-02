@@ -16,7 +16,7 @@ export class Wishlist extends React.Component {
     return (
       <div>
         <h1> Wishlist</h1>
-        {wishlists.length === 0 ? (
+        {/* {wishlists.length === 0 ? (
           <h3>
             Your wishlist is empty now!
             <a href="/explore">
@@ -35,7 +35,7 @@ export class Wishlist extends React.Component {
               </div>
             </div>;
           })
-        )}
+        )} */}
       </div>
     );
   }

@@ -33,9 +33,12 @@ export class MyPlanner extends React.Component {
     return (
       <div id="trips" className="column">
         <TableContainer component={Paper} className="trip-table">
-          <button type="submit" onClick={this.isClicked}>
-            Create New Trip
-          </button>
+          <Link to="./my-planner/wishlists">
+            <button type="submit" onClick={this.isClicked}>
+              Create New Trip
+            </button>
+          </Link>
+
           {/* {this.state.hasAddForm ? <CreateTrip /> : null} */}
           <Table
             stickyHeader

@@ -10,6 +10,7 @@ export const setWishlists = (wishlists) => {
 };
 
 export const fetchWishlists = (id) => {
+  console.log('id=========>', id);
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/wishlists?id=${id}`);

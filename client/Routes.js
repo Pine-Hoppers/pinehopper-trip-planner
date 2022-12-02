@@ -33,8 +33,13 @@ class Routes extends Component {
               component={ParkActivities}
             />
             <Route exact path="/my-planner" component={MyPlanner} />
-            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
-            <Route path="/my-planner/create-trip" component={Wishlist} />
+            <Route exact path="/my-planner/wishlists" component={Wishlist} />
+            <Route
+              exact
+              path="/my-planner/:tripId"
+              component={MySinglePlanner}
+            />
+
             <Redirect to="/home" />
           </Switch>
         ) : (

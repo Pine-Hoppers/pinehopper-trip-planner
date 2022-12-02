@@ -5,7 +5,6 @@ const {
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(req.query);
     const allTrips = await Trip.findAll({
       where: {
         userId: req.query.id,
