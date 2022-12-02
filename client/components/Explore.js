@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { fetchParkActivities } from '../store';
+import history from '../history';
 import { connect } from 'react-redux';
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
@@ -97,10 +97,13 @@ export const Explore = (props) => {
         getOptionSelected={(option, value) => option.id === value.id}
         style={{ width: 300 }}
         onChange={async (event, newValue) => {
-          console.log(newValue);
           if (newValue !== null) {
-            console.log('here: ', newValue.parkCode);
-            await props.fetchParkActivities(newValue.parkCode);
+            setTimeout(() => {
+              history.push({
+                pathname: `/explore/${newValue.parkCode}/activities`,
+                state: newValue,
+              });
+            }, 500);
           }
         }}
         renderInput={(params) => (
@@ -124,10 +127,4 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    fetchParkActivities: (parkCode) => dispatch(fetchParkActivities(parkCode)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(Explore);
+export default connect(mapState)(Explore);

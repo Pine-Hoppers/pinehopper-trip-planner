@@ -1,5 +1,4 @@
 import axios from 'axios';
-import history from '../history';
 
 /**
  * ACTION TYPES
@@ -21,8 +20,12 @@ export const fetchParkActivities = (parkCode) => {
       const res = await axios.get(
         `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&limit=90&api_key=${process.env.API_KEY}`
       );
-      dispatch(setActivities(res.data));
-      history.push(`/explore/${parkCode}/activities`);
+
+      const { data } = await axios.get(
+        `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
+      );
+
+      dispatch(setActivities({ ...res.data, parkName: data.data[0].fullName }));
     } catch (error) {
       console.log('Unable to fetch park activities right now: ', error);
       throw error;
