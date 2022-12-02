@@ -22,7 +22,7 @@ export class MyPlanner extends React.Component {
     this.isClicked = this.isClicked.bind(this);
   }
   componentDidMount() {
-    this.props.getTrips();
+    this.props.getTrips(this.props.id);
   }
   isClicked() {
     this.setState({ hasForm: true });
@@ -91,12 +91,13 @@ export class MyPlanner extends React.Component {
 const mapState = (state) => {
   return {
     trips: state.trips,
+    id: state.auth.id,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    getTrips: () => dispatch(fetchTrips()),
+    getTrips: (id) => dispatch(fetchTrips(id)),
     deleteTrip: (trip) => dispatch(deleteTrip(trip)),
   };
 };
