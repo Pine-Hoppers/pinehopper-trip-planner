@@ -2,8 +2,9 @@ const router = require('express').Router();
 const {
   models: { Trip, Activity },
 } = require('../db/index');
+const requireToken = require('./users');
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, async (req, res, next) => {
   try {
     const allTrips = await Trip.findAll();
     res.json(allTrips);
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:tripId', async (req, res, next) => {
+router.get('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId, {
       include: { model: Activity },
@@ -23,7 +24,7 @@ router.get('/:tripId', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
     res.status(201).send(await Trip.create(req.body));
   } catch (error) {
@@ -31,7 +32,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:tripId', async (req, res, next) => {
+router.put('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId, {
       include: { model: Activity },
@@ -42,7 +43,7 @@ router.put('/:tripId', async (req, res, next) => {
   }
 });
 
-router.delete('/:tripId', async (req, res, next) => {
+router.delete('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId);
     await trip.destroy();
