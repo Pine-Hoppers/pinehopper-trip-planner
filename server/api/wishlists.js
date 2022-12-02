@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
       where: {
         userId: req.query.id,
       },
+      include: { model: Activity },
     });
     res.json(wishlists);
   } catch (error) {

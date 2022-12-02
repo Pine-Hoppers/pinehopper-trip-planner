@@ -13,29 +13,34 @@ export class Wishlist extends React.Component {
 
   render() {
     const { wishlists } = this.props;
+
     return (
       <div>
+        <Link to={`/my-planner`}>
+          <button>All Trips</button>
+        </Link>
         <h1> Wishlist</h1>
-        {/* {wishlists.length === 0 ? (
+
+        {wishlists.length === 0 ? (
           <h3>
             Your wishlist is empty now!
-            <a href="/explore">
-              Explore another park & Add activities into your wishlist!
-            </a>
+            <a href="/explore">Explore</a> another park & Add activities into
+            your wishlist!
           </h3>
         ) : (
           wishlists.map((wishlist) => {
-            <div key={wishlist.id} className="each-activity-layout">
-              <img
-                className="all-activities-img"
-                src={wishlist.images[0].url}
-              />
-              <div className="each-activity-detail">
-                <p>{wishlist.title}</p>
+            const image = JSON.parse(wishlist.activity.images);
+
+            return (
+              <div key={wishlist.id} className="each-activity-layout">
+                <img className="all-activities-img" src={image.url} />
+                <div className="each-activity-detail">
+                  <p>{wishlist.activity.activity_name}</p>
+                </div>
               </div>
-            </div>;
+            );
           })
-        )} */}
+        )}
       </div>
     );
   }

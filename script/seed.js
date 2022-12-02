@@ -503,7 +503,7 @@ async function seed() {
 
   const wishlist2 = Wishlist.build();
   wishlist2.set({
-    userId: 5,
+    userId: 7,
     activityId: activities[4].id,
   });
   await wishlist2.save();
@@ -514,6 +514,13 @@ async function seed() {
     activityId: activities[5].id,
   });
   await wishlist3.save();
+
+  const wishlist4 = Wishlist.build();
+  wishlist4.set({
+    userId: 7,
+    activityId: activities[1].id,
+  });
+  await wishlist4.save();
 
   const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
   console.log(`seeded ${wishlists.length} wishlists`);
