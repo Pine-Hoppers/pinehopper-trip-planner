@@ -16,11 +16,12 @@ const setActivities = (activities) => ({ type: SET_ACTIVITIES, activities });
 export const fetchParkActivities = (parkCode) => {
   return async (dispatch) => {
     try {
-      // make the GET request to NPS
+      // make the GET request to NPS (to get parks things to do)
       const res = await axios.get(
         `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&limit=90&api_key=${process.env.API_KEY}`
       );
 
+      // get the park info (to get park's full name)
       const { data } = await axios.get(
         `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
       );

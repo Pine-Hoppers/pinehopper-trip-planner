@@ -11,28 +11,21 @@ export class ParkActivities extends React.Component {
     super();
     this.state = {
       loading: true,
-      parkName: '',
     };
   }
 
   async componentDidMount() {
     await this.props.fetchParkActivities(this.props.match.params.parkCode);
 
-    let parkFullName =
-      typeof this.props.location.state !== 'undefined'
-        ? this.props.location.state.parkName
-        : this.props.activities.parkName;
-
-    this.setState({ parkName: parkFullName });
     this.setState({ loading: false });
   }
 
   render() {
     if (this.state.loading) {
       return (
-        <div>
+        <main>
           <h3>Loading...</h3>
-        </div>
+        </main>
       );
     } else {
       const { parkCode } = this.props.match.params;
@@ -42,8 +35,8 @@ export class ParkActivities extends React.Component {
       const hasActivities = checkActivities.length !== 0;
 
       return (
-        <div>
-          {<h3>{this.state.parkName}</h3>}
+        <main>
+          {<h3>{activities.parkName}</h3>}
           {!hasActivities && (
             <p>
               Activities info is not available for this park currently.{' '}
@@ -66,7 +59,7 @@ export class ParkActivities extends React.Component {
                 </div>
               ))}
           </div>
-        </div>
+        </main>
       );
     }
   }

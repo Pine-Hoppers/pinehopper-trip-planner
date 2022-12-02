@@ -4,7 +4,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import history from '../history';
 import { connect } from 'react-redux';
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const nationalParks = [
   { parkName: 'Acadia National Park', parkCode: 'acad' },
   { parkName: 'Arches National Park', parkCode: 'arch' },
@@ -99,11 +98,8 @@ export const Explore = (props) => {
         onChange={async (event, newValue) => {
           if (newValue !== null) {
             setTimeout(() => {
-              history.push({
-                pathname: `/explore/${newValue.parkCode}/activities`,
-                state: newValue,
-              });
-            }, 500);
+              history.push(`/explore/${newValue.parkCode}/activities`);
+            }, 450);
           }
         }}
         renderInput={(params) => (
