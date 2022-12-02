@@ -16,12 +16,17 @@ const setActivity = (activity) => ({ type: SET_ACTIVITY, activity });
 export const fetchActivity = (parkCode, activityId) => {
   return async (dispatch) => {
     try {
-      // make the GET request to NPS
+      // make the GET request to NPS (to get parks things to do)
       const res = await axios.get(
         `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&id=${activityId}&api_key=${process.env.API_KEY}`
       );
 
-      dispatch(setActivity(res.data));
+      // get the park info (to get park's full name)
+      const { data } = await axios.get(
+        `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
+      );
+
+      dispatch(setActivity({ ...res.data, parkName: data.data[0].fullName }));
     } catch (error) {
       console.log('Unable to fetch the activity info right now: ', error);
       throw error;
