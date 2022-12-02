@@ -3,7 +3,6 @@ const router = express.Router();
 const {
   models: { User },
 } = require('../db');
-module.exports = router;
 
 // Middleware
 router.use(express.json());
@@ -12,6 +11,8 @@ router.use(express.json());
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
+    console.log('--------> TOKEN', token);
+
     const user = await User.findByToken(token);
     req.user = user;
     next();
@@ -32,3 +33,5 @@ router.get('/', requireToken, async (req, res, next) => {
     next(err);
   }
 });
+
+module.exports = { router, requireToken };

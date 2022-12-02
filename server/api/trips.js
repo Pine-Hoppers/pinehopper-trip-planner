@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   models: { Trip, Activity },
 } = require('../db/index');
-const requireToken = require('./users');
+const { requireToken } = require('./users');
 
 router.get('/', requireToken, async (req, res, next) => {
   try {
