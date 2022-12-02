@@ -6,7 +6,7 @@ const {
 
 const { faker } = require('@faker-js/faker');
 
-/**
+/*
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
@@ -559,5 +559,5 @@ if (module === require.main) {
   runSeed();
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
+// We export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
