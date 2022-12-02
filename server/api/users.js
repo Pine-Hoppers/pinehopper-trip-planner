@@ -11,8 +11,6 @@ router.use(express.json());
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    console.log('--------> TOKEN', token);
-
     const user = await User.findByToken(token);
     req.user = user;
     next();
