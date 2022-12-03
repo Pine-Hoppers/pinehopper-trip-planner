@@ -27,7 +27,17 @@ export class Wishlist extends React.Component {
             const image = JSON.parse(wishlist.activity.images);
 
             return (
-              <div key={wishlist.id} className="each-activity-layout">
+              <div
+                className="each-activity-layout"
+                draggable="true"
+                key={wishlist.id}
+                onDragStart={() =>
+                  this.props.handleDragStart({
+                    title: wishlist.activity.activity_name,
+                    name: wishlist.activity.activity_name,
+                  })
+                }
+              >
                 <img className="all-activities-img" src={image.url} />
                 <div className="each-activity-detail">
                   <p>{wishlist.activity.activity_name}</p>

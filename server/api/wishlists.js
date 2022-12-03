@@ -5,9 +5,6 @@ const {
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('---------------------');
-    console.log(req.query);
-    console.log('---------------------');
     const wishlists = await Wishlist.findAll({
       where: {
         userId: req.query.id,
