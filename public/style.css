@@ -28,6 +28,12 @@ h3 {
   font-size: 35px;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Explore Page */
 #explore-page {
   display: flex;
