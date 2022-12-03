@@ -4,9 +4,6 @@ const {
   models: { User },
 } = require('../db');
 
-// MIDDLEWARE
-router.use(express.json());
-
 // MIDDLEWARE FUNC
 const requireToken = async (req, res, next) => {
   try {
