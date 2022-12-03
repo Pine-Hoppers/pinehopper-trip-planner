@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import activities from './activities';
 import singleActivity from './singleActivity';
+import wishlist from './wishlist';
 import trips from './alltrips';
 import singleTripReducer from './singleTrip';
 
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   auth,
   activities,
   singleActivity,
+  wishlist,
   trips,
   singleTrip: singleTripReducer,
 });
@@ -27,3 +29,4 @@ export * from './activities';
 export * from './singleActivity';
 export * from './alltrips';
 export * from './singleTrip';
+export * from './wishlist';
