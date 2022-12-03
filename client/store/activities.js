@@ -26,7 +26,12 @@ export const fetchParkActivities = (parkCode) => {
         `https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=${process.env.API_KEY}`
       );
 
-      dispatch(setActivities({ ...res.data, parkName: data.data[0].fullName }));
+      dispatch(
+        setActivities({
+          ...res.data,
+          parkName: data.data[0].fullName,
+        })
+      );
     } catch (error) {
       console.log('Unable to fetch park activities right now: ', error);
       throw error;
