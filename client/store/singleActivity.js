@@ -3,22 +3,22 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-const SET_ACTIVITIES = 'SET_ACTIVITIES';
+const SET_ACTIVITY = 'SET_ACTIVITY';
 
 /**
  * ACTION CREATORS
  */
-const setActivities = (activities) => ({ type: SET_ACTIVITIES, activities });
+const setActivity = (activity) => ({ type: SET_ACTIVITY, activity });
 
 /**
  * THUNK CREATORS
  */
-export const fetchParkActivities = (parkCode) => {
+export const fetchActivity = (parkCode, activityId) => {
   return async (dispatch) => {
     try {
       // make the GET request to NPS (to get parks things to do)
       const res = await axios.get(
-        `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&limit=90&api_key=${process.env.API_KEY}`
+        `https://developer.nps.gov/api/v1/thingstodo?parkCode=${parkCode}&id=${activityId}&api_key=${process.env.API_KEY}`
       );
 
       // get the park info (to get park's full name)
@@ -27,13 +27,15 @@ export const fetchParkActivities = (parkCode) => {
       );
 
       dispatch(
-        setActivities({
+        setActivity({
           ...res.data,
+          parkUrl: data.data[0].url,
+          parkCode: parkCode,
           parkName: data.data[0].fullName,
         })
       );
     } catch (error) {
-      console.log('Unable to fetch park activities right now: ', error);
+      console.log('Unable to fetch the activity info right now: ', error);
       throw error;
     }
   };
@@ -44,8 +46,8 @@ export const fetchParkActivities = (parkCode) => {
  */
 export default function (state = {}, action) {
   switch (action.type) {
-    case SET_ACTIVITIES:
-      return action.activities;
+    case SET_ACTIVITY:
+      return action.activity;
     default:
       return state;
   }
