@@ -33,7 +33,7 @@ export class MyPlanner extends React.Component {
     return (
       <div id="trips" className="column">
         <TableContainer component={Paper} className="trip-table">
-          <Link to="./my-planner/wishlists">
+          <Link to="./my-planner/create-trip">
             <button type="submit" onClick={this.isClicked}>
               Create New Trip
             </button>

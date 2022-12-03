@@ -8,8 +8,8 @@ import MyPlanner from './components/MyPlanner';
 import MySinglePlanner from './components/MySinglePlanner';
 import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
-import Wishlist from './components/Wishlist';
 import SingleActivity from './components/SingleActivity';
+import CreateTrip from './components/CreateTrip';
 import { me } from './store';
 
 /**
@@ -38,7 +38,11 @@ class Routes extends Component {
               component={ParkActivities}
             />
             <Route exact path="/my-planner" component={MyPlanner} />
-            <Route exact path="/my-planner/wishlists" component={Wishlist} />
+            <Route
+              exact
+              path="/my-planner/create-trip"
+              component={CreateTrip}
+            />
             <Route
               exact
               path="/my-planner/:tripId"

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchWishlists } from '../store/wishlists';
 
 export class Wishlist extends React.Component {
@@ -16,11 +15,7 @@ export class Wishlist extends React.Component {
 
     return (
       <div>
-        <Link to={`/my-planner`}>
-          <button>All Trips</button>
-        </Link>
         <h1> Wishlist</h1>
-
         {wishlists.length === 0 ? (
           <h3>
             Your wishlist is empty now!
