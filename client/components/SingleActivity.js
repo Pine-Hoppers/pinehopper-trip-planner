@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchActivity, addItemToWishlist } from '../store';
-import { UilBookmarkFull } from '@iconscout/react-unicons';
+import Details from './Details';
+
+// bookmark icon
+import { UilBookmark } from '@iconscout/react-unicons';
+import { UisBookmark } from '@iconscout/react-unicons';
 
 /**
  * COMPONENT
@@ -48,7 +52,7 @@ export class SingleActivity extends React.Component {
             <p>THING TO DO</p>
 
             <div id="bookmark-title">
-              <UilBookmarkFull
+              <UilBookmark
                 id="bookmark"
                 size="30"
                 color="#b68d40"
@@ -64,15 +68,21 @@ export class SingleActivity extends React.Component {
               {singleActivity.parkName}
             </a>
           </section>
+
           <section className="single-activity">
             <img id="activity-img" src={singleActivity.data[0].images[0].url} />
-            {/* <div
-              onClick={(event) =>
-                this.handleAddToWishlist(event, singleActivity)
-              }
-            >
-              <img id="bookmark" src="/bookmark-full.svg" />
-            </div> */}
+          </section>
+
+          <section className="single-activity" id="description">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: singleActivity.data[0].longDescription,
+              }}
+            />
+          </section>
+
+          <section className="single-activity" id="details">
+            <Details singleActivity={singleActivity} />
           </section>
         </main>
       );
