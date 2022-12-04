@@ -33,7 +33,6 @@ router.post('/', requireToken, async (req, res, next) => {
       park_url: req.body.parkUrl,
       parkCode: req.body.parkCode,
       isReservationRequired: data[0].isReservationRequired,
-
       feeDescription: data[0].feeDescription,
       doFeesApply: data[0].doFeesApply,
       arePetsPermittedWithRestrictions:
