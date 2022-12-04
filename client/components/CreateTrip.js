@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import Calendar from './Calendar';
+import Calendar from './DnDCalendar';
 import Wishlist from './Wishlist';
 import { connect } from 'react-redux';
 
