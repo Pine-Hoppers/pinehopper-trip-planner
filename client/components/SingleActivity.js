@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchActivity, addItemToWishlist } from '../store';
+import { UilBookmarkFull } from '@iconscout/react-unicons';
 
 /**
  * COMPONENT
@@ -40,13 +41,39 @@ export class SingleActivity extends React.Component {
 
       return (
         <main>
-          {<h3>{singleActivity.data[0].title}</h3>}
-          {<h4>{singleActivity.parkName}</h4>}
-          <div
-            onClick={(event) => this.handleAddToWishlist(event, singleActivity)}
-          >
-            Add to Wishlist
-          </div>
+          <section className="single-activity" id="activity-header">
+            {/* <Link to={`/explore/${parkCode}/activities`}>
+              BACK TO ACTIVITIES
+            </Link> */}
+            <p>THING TO DO</p>
+
+            <div id="bookmark-title">
+              <UilBookmarkFull
+                id="bookmark"
+                size="30"
+                color="#b68d40"
+                onClick={(event) =>
+                  this.handleAddToWishlist(event, singleActivity)
+                }
+              />
+              <a className="activity-title" href={singleActivity.data[0].url}>
+                {singleActivity.data[0].title}
+              </a>
+            </div>
+            <a className="park-title" href={singleActivity.parkUrl}>
+              {singleActivity.parkName}
+            </a>
+          </section>
+          <section className="single-activity">
+            <img id="activity-img" src={singleActivity.data[0].images[0].url} />
+            {/* <div
+              onClick={(event) =>
+                this.handleAddToWishlist(event, singleActivity)
+              }
+            >
+              <img id="bookmark" src="/bookmark-full.svg" />
+            </div> */}
+          </section>
         </main>
       );
     }
