@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchTrips, deleteTrip } from '../store/alltrips';
-import ClearIcon from '@material-ui/icons/Clear';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -41,7 +41,7 @@ export class MyPlanner extends React.Component {
                 <TableCell>All Trips</TableCell>
                 <TableCell align="right">Start Date</TableCell>
                 <TableCell align="right">End Date</TableCell>
-                <TableCell align="right">Edit</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -61,6 +61,13 @@ export class MyPlanner extends React.Component {
                         <EditIcon />
                       </IconButton>
                     </Link>
+
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => this.props.deleteTrip(trip.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -82,7 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getTrips: (id) => dispatch(fetchTrips(id)),
-    deleteTrip: (trip) => dispatch(deleteTrip(trip)),
+    deleteTrip: (id) => dispatch(deleteTrip(id)),
   };
 };
 
