@@ -48,6 +48,11 @@ class Routes extends Component {
               path="/my-planner/:tripId"
               component={MySinglePlanner}
             />
+            <Route
+              exact
+              path="/my-planner/:tripId/:mode"
+              component={MySinglePlanner}
+            />
 
             <Redirect to="/home" />
           </Switch>

@@ -2,11 +2,16 @@ import React, { useCallback, useState } from 'react';
 import Calendar from './DnDCalendar';
 import Wishlist from './Wishlist';
 import { connect } from 'react-redux';
-
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+import { createTrip } from '../store/alltrips';
 /**
  * COMPONENT
  */
 export const CreateTrip = (props) => {
+  const [myTripName, setTripName] = useState();
   const [myEvents, setMyEvents] = useState(
     props.trip.activities.map((activity) => ({
       start: activity.dateOfActivity,
@@ -15,6 +20,21 @@ export const CreateTrip = (props) => {
       isDraggable: true,
     }))
   );
+  console.log(myEvents);
+  const handleChange = (event) => {
+    setTripName(event.target.value);
+  };
+
+  const handleClick = () => {
+    props.createTrip({
+      tripName: myTripName,
+      userId: props.id,
+      startDate: myEvents[0].start,
+      endDate: myEvents[myEvents.length - 1].end,
+    });
+    props.history.push('/my-planner');
+  };
+
   const [draggedEvent, setDraggedEvent] = useState();
   const handleDragStart = useCallback((event) => setDraggedEvent(event), []);
   const dragFromOutsideItem = useCallback(() => draggedEvent, [draggedEvent]);
@@ -91,18 +111,44 @@ export const CreateTrip = (props) => {
 
   return (
     <div>
-      <Wishlist handleDragStart={handleDragStart} />
-      <button>Save</button>
-      <Calendar
-        onDropFromOutside={onDropFromOutside}
-        dragFromOutsideItem={dragFromOutsideItem}
-        newEvent={newEvent}
-        customOnDragOver={customOnDragOver}
-        myEvents={myEvents}
-        resizeEvent={resizeEvent}
-        moveEvent={moveEvent}
-        trip={props.trip}
-      />
+      <Grid container spacing={3}>
+        <Grid item lg>
+          <TextField
+            id="filled-basic"
+            label="Trip Name"
+            value={myTripName}
+            onChange={handleChange}
+            variant="filled"
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} m={12} lg={3}>
+          <Wishlist handleDragStart={handleDragStart} />
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={handleClick}
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
+        </Grid>
+        <Grid item xs={12} m={12} lg={9}>
+          <Calendar
+            onDropFromOutside={onDropFromOutside}
+            dragFromOutsideItem={dragFromOutsideItem}
+            newEvent={newEvent}
+            customOnDragOver={customOnDragOver}
+            myEvents={myEvents}
+            resizeEvent={resizeEvent}
+            moveEvent={moveEvent}
+            trip={props.trip}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };
@@ -110,7 +156,12 @@ export const CreateTrip = (props) => {
 const mapStateToProps = (state) => {
   return {
     trip: state.singleTrip,
+    id: state.auth.id,
   };
 };
 
-export default connect(mapStateToProps, null)(CreateTrip);
+const mapDispatchToProps = (dispatch, { history }) => ({
+  createTrip: (trip) => dispatch(createTrip(trip, history)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTrip);

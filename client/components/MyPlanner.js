@@ -16,16 +16,9 @@ import EditIcon from '@material-ui/icons/Edit';
 export class MyPlanner extends React.Component {
   constructor() {
     super();
-    this.state = {
-      hasForm: false,
-    };
-    this.isClicked = this.isClicked.bind(this);
   }
   componentDidMount() {
     this.props.getTrips(this.props.id);
-  }
-  isClicked() {
-    this.setState({ hasForm: true });
   }
 
   render() {
@@ -34,9 +27,7 @@ export class MyPlanner extends React.Component {
       <div id="trips" className="column">
         <TableContainer component={Paper} className="trip-table">
           <Link to="./my-planner/create-trip">
-            <button type="submit" onClick={this.isClicked}>
-              Create New Trip
-            </button>
+            <button type="submit">Create New Trip</button>
           </Link>
 
           {/* {this.state.hasAddForm ? <CreateTrip /> : null} */}
@@ -54,35 +45,25 @@ export class MyPlanner extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {trips.map((trip) =>
-                this.state.editId === trip.id ? (
-                  <TableRow
-                    key={trip.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <EditTrip trip={trip} onClickUpdate={this.isEditClicked} />
-                  </TableRow>
-                ) : (
-                  <TableRow
-                    key={trip.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
-                    </TableCell>
-                    <TableCell align="right">{trip.startDate}</TableCell>
-                    <TableCell align="right">{trip.endDate}</TableCell>
-                    <TableCell align="right">
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() => this.isEditClicked(trip.id)}
-                      >
+              {trips.map((trip) => (
+                <TableRow
+                  key={trip.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
+                  </TableCell>
+                  <TableCell align="right">{trip.startDate}</TableCell>
+                  <TableCell align="right">{trip.endDate}</TableCell>
+                  <TableCell align="right">
+                    <Link to={`/my-planner/${trip.id}/edit`}>
+                      <IconButton aria-label="edit">
                         <EditIcon />
                       </IconButton>
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchSingleTrip } from '../store/singleTrip';
 import moment from 'moment';
-import {
-  Calendar,
-  Views,
-  DateLocalizer,
-  momentLocalizer,
-} from 'react-big-calendar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const mLocalizer = momentLocalizer(moment);
