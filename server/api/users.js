@@ -5,11 +5,10 @@ const {
 } = require('../db');
 const { requireToken } = require('./gateKeepingMiddleware');
 
-// API/GET/
+// API/USERS
 router.get('/', requireToken, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // Explicitly select only the id and username fields - even though users' passwords are encrypted, it won't help if we just send everything to anyone who asks.
       attributes: ['id', 'username'],
     });
     res.json(users);
@@ -18,4 +17,4 @@ router.get('/', requireToken, async (req, res, next) => {
   }
 });
 
-module.exports = { router };
+module.exports = router;
