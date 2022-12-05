@@ -3,7 +3,7 @@ const db = require('../db');
 
 const Activity = db.define('activity', {
   activity_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   url: {
     type: DataTypes.TEXT,
@@ -24,7 +24,7 @@ const Activity = db.define('activity', {
     type: DataTypes.STRING,
   },
   feeDescription: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   doFeesApply: {
     type: DataTypes.STRING,
@@ -36,16 +36,16 @@ const Activity = db.define('activity', {
     type: DataTypes.TEXT,
   },
   activity_category: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.ARRAY(DataTypes.TEXT),
   },
   activityDescription: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   longDescription: {
     type: DataTypes.TEXT,
   },
   additional_category: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.ARRAY(DataTypes.TEXT),
   },
   duration: {
     type: DataTypes.STRING,
@@ -54,7 +54,7 @@ const Activity = db.define('activity', {
     type: DataTypes.TEXT,
   },
   tags: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.ARRAY(DataTypes.TEXT),
   },
   dateOfActivity: {
     type: DataTypes.DATEONLY,
