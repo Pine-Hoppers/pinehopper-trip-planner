@@ -34,6 +34,8 @@ export const CreateTrip = (props) => {
       userId: props.id,
       startDate: myEvents[0].start,
       endDate: myEvents[myEvents.length - 1].end,
+      activityId: props.wishlist[0].activityId,
+      dateOfActivity: myEvents[0].start,
     });
     props.history.push('/my-planner');
   };

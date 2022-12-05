@@ -29,7 +29,20 @@ router.get('/:tripId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    res.status(201).send(await Trip.create(req.body));
+    const trip = await Trip.create({
+      tripName: req.body.tripName,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      userId: req.body.userId,
+    });
+    console.log(trip);
+    const activity = await Activity.findByPk(req.body.activityId);
+    await activity.update({
+      tripId: trip.id,
+      dateOfActivity: req.body.dateOfActivity,
+    });
+
+    res.status(201).send(trip);
   } catch (error) {
     next(error);
   }
