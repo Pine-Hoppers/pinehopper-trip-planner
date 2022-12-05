@@ -36,7 +36,6 @@ router.post('/', requireToken, async (req, res, next) => {
       endDate: req.body.endDate,
       userId: req.body.userId,
     });
-    console.log(req.body.activities);
     const promises = req.body.activities.map(async (activity) => {
       let activityRow = await Activity.findByPk(activity.activityId);
       await activityRow.update({
