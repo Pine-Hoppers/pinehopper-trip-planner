@@ -6,7 +6,7 @@ const {
 
 const { faker } = require('@faker-js/faker');
 
-/**
+/*
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
@@ -14,7 +14,7 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
 
-  // Create Users
+  // CREATE USERS
   const randomUsers = [];
 
   randomUsers.push(
@@ -62,7 +62,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
 
-  // Create Trips
+  // CREATE TRIPS
   const tripsArr = [
     Trip.create({
       tripName: 'March Yellowstone Trip',
@@ -83,14 +83,14 @@ async function seed() {
 
   const trips = await Promise.all(tripsArr);
 
-  // associate trips with a user
+  // ASSOCIATE TRIP WITH USER
   await trips[0].setUser(users[0].id);
   await trips[1].setUser(users[1].id);
   await trips[2].setUser(users[2].id);
 
   console.log(`seeded ${trips.length} trips`);
 
-  // Creating Activities
+  // CREATING ACTIVITIES
   const activities = await Promise.all([
     Activity.create({
       activity_name: 'Bannock Ski Trail',
@@ -493,7 +493,7 @@ async function seed() {
 
   console.log(`seeded ${activities.length} activities`);
 
-  // Create Wishlists
+  // CREATE WISHLISTS
   const wishlist1 = Wishlist.build();
   wishlist1.set({
     userId: users[3].id,
@@ -558,5 +558,5 @@ if (module === require.main) {
   runSeed();
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
+// We export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
