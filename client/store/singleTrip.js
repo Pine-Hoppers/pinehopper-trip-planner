@@ -24,7 +24,7 @@ export const fetchSingleTrip = (id) => {
   };
 };
 
-// REDUCERS
+// REDUCER
 const initialState = {
   activities: [],
 };

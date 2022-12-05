@@ -53,7 +53,7 @@ export const deleteTrip = (id) => {
   };
 };
 
-// REDUCERS
+// REDUCER
 const initialState = [];
 
 export default function (state = initialState, action) {
