@@ -6,7 +6,7 @@ const {
 
 const { faker } = require('@faker-js/faker');
 
-/**
+/*
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
@@ -14,7 +14,7 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
 
-  // Create Users
+  // CREATE USERS
   const randomUsers = [];
 
   randomUsers.push(
@@ -62,7 +62,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
 
-  // Create Trips
+  // CREATE TRIPS
   const tripsArr = [
     Trip.create({
       tripName: 'March Yellowstone Trip',
@@ -133,7 +133,7 @@ async function seed() {
 
   const trips = await Promise.all(tripsArr);
 
-  // associate trips with a user
+  // ASSOCIATE TRIP WITH USER
   await trips[0].setUser(users[0].id);
   await trips[1].setUser(users[1].id);
   await trips[2].setUser(users[2].id);
@@ -148,7 +148,7 @@ async function seed() {
 
   console.log(`seeded ${trips.length} trips`);
 
-  // Creating Activities
+  // CREATING ACTIVITIES
   const activities = await Promise.all([
     Activity.create({
       activity_name: 'Bannock Ski Trail',
@@ -551,27 +551,25 @@ async function seed() {
 
   console.log(`seeded ${activities.length} activities`);
 
-  // Create Wishlists
+  // CREATE WISHLISTS
   const wishlist1 = Wishlist.build();
   wishlist1.set({
-    userId: 4,
+    userId: users[3].id,
     activityId: activities[0].id,
   });
   await wishlist1.save();
 
   const wishlist2 = Wishlist.build();
   wishlist2.set({
-    userId: 5,
+    userId: users[4].id,
     activityId: activities[4].id,
   });
   await wishlist2.save();
 
-  const wishlist3 = Wishlist.build();
-  wishlist3.set({
-    userId: 6,
-    activityId: activities[5].id,
+  const wishlist3 = Wishlist.create({
+    userId: users[2].id,
+    activityId: activities[4].id,
   });
-  await wishlist3.save();
 
   const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
   console.log(`seeded ${wishlists.length} wishlists`);
@@ -582,6 +580,7 @@ async function seed() {
     users: {
       nadia: users[0],
       christine: users[1],
+      lu: users[2],
     },
     activities: {
       'Bannock Ski Trail': activities[0],
@@ -617,5 +616,5 @@ if (module === require.main) {
   runSeed();
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
+// We export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;

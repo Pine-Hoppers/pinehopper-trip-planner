@@ -11,11 +11,11 @@ const Trip = db.define('trip', {
   },
   startDate: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
   endDate: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
 });
 

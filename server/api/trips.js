@@ -2,8 +2,9 @@ const router = require('express').Router();
 const {
   models: { Trip, Activity },
 } = require('../db/index');
+const { requireToken } = require('./gateKeepingMiddleware');
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, async (req, res, next) => {
   try {
     const allTrips = await Trip.findAll({
       where: {
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:tripId', async (req, res, next) => {
+router.get('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId, {
       include: { model: Activity },
@@ -27,15 +28,28 @@ router.get('/:tripId', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
-    res.status(201).send(await Trip.create(req.body));
+    const trip = await Trip.create({
+      tripName: req.body.tripName,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      userId: req.body.userId,
+    });
+    console.log(trip);
+    const activity = await Activity.findByPk(req.body.activityId);
+    await activity.update({
+      tripId: trip.id,
+      dateOfActivity: req.body.dateOfActivity,
+    });
+
+    res.status(201).send(trip);
   } catch (error) {
     next(error);
   }
 });
 
-router.put('/:tripId', async (req, res, next) => {
+router.put('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId, {
       include: { model: Activity },
@@ -46,7 +60,7 @@ router.put('/:tripId', async (req, res, next) => {
   }
 });
 
-router.delete('/:tripId', async (req, res, next) => {
+router.delete('/:tripId', requireToken, async (req, res, next) => {
   try {
     const trip = await Trip.findByPk(req.params.tripId);
     await trip.destroy();

@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+// ACTION TYPES
 const SET_TRIPS = 'SET_TRIPS';
 const CREATE_TRIP = 'CREATE_TRIP';
 const DELETE_TRIP = 'DELETE_TRIP';
 
+// ACTION CREATORS
 export const setTrips = (trips) => {
   return {
     type: SET_TRIPS,
@@ -11,7 +13,6 @@ export const setTrips = (trips) => {
   };
 };
 
-// Fetches all trips for logged-in user
 export const fetchTrips = (id) => {
   return async (dispatch) => {
     try {
@@ -37,6 +38,7 @@ const _deleteTrip = (trip) => {
   };
 };
 
+// THUNKS
 export const createTrip = (trip) => {
   return async (dispatch) => {
     const { data: created } = await axios.post('/api/trips', trip);
@@ -51,6 +53,7 @@ export const deleteTrip = (id) => {
   };
 };
 
+// REDUCER
 const initialState = [];
 
 export default function (state = initialState, action) {
