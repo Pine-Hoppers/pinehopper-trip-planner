@@ -6,7 +6,11 @@ const { requireToken } = require('./gateKeepingMiddleware');
 
 router.get('/', requireToken, async (req, res, next) => {
   try {
-    const allTrips = await Trip.findAll();
+    const allTrips = await Trip.findAll({
+      where: {
+        userId: req.query.id,
+      },
+    });
     res.json(allTrips);
   } catch (error) {
     next(error);
@@ -26,7 +30,20 @@ router.get('/:tripId', requireToken, async (req, res, next) => {
 
 router.post('/', requireToken, async (req, res, next) => {
   try {
-    res.status(201).send(await Trip.create(req.body));
+    const trip = await Trip.create({
+      tripName: req.body.tripName,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      userId: req.body.userId,
+    });
+    console.log(trip);
+    const activity = await Activity.findByPk(req.body.activityId);
+    await activity.update({
+      tripId: trip.id,
+      dateOfActivity: req.body.dateOfActivity,
+    });
+
+    res.status(201).send(trip);
   } catch (error) {
     next(error);
   }

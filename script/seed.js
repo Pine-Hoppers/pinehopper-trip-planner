@@ -496,24 +496,22 @@ async function seed() {
   // CREATE WISHLISTS
   const wishlist1 = Wishlist.build();
   wishlist1.set({
-    userId: 4,
+    userId: users[3].id,
     activityId: activities[0].id,
   });
   await wishlist1.save();
 
   const wishlist2 = Wishlist.build();
   wishlist2.set({
-    userId: 5,
+    userId: users[4].id,
     activityId: activities[4].id,
   });
   await wishlist2.save();
 
-  const wishlist3 = Wishlist.build();
-  wishlist3.set({
-    userId: 6,
-    activityId: activities[5].id,
+  const wishlist3 = Wishlist.create({
+    userId: users[2].id,
+    activityId: activities[4].id,
   });
-  await wishlist3.save();
 
   const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
   console.log(`seeded ${wishlists.length} wishlists`);
@@ -524,6 +522,7 @@ async function seed() {
     users: {
       nadia: users[0],
       christine: users[1],
+      lu: users[2],
     },
     activities: {
       'Bannock Ski Trail': activities[0],

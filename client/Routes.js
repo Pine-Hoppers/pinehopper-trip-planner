@@ -8,6 +8,8 @@ import MyPlanner from './components/MyPlanner';
 import MySinglePlanner from './components/MySinglePlanner';
 import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
+import SingleActivity from './components/SingleActivity';
+import CreateTrip from './components/CreateTrip';
 import { me } from './store';
 
 // COMPONENT
@@ -26,11 +28,30 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route exact path="/explore" component={Explore} />
             <Route
+              path="/explore/:parkCode/activities/:activityId"
+              component={SingleActivity}
+            />
+            <Route
               path="/explore/:parkCode/activities"
               component={ParkActivities}
             />
             <Route exact path="/my-planner" component={MyPlanner} />
-            <Route path="/my-planner/:tripId" component={MySinglePlanner} />
+            <Route
+              exact
+              path="/my-planner/create-trip"
+              component={CreateTrip}
+            />
+            <Route
+              exact
+              path="/my-planner/:tripId"
+              component={MySinglePlanner}
+            />
+            <Route
+              exact
+              path="/my-planner/:tripId/:mode"
+              component={MySinglePlanner}
+            />
+
             <Redirect to="/home" />
           </Switch>
         ) : (
