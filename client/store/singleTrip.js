@@ -1,4 +1,5 @@
 import axios from 'axios';
+const TOKEN = 'token';
 
 // ACTION TYPES
 const SET_SINGLE_TRIP = 'SET_SINGLE_TRIP';
@@ -16,8 +17,15 @@ export const setSingleTrip = (trip) => {
 export const fetchSingleTrip = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/trips/${id}`);
-      dispatch(setSingleTrip(data));
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data } = await axios.get(`/api/trips/${id}`, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(setSingleTrip(data));
+      }
     } catch (err) {
       console.log(err);
     }
