@@ -92,8 +92,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case SET_TRIPS:
       return action.trips;
-    // case CREATE_TRIP:
-    //   return [...state, action.trip];
+    case CREATE_TRIP:
+      return [...state, action.trip];
     case DELETE_TRIP:
       return state.filter((trip) => trip.id !== action.trip.id);
     default:
