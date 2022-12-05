@@ -88,6 +88,10 @@ main {
   padding-right: 5px;
 }
 
+button.button-create-new-trip {
+  margin-bottom: 15px
+}
+
 /* Single Activity Page */
 .single-activity {
   width: 70%;
@@ -185,3 +189,4 @@ main {
 #accordion p {
   margin-top: 0;
 }
+

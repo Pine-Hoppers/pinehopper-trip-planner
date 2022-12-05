@@ -509,8 +509,8 @@ async function seed() {
   await wishlist2.save();
 
   const wishlist3 = Wishlist.create({
-    userId: users[5].id,
-    activityId: activities[5].id,
+    userId: users[2].id,
+    activityId: activities[4].id,
   });
 
   const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
@@ -522,6 +522,7 @@ async function seed() {
     users: {
       nadia: users[0],
       christine: users[1],
+      lu: users[2],
     },
     activities: {
       'Bannock Ski Trail': activities[0],

@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchSingleTrip, editSingelTrip } from '../store/singleTrip';
-import Calendar from './Calendar';
+import { fetchSingleTrip } from '../store/singleTrip';
+import moment from 'moment';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+const mLocalizer = momentLocalizer(moment);
 
 class SingleTrip extends React.Component {
   constructor() {
@@ -21,12 +23,24 @@ class SingleTrip extends React.Component {
   }
   render() {
     const trip = this.props.trip;
+    const myEvents = this.props.trip.activities.map((activity) => ({
+      start: activity.dateOfActivity,
+      end: activity.dateOfActivity,
+      title: activity.activity_name,
+    }));
     return (
-      <div id="single-trip" className="column">
-        <Link to={`/my-planner`}>
-          <button>All Trips</button>
-        </Link>
-        {trip.activities.length === 0 ? <CircularProgress /> : <Calendar />}
+      <div id="single-trip" className="column calendar-container">
+        <h1>{trip.tripName}</h1>
+
+        {trip.activities.length === 0 ? (
+          <CircularProgress />
+        ) : (
+          <Calendar
+            defaultDate={trip.startDate}
+            events={myEvents}
+            localizer={mLocalizer}
+          />
+        )}
       </div>
     );
   }
