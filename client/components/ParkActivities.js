@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchParkActivities } from '../store';
 
-/**
- * COMPONENT
- */
+// COMPONENT
 export class ParkActivities extends React.Component {
   constructor() {
     super();
@@ -65,9 +63,7 @@ export class ParkActivities extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapState = (state) => {
   return {
     activities: state.activities,

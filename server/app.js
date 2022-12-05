@@ -4,13 +4,13 @@ const morgan = require('morgan');
 const app = express();
 module.exports = app;
 
-// logging middleware
+// LOGGING MIDDLEWARE
 app.use(morgan('dev'));
 
-// body parsing middleware
+// BODY PARSING MIDDLEWARE
 app.use(express.json());
 
-// auth and api routes
+// AUTH AND API ROUTES
 app.use('/auth', require('./auth'));
 app.use('/api', require('./api'));
 
@@ -18,10 +18,9 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
 
-// static file-serving middleware
+// STATIC FILE SERVING MIDDLEWARE
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// any remaining requests with an extension (.js, .css, etc.) send 404
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
     const err = new Error('Not found');
@@ -32,12 +31,12 @@ app.use((req, res, next) => {
   }
 });
 
-// sends index.html
+// SENDS INDEX.HTML
 app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'));
 });
 
-// error handling endware
+// ERROR HANDLING ENDWARE
 app.use((err, req, res, next) => {
   console.error(err);
   console.error(err.stack);
