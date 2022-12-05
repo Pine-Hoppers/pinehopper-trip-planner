@@ -29,13 +29,24 @@ export const CreateTrip = (props) => {
     setTripName(event.target.value);
   };
   const handleClick = () => {
+    let matchActivities = [];
+    for (let i = 0; i < myEvents.length; i++) {
+      for (let j = 0; j < props.wishlist.length; j++) {
+        if (props.wishlist[j].activity.activity_name === myEvents[i].title) {
+          matchActivities[i] = {
+            activityId: props.wishlist[j].activityId,
+            dateOfActivity: myEvents[i].start,
+          };
+        }
+      }
+    }
+    console.log(matchActivities);
     props.createTrip({
       tripName: myTripName,
       userId: props.id,
       startDate: myEvents[0].start,
       endDate: myEvents[myEvents.length - 1].end,
-      activityId: props.wishlist[0].activityId,
-      dateOfActivity: myEvents[0].start,
+      activities: matchActivities,
     });
     props.history.push('/my-planner');
   };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+const TOKEN = 'token';
 
 // ACTION TYPES
 const SET_TRIPS = 'SET_TRIPS';
@@ -16,8 +17,15 @@ export const setTrips = (trips) => {
 export const fetchTrips = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/trips?id=${id}`);
-      dispatch(setTrips(data));
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data } = await axios.get(`/api/trips?id=${id}`, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(setTrips(data));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,15 +49,39 @@ const _deleteTrip = (trip) => {
 // THUNKS
 export const createTrip = (trip) => {
   return async (dispatch) => {
-    const { data: created } = await axios.post('/api/trips', trip);
-    dispatch(_createTrip(created));
+    try {
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data: created } = await axios.post('/api/trips', trip, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(_createTrip(created));
+      }
+    } catch (error) {
+      console.log('Unable to add item to wishlist right now: ', error);
+      throw error;
+    }
   };
 };
 
 export const deleteTrip = (id) => {
   return async (dispatch) => {
-    const { data: trip } = await axios.delete(`/api/trips/${id}`);
-    dispatch(_deleteTrip(trip));
+    try {
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data: trip } = await axios.delete(`/api/trips/${id}`, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(_deleteTrip(trip));
+      }
+    } catch (error) {
+      console.log('Unable to add item to wishlist right now: ', error);
+      throw error;
+    }
   };
 };
 

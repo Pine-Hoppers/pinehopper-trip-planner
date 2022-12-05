@@ -36,14 +36,17 @@ router.post('/', requireToken, async (req, res, next) => {
       endDate: req.body.endDate,
       userId: req.body.userId,
     });
-    console.log(trip);
-    const activity = await Activity.findByPk(req.body.activityId);
-    await activity.update({
-      tripId: trip.id,
-      dateOfActivity: req.body.dateOfActivity,
-    });
+    // const promises =
 
+    req.body.activities.map(async (activity) => {
+      let activityRow = await Activity.findByPk(activity.activityId);
+      await activityRow.update({
+        tripId: trip.id,
+        dateOfActivity: activity.dateOfActivity,
+      });
+    });
     res.status(201).send(trip);
+    // Promise.all(promises).then(() => res.status(201).send(trip));
   } catch (error) {
     next(error);
   }
