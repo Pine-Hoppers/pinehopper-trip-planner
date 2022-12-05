@@ -3,7 +3,7 @@ const db = require('../db');
 
 const Activity = db.define('activity', {
   activity_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   url: {
     type: DataTypes.TEXT,
@@ -39,7 +39,7 @@ const Activity = db.define('activity', {
     type: DataTypes.ARRAY(DataTypes.TEXT),
   },
   activityDescription: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   longDescription: {
     type: DataTypes.TEXT,
