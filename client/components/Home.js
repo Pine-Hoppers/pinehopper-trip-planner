@@ -31,16 +31,44 @@ export class Home extends React.Component {
 
   render() {
     const { trips } = this.props;
-    const { username } = this.props;
+    const { firstName } = this.props;
+    console.log('FIRSTNAME', firstName);
 
     return (
       <div>
-        <h3>Welcome, {username}</h3>
-        <h4 id="trips">Upcoming Trips</h4>
+        <h3>Welcome, {firstName}</h3>
+        <button type="submit" onClick={this.isClicked}>
+          Create New Trip
+        </button>
         <TableContainer component={Paper} className="trip-table">
-          <button type="submit" onClick={this.isClicked}>
-            Create New Trip
-          </button>
+          <h4 id="trips">Upcoming Trips</h4>
+          <Table>
+            <TableBody>
+              {trips.map((trip) =>
+                this.state.editId === trip.id ? (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <EditTrip trip={trip} onClickUpdate={this.isEditClicked} />
+                  </TableRow>
+                ) : (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
+                    </TableCell>
+                    <TableCell align="right"></TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TableContainer>
+          <h4 id="trips">Past Trips</h4>
           <Table>
             <TableBody>
               {trips.map((trip) =>
@@ -73,7 +101,7 @@ export class Home extends React.Component {
 
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
     trips: state.trips,
     id: state.auth.id,
   };

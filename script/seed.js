@@ -92,7 +92,22 @@ async function seed() {
     Trip.create({
       tripName: 'July Yellowstone Trip',
       startDate: '2022-07-05',
-      endDate: '2022-07-19',
+      endDate: '2023-07-19',
+    }),
+    Trip.create({
+      tripName: 'July Yellowstone Trip',
+      startDate: '2022-07-05',
+      endDate: '2023-07-19',
+    }),
+    Trip.create({
+      tripName: 'July Yellowstone Trip',
+      startDate: '2022-07-05',
+      endDate: '2023-07-19',
+    }),
+    Trip.create({
+      tripName: 'July Yellowstone Trip',
+      startDate: '2022-07-05',
+      endDate: '2023-07-19',
     }),
     Trip.create({
       tripName: 'July Yellowstone Trip',
@@ -102,32 +117,17 @@ async function seed() {
     Trip.create({
       tripName: 'July Yellowstone Trip',
       startDate: '2022-07-05',
-      endDate: '2022-07-19',
+      endDate: '2021-07-19',
     }),
     Trip.create({
       tripName: 'July Yellowstone Trip',
       startDate: '2022-07-05',
-      endDate: '2022-07-19',
+      endDate: '2020-07-19',
     }),
     Trip.create({
       tripName: 'July Yellowstone Trip',
       startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
+      endDate: '2021-07-19',
     }),
   ];
 
@@ -144,7 +144,7 @@ async function seed() {
   await trips[7].setUser(users[0].id);
   await trips[8].setUser(users[0].id);
   await trips[9].setUser(users[0].id);
-  await trips[2].setUser(users[0].id);
+  await trips[10].setUser(users[0].id);
 
   console.log(`seeded ${trips.length} trips`);
 
