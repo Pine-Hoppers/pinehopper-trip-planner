@@ -89,12 +89,12 @@ main {
 }
 
 button.button-create-new-trip {
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 
 /* Single Activity Page */
 .single-activity {
-  width: 70%;
+  width: 50%;
 }
 
 .single-activity h3 {
@@ -126,10 +126,16 @@ button.button-create-new-trip {
 
 #activity-img {
   width: 100%;
-  max-width: 950px;
+  /* max-width: 950px;
   max-height: 535px;
   min-width: 262px;
-  min-height: 175px;
+  min-height: 175px; */
+}
+
+.single-activity figcaption {
+  font-size: 14px;
+  font-style: italic;
+  padding-top: 7px;
 }
 
 /* #box {
@@ -172,7 +178,7 @@ button.button-create-new-trip {
 .park-title {
   font-family: sans-serif;
   font-size: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: 6px;
 }
 
@@ -189,4 +195,3 @@ button.button-create-new-trip {
 #accordion p {
   margin-top: 0;
 }
-

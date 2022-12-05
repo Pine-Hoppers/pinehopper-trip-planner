@@ -43,6 +43,14 @@ export class SingleActivity extends React.Component {
       const { parkCode, activityId } = this.props.match.params;
       const { singleActivity } = this.props;
 
+      const hasCaption =
+        singleActivity.data[0].images[0].caption &&
+        singleActivity.data[0].images[0].caption.length > 0;
+
+      const hasCropImg =
+        singleActivity.data[0].images[0].crops &&
+        singleActivity.data[0].images[0].crops.length > 0;
+
       return (
         <main>
           <section className="single-activity" id="activity-header">
@@ -69,9 +77,21 @@ export class SingleActivity extends React.Component {
             </a>
           </section>
 
-          <section className="single-activity">
-            <img id="activity-img" src={singleActivity.data[0].images[0].url} />
-          </section>
+          <figure className="single-activity">
+            <img
+              id="activity-img"
+              src={
+                hasCropImg
+                  ? singleActivity.data[0].images[0].crops[0].url
+                  : singleActivity.data[0].images[0].url
+              }
+            />
+            {hasCaption && (
+              <figcaption>
+                {singleActivity.data[0].images[0].caption}
+              </figcaption>
+            )}
+          </figure>
 
           <section className="single-activity" id="description">
             <div
