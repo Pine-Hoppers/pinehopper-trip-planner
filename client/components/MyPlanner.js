@@ -12,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
 
 export class MyPlanner extends React.Component {
   constructor() {
@@ -27,9 +28,14 @@ export class MyPlanner extends React.Component {
       <div id="trips" className="column">
         <TableContainer component={Paper} className="trip-table">
           <Link to="./my-planner/create-trip">
-            <button type="submit">Create New Trip</button>
+            <Button
+              className="button-create-new-trip"
+              variant="contained"
+              color="primary"
+            >
+              Create New Trip
+            </Button>
           </Link>
-
           {/* {this.state.hasAddForm ? <CreateTrip /> : null} */}
           <Table
             stickyHeader

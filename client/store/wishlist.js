@@ -7,10 +7,19 @@ const TOKEN = 'token';
  */
 const SET_WISHLIST_ITEM = 'SET_WISHLIST_ITEM';
 
+const SET_WISHLIST = 'SET_WISHLIST';
+
 /**
  * ACTION CREATORS
  */
 const setWishlistItem = (item) => ({ type: SET_WISHLIST_ITEM, item });
+
+export const setWishlist = (wishlist) => {
+  return {
+    type: SET_WISHLIST,
+    wishlist,
+  };
+};
 
 /**
  * THUNK CREATORS
@@ -34,6 +43,23 @@ export const addItemToWishlist = (activityInfo) => {
   };
 };
 
+export const fetchWishlist = (id) => {
+  return async (dispatch) => {
+    try {
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data } = await axios.get(`/api/wishlist?id=${id}`, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(setWishlist(data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 /**
  * REDUCER
  */
@@ -41,6 +67,8 @@ export default function (state = [], action) {
   switch (action.type) {
     case SET_WISHLIST_ITEM:
       return [...state, action.item];
+    case SET_WISHLIST:
+      return action.wishlist;
     default:
       return state;
   }

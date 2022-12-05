@@ -1,46 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishlists } from '../store/wishlists';
 
 export class Wishlist extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
-  componentDidMount() {
-    this.props.getWishlists(this.props.id);
-  }
-
   render() {
-    const { wishlists } = this.props;
+    const { wishlist } = this.props;
 
     return (
       <div>
         <h1> Wishlist</h1>
-        {wishlists.length === 0 ? (
+        {wishlist.length === 0 ? (
           <h3>
             Your wishlist is empty now!
             <a href="/explore">Explore</a> another park & Add activities into
             your wishlist!
           </h3>
         ) : (
-          wishlists.map((wishlist) => {
-            const image = JSON.parse(wishlist.activity.images);
+          wishlist.map((item) => {
+            const image = JSON.parse(item.activity.images);
 
             return (
               <div
                 className="each-activity-layout"
                 draggable="true"
-                key={wishlist.id}
+                key={item.id}
                 onDragStart={() =>
                   this.props.handleDragStart({
-                    title: wishlist.activity.activity_name,
-                    name: wishlist.activity.activity_name,
+                    title: item.activity.activity_name,
+                    name: item.activity.activity_name,
                   })
                 }
               >
                 <img className="all-activities-img" src={image.url} />
                 <div className="each-activity-detail">
-                  <p>{wishlist.activity.activity_name}</p>
+                  <p>{item.activity.activity_name}</p>
                 </div>
               </div>
             );
@@ -53,15 +48,8 @@ export class Wishlist extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    wishlists: state.wishlists,
     id: state.auth.id,
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    getWishlists: (id) => dispatch(fetchWishlists(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatch)(Wishlist);
+export default connect(mapStateToProps, null)(Wishlist);

@@ -15,6 +15,31 @@ const requireToken = async (req, res, next) => {
   }
 };
 
+router.get('/', requireToken, async (req, res, next) => {
+  try {
+    const wishlists = await Wishlist.findAll({
+      where: {
+        userId: req.query.id,
+      },
+      include: { model: Activity },
+    });
+    res.json(wishlists);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/:wishlistId', requireToken, async (req, res, next) => {
+  try {
+    const wishlist = await Wishlist.findByPk(req.params.wishlistId, {
+      include: { model: Activity },
+    });
+    res.json(wishlist);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST /api/wishlist
 router.post('/', requireToken, async (req, res, next) => {
   try {

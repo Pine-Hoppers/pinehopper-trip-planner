@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Calendar from './DnDCalendar';
 import Wishlist from './Wishlist';
 import { connect } from 'react-redux';
@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { createTrip } from '../store/alltrips';
+import { fetchWishlist } from '../store/wishlist';
+
 /**
  * COMPONENT
  */
@@ -20,11 +22,12 @@ export const CreateTrip = (props) => {
       isDraggable: true,
     }))
   );
-  console.log(myEvents);
+  useEffect(() => {
+    props.getWishlist(props.id);
+  }, []);
   const handleChange = (event) => {
     setTripName(event.target.value);
   };
-
   const handleClick = () => {
     props.createTrip({
       tripName: myTripName,
@@ -125,7 +128,10 @@ export const CreateTrip = (props) => {
 
       <Grid container spacing={3}>
         <Grid item xs={12} m={12} lg={3}>
-          <Wishlist handleDragStart={handleDragStart} />
+          <Wishlist
+            handleDragStart={handleDragStart}
+            wishlist={props.wishlist}
+          />
           <Button
             variant="contained"
             color="primary"
@@ -155,6 +161,7 @@ export const CreateTrip = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    wishlist: state.wishlist,
     trip: state.singleTrip,
     id: state.auth.id,
   };
@@ -162,6 +169,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, { history }) => ({
   createTrip: (trip) => dispatch(createTrip(trip, history)),
+  getWishlist: (id) => dispatch(fetchWishlist(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTrip);
