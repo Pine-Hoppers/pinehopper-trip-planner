@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchActivity, addItemToWishlist } from '../store';
+import { fetchActivity, addItemToWishlist, fetchWishlist } from '../store';
 import Details from './Details';
 
-// bookmark icon
-import { UilBookmark } from '@iconscout/react-unicons';
-import { UisBookmark } from '@iconscout/react-unicons';
+// bookmark icon: https://iconscout.com/unicons/explore/line
+// import { UilBookmark } from '@iconscout/react-unicons';
 
 /**
  * COMPONENT
@@ -16,20 +15,50 @@ export class SingleActivity extends React.Component {
     super();
     this.state = {
       loading: true,
+      bookmarked: false,
     };
     this.handleAddToWishlist = this.handleAddToWishlist.bind(this);
+    this.setBookmarkIcon = this.setBookmarkIcon.bind(this);
   }
 
   async componentDidMount() {
     const { parkCode, activityId } = this.props.match.params;
+
+    // load single activity
     await this.props.fetchActivity(parkCode, activityId);
+
+    // check if activity is bookmarked
+    this.setBookmarkIcon(activityId);
+
     this.setState({ loading: false });
+  }
+
+  async componentDidUpdate(prevProps) {
+    // if wishlist was updated
+    if (this.props.wishlist.length !== prevProps.wishlist.length) {
+      const { activityId } = this.props.match.params;
+      this.setBookmarkIcon(activityId);
+    }
   }
 
   async handleAddToWishlist(event, activityInfo) {
     event.preventDefault();
     const { addItemToWishlist } = this.props;
     await addItemToWishlist(activityInfo);
+  }
+
+  async setBookmarkIcon(activityId) {
+    // load wishlist
+    await this.props.fetchWishlist(this.props.id);
+
+    // check if this activity is already bookmarked
+    const { wishlist } = this.props;
+    if (wishlist.length > 0) {
+      const isBookmarked = wishlist.some(
+        (item) => item.activity.activity_id === activityId
+      );
+      if (isBookmarked) this.setState({ bookmarked: isBookmarked });
+    }
   }
 
   render() {
@@ -40,7 +69,6 @@ export class SingleActivity extends React.Component {
         </div>
       );
     } else {
-      const { parkCode, activityId } = this.props.match.params;
       const { singleActivity } = this.props;
 
       const hasCaption =
@@ -54,20 +82,29 @@ export class SingleActivity extends React.Component {
       return (
         <main>
           <section className="single-activity" id="activity-header">
-            {/* <Link to={`/explore/${parkCode}/activities`}>
-              BACK TO ACTIVITIES
-            </Link> */}
             <p>THING TO DO</p>
 
             <div id="bookmark-title">
-              <UilBookmark
-                id="bookmark"
-                size="30"
-                color="#b68d40"
-                onClick={(event) =>
-                  this.handleAddToWishlist(event, singleActivity)
-                }
-              />
+              {!this.state.bookmarked && (
+                <i
+                  id="bookmark"
+                  className="uil uil-bookmark"
+                  onClick={(event) =>
+                    this.handleAddToWishlist(event, singleActivity)
+                  }
+                ></i>
+                // <UilBookmark
+                //   id="bookmark"
+                //   size="30"
+                //   color="#b68d40"
+                //   onClick={(event) =>
+                //     this.handleAddToWishlist(event, singleActivity)
+                //   }
+                // />
+              )}
+              {this.state.bookmarked && (
+                <i id="bookmark-solid" className="uis uis-bookmark"></i>
+              )}
               <a className="activity-title" href={singleActivity.data[0].url}>
                 {singleActivity.data[0].title}
               </a>
@@ -93,8 +130,9 @@ export class SingleActivity extends React.Component {
             )}
           </figure>
 
-          <section className="single-activity" id="description">
+          <section className="single-activity" id="description-section">
             <div
+              id="longDesc"
               dangerouslySetInnerHTML={{
                 __html: singleActivity.data[0].longDescription,
               }}
@@ -116,6 +154,8 @@ export class SingleActivity extends React.Component {
 const mapState = (state) => {
   return {
     singleActivity: state.singleActivity,
+    id: state.auth.id,
+    wishlist: state.wishlist,
   };
 };
 
@@ -125,6 +165,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchActivity(parkCode, activityId)),
     addItemToWishlist: (activityInfo) =>
       dispatch(addItemToWishlist(activityInfo)),
+    fetchWishlist: (userId) => dispatch(fetchWishlist(userId)),
   };
 };
 

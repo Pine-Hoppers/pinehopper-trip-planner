@@ -115,14 +115,21 @@ button.button-create-new-trip {
   flex-direction: row;
 }
 
+#bookmark,
+#bookmark-solid {
+  color: #b68d40;
+  font-size: 1.8em;
+}
+
 #bookmark:hover {
-  transform: scale(1.075);
+  transform: scale(1.081);
   /* background-color: rgb(138, 95, 54); */
 }
 
-/* #bookmark:active {
-  color: rgb(194, 137, 84);
-} */
+#bookmark:active {
+  transform: scale(0.95);
+  /* background-color: rgb(138, 95, 54); */
+}
 
 #activity-img {
   width: 100%;
@@ -182,8 +189,13 @@ button.button-create-new-trip {
   margin-left: 6px;
 }
 
-#description {
+#description-section {
   margin-top: 15px;
+}
+
+/* selects the first child element where the parent is an element with #longDesc */
+#longDesc > :first-child {
+  margin-top: 0;
 }
 
 #details {
