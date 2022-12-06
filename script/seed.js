@@ -79,56 +79,56 @@ async function seed() {
       startDate: '2022-07-05',
       endDate: '2022-07-19',
     }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2023-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2023-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2023-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2023-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2022-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2021-07-19',
-    }),
-    Trip.create({
-      tripName: 'THE 9th Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2020-07-19',
-    }),
-    Trip.create({
-      tripName: 'July Yellowstone Trip',
-      startDate: '2022-07-05',
-      endDate: '2021-07-19',
-    }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2022-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2022-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2023-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2023-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2023-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2023-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2022-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2021-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'THE 9th Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2020-07-19',
+    // }),
+    // Trip.create({
+    //   tripName: 'July Yellowstone Trip',
+    //   startDate: '2022-07-05',
+    //   endDate: '2021-07-19',
+    // }),
   ];
 
   const trips = await Promise.all(tripsArr);
@@ -137,14 +137,14 @@ async function seed() {
   await trips[0].setUser(users[0].id);
   await trips[1].setUser(users[1].id);
   await trips[2].setUser(users[2].id);
-  await trips[3].setUser(users[0].id);
-  await trips[4].setUser(users[0].id);
-  await trips[5].setUser(users[0].id);
-  await trips[6].setUser(users[0].id);
-  await trips[7].setUser(users[0].id);
-  await trips[8].setUser(users[0].id);
-  await trips[9].setUser(users[0].id);
-  await trips[10].setUser(users[0].id);
+  // await trips[3].setUser(users[0].id);
+  // await trips[4].setUser(users[0].id);
+  // await trips[5].setUser(users[0].id);
+  // await trips[6].setUser(users[0].id);
+  // await trips[7].setUser(users[0].id);
+  // await trips[8].setUser(users[0].id);
+  // await trips[9].setUser(users[0].id);
+  // await trips[10].setUser(users[0].id);
 
   console.log(`seeded ${trips.length} trips`);
 

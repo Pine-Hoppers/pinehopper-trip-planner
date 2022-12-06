@@ -30,7 +30,19 @@ export class Home extends React.Component {
   render() {
     const { trips } = this.props;
     const { firstName } = this.props;
-    console.log('FIRSTNAME', firstName);
+    const endDate = trips[1][endDate];
+    console.log('PROPS', this.props);
+    console.log('TRIP 1 END DATE', endDate);
+    // console.log('TRIPS', trips);
+    const findPastTrips = function (date) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return date < today;
+    };
+
+    console.log('DATE CHECK: FALSE', findPastTrips(new Date()));
+
+    console.log('DATE CHECK: TRUE', findPastTrips(new Date('2022-01-25')));
 
     return (
       <div>
