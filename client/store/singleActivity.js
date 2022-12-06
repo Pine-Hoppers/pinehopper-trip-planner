@@ -29,6 +29,7 @@ export const fetchActivity = (parkCode, activityId) => {
       dispatch(
         setActivity({
           ...res.data,
+          activityId: activityId,
           parkUrl: data.data[0].url,
           parkCode: parkCode,
           parkName: data.data[0].fullName,

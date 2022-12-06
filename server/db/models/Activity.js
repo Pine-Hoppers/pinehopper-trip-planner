@@ -5,6 +5,9 @@ const Activity = db.define('activity', {
   activity_name: {
     type: DataTypes.TEXT,
   },
+  activity_id: {
+    type: DataTypes.STRING,
+  },
   url: {
     type: DataTypes.TEXT,
   },
