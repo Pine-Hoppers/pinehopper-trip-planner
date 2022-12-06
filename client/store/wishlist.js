@@ -6,8 +6,8 @@ const TOKEN = 'token';
  * ACTION TYPES
  */
 const SET_WISHLIST_ITEM = 'SET_WISHLIST_ITEM';
-
 const SET_WISHLIST = 'SET_WISHLIST';
+const CREATE_TRIP = 'CREATE_TRIP';
 
 /**
  * ACTION CREATORS
@@ -65,6 +65,8 @@ export const fetchWishlist = (id) => {
  */
 export default function (state = [], action) {
   switch (action.type) {
+    case CREATE_TRIP:
+      return [];
     case SET_WISHLIST_ITEM:
       return [...state, action.item];
     case SET_WISHLIST:
