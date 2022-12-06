@@ -36,7 +36,6 @@ router.post('/', requireToken, async (req, res, next) => {
       endDate: req.body.endDate,
       userId: req.body.userId,
     });
-    // const promises =
 
     req.body.activities.map(async (activity) => {
       let activityRow = await Activity.findByPk(activity.activityId);
@@ -46,7 +45,6 @@ router.post('/', requireToken, async (req, res, next) => {
       });
     });
     res.status(201).send(trip);
-    // Promise.all(promises).then(() => res.status(201).send(trip));
   } catch (error) {
     next(error);
   }
@@ -65,7 +63,9 @@ router.put('/:tripId', requireToken, async (req, res, next) => {
 
 router.delete('/:tripId', requireToken, async (req, res, next) => {
   try {
-    const trip = await Trip.findByPk(req.params.tripId);
+    const trip = await Trip.findByPk(req.params.tripId, {
+      include: { model: Activity },
+    });
     await trip.destroy();
     res.send(trip);
   } catch (error) {

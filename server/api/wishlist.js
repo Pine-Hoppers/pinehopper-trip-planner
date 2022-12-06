@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   models: { User, Wishlist, Activity },
 } = require('../db/index');
-
+const { Op } = require('sequelize');
 // MIDDLEWARE FUNCTION to check for auth headers and attach user to req
 const requireToken = async (req, res, next) => {
   try {
@@ -21,20 +21,9 @@ router.get('/', requireToken, async (req, res, next) => {
       where: {
         userId: req.query.id,
       },
-      include: { model: Activity },
+      include: { model: Activity, where: { tripId: { [Op.is]: null } } },
     });
     res.json(wishlists);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get('/:wishlistId', requireToken, async (req, res, next) => {
-  try {
-    const wishlist = await Wishlist.findByPk(req.params.wishlistId, {
-      include: { model: Activity },
-    });
-    res.json(wishlist);
   } catch (error) {
     next(error);
   }
@@ -52,6 +41,7 @@ router.post('/', requireToken, async (req, res, next) => {
 
     const activity = {
       activity_name: data[0].title,
+      activity_id: req.body.activityId,
       url: data[0].url,
       images: [JSON.stringify(data[0].images[0])],
       park_fullName: req.body.parkName,

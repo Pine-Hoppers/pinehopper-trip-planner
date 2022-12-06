@@ -128,7 +128,7 @@ export const CreateTrip = (props) => {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item lg>
+        <Grid item lg={11}>
           <TextField
             id="filled-basic"
             label="Trip Name"
@@ -136,6 +136,18 @@ export const CreateTrip = (props) => {
             onChange={handleChange}
             variant="filled"
           />
+        </Grid>
+        <Grid item lg={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={handleClick}
+            startIcon={<SaveIcon />}
+            disabled={!myTripName}
+          >
+            Save
+          </Button>
         </Grid>
       </Grid>
 
@@ -145,15 +157,6 @@ export const CreateTrip = (props) => {
             handleDragStart={handleDragStart}
             wishlist={props.wishlist}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleClick}
-            startIcon={<SaveIcon />}
-          >
-            Save
-          </Button>
         </Grid>
         <Grid item xs={12} m={12} lg={9}>
           <Calendar

@@ -89,12 +89,12 @@ main {
 }
 
 button.button-create-new-trip {
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 
 /* Single Activity Page */
 .single-activity {
-  width: 70%;
+  width: 50%;
 }
 
 .single-activity h3 {
@@ -115,21 +115,34 @@ button.button-create-new-trip {
   flex-direction: row;
 }
 
+#bookmark,
+#bookmark-solid {
+  color: #b68d40;
+  font-size: 1.8em;
+}
+
 #bookmark:hover {
-  transform: scale(1.075);
+  transform: scale(1.081);
   /* background-color: rgb(138, 95, 54); */
 }
 
-/* #bookmark:active {
-  color: rgb(194, 137, 84);
-} */
+#bookmark:active {
+  transform: scale(0.95);
+  /* background-color: rgb(138, 95, 54); */
+}
 
 #activity-img {
   width: 100%;
-  max-width: 950px;
+  /* max-width: 950px;
   max-height: 535px;
   min-width: 262px;
-  min-height: 175px;
+  min-height: 175px; */
+}
+
+.single-activity figcaption {
+  font-size: 14px;
+  font-style: italic;
+  padding-top: 7px;
 }
 
 /* #box {
@@ -172,12 +185,17 @@ button.button-create-new-trip {
 .park-title {
   font-family: sans-serif;
   font-size: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: 6px;
 }
 
-#description {
+#description-section {
   margin-top: 15px;
+}
+
+/* selects the first child element where the parent is an element with #longDesc */
+#longDesc > :first-child {
+  margin-top: 0;
 }
 
 #details {
@@ -189,4 +207,3 @@ button.button-create-new-trip {
 #accordion p {
   margin-top: 0;
 }
-

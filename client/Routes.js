@@ -10,6 +10,7 @@ import Explore from './components/Explore';
 import ParkActivities from './components/ParkActivities';
 import SingleActivity from './components/SingleActivity';
 import CreateTrip from './components/CreateTrip';
+import WishlistActivity from './components/WishlistActivity';
 import { me } from './store';
 
 // COMPONENT
@@ -27,6 +28,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route exact path="/explore" component={Explore} />
+            <Route exact path="/wishlist" component={WishlistActivity} />
             <Route
               path="/explore/:parkCode/activities/:activityId"
               component={SingleActivity}
