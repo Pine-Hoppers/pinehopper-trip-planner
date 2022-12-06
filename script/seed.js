@@ -94,6 +94,7 @@ async function seed() {
   const activities = await Promise.all([
     Activity.create({
       activity_name: 'Bannock Ski Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
       images: [
         JSON.stringify({
@@ -118,7 +119,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -159,6 +159,7 @@ async function seed() {
     }),
     Activity.create({
       activity_name: 'Natural Bridge Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-trail-natural-bridge.htm',
       images: [
         JSON.stringify({
@@ -184,7 +185,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -227,6 +227,7 @@ async function seed() {
     }),
     Activity.create({
       activity_name: 'Bannock Ski Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
       images: [
         JSON.stringify({
@@ -251,7 +252,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -294,6 +294,7 @@ async function seed() {
     }),
     Activity.create({
       activity_name: 'Bannock Ski Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
       images: [
         JSON.stringify({
@@ -318,7 +319,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -361,6 +361,7 @@ async function seed() {
     }),
     Activity.create({
       activity_name: 'Bannock Ski Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
       images: [
         JSON.stringify({
@@ -385,7 +386,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -426,6 +426,7 @@ async function seed() {
     }),
     Activity.create({
       activity_name: 'Bannock Ski Trail',
+      activity_id: '8B175753-D37B-4DD5-BF96-00383F7BB46C',
       url: 'https://www.nps.gov/thingstodo/yell-bannock-ski-trail.htm',
       images: [
         JSON.stringify({
@@ -450,7 +451,6 @@ async function seed() {
       park_url: 'https://www.nps.gov/yell/index.htm',
       parkCode: 'yell',
       isReservationRequired: 'false',
-
       feeDescription: '',
       doFeesApply: 'false',
       arePetsPermittedWithRestrictions: 'false',
@@ -509,8 +509,8 @@ async function seed() {
   await wishlist2.save();
 
   const wishlist3 = Wishlist.create({
-    userId: users[2].id,
-    activityId: activities[4].id,
+    userId: users[5].id,
+    activityId: activities[5].id,
   });
 
   const wishlists = await Promise.all([wishlist1, wishlist2, wishlist3]);
