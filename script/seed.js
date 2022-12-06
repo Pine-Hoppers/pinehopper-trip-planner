@@ -120,7 +120,7 @@ async function seed() {
       endDate: '2021-07-19',
     }),
     Trip.create({
-      tripName: 'July Yellowstone Trip',
+      tripName: 'THE 9th Yellowstone Trip',
       startDate: '2022-07-05',
       endDate: '2020-07-19',
     }),
