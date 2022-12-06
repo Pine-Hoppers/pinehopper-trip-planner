@@ -52,6 +52,7 @@ router.post('/', requireToken, async (req, res, next) => {
 
     const activity = {
       activity_name: data[0].title,
+      activity_id: req.body.activityId,
       url: data[0].url,
       images: [JSON.stringify(data[0].images[0])],
       park_fullName: req.body.parkName,
