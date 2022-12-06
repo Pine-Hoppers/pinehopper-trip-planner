@@ -35,9 +35,15 @@ export class Home extends React.Component {
     return (
       <div>
         <h3>Welcome, {firstName}</h3>
-        <button type="submit" onClick={this.isClicked}>
-          Create New Trip
-        </button>
+        <Link to="./my-planner/create-trip">
+          <Button
+            className="button-create-new-trip"
+            variant="contained"
+            color="primary"
+          >
+            Create New Trip
+          </Button>
+        </Link>
         <TableContainer component={Paper} className="trip-table">
           <h4 id="trips">Upcoming Trips</h4>
           <Table>
@@ -65,6 +71,7 @@ export class Home extends React.Component {
             </TableBody>
           </Table>
         </TableContainer>
+
         <TableContainer>
           <h4 id="trips">Past Trips</h4>
           <Table>
