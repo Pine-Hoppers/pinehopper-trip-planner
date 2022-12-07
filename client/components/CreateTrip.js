@@ -15,7 +15,7 @@ import { fetchSingleTrip } from '../store/singleTrip';
  */
 export const CreateTrip = (props) => {
   const [myTripName, setTripName] = useState();
-  const [myEvents, setMyEvents] = useState();
+  const [myEvents, setMyEvents] = useState([]);
 
   useEffect(() => {
     if (props.match.params.tripId) {
@@ -78,9 +78,7 @@ export const CreateTrip = (props) => {
   const newEvent = useCallback(
     (event) => {
       setMyEvents((prev) => {
-        const idList = prev.map((item) => item.id);
-        const newId = Math.max(...idList) + 1;
-        return [...prev, { ...event, id: newId }];
+        return [...prev, event];
       });
     },
     [setMyEvents]
@@ -92,9 +90,10 @@ export const CreateTrip = (props) => {
         return;
       }
 
-      const { name } = draggedEvent;
+      const { name, id } = draggedEvent;
       const event = {
         title: name,
+        id,
         start,
         end,
         isAllDay,
