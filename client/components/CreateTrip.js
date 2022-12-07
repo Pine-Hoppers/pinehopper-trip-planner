@@ -18,9 +18,10 @@ export const CreateTrip = (props) => {
   const [myEvents, setMyEvents] = useState();
 
   useEffect(() => {
-    console.log('?????', props.match.params);
+    if (props.match.params.tripId) {
+      props.getSingleTrip(props.match.params.tripId);
+    }
 
-    props.getSingleTrip(props.match.params.tripId);
     props.getWishlist(props.id);
   }, []);
 
@@ -37,7 +38,7 @@ export const CreateTrip = (props) => {
         end: activity.dateOfActivity,
         title: activity.activity_name,
         isDraggable: true,
-        resource: activity.id,
+        id: activity.id,
       }))
     );
   }, [props.trip.activities]);
@@ -46,15 +47,8 @@ export const CreateTrip = (props) => {
     setTripName(event.target.value);
   };
   const handleClick = () => {
-    // for (let i = 0; i < myEvents.length; i++) {
-    //   matchActivities[i] = {
-    //     activityId: myEvents[i].resource,
-    //     dateOfActivity: myEvents[i].start,
-    //   };
-    // }
-
     let matchActivities = myEvents.map((item) => ({
-      activityId: item.resource,
+      activityId: item.id,
       dateOfActivity: item.start,
     }));
     if (props.match.params.mode !== 'edit') {
@@ -74,8 +68,6 @@ export const CreateTrip = (props) => {
         endDate: myEvents[myEvents.length - 1].end,
         activities: matchActivities,
       });
-      console.log('match activities=========>', matchActivities);
-      console.log('my event start ==========>', myEvents);
     }
     props.history.push('/my-planner');
   };
