@@ -51,7 +51,7 @@ class Routes extends Component {
             <Route
               exact
               path="/my-planner/:tripId/:mode"
-              component={MySinglePlanner}
+              component={CreateTrip}
             />
 
             <Redirect to="/home" />

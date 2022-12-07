@@ -4,6 +4,7 @@ const TOKEN = 'token';
 // ACTION TYPES
 const SET_TRIPS = 'SET_TRIPS';
 const CREATE_TRIP = 'CREATE_TRIP';
+const UPDATE_TRIP = 'UPDATE_TRIP';
 const DELETE_TRIP = 'DELETE_TRIP';
 
 // ACTION CREATORS
@@ -38,6 +39,12 @@ const _createTrip = (trip) => {
     trip,
   };
 };
+const _updateTrip = (trip) => {
+  return {
+    type: UPDATE_TRIP,
+    trip,
+  };
+};
 
 const _deleteTrip = (trip) => {
   return {
@@ -60,12 +67,34 @@ export const createTrip = (trip) => {
         dispatch(_createTrip(created));
       }
     } catch (error) {
-      console.log('Unable to add item to wishlist right now: ', error);
+      console.log('Unable to add item right now: ', error);
       throw error;
     }
   };
 };
-
+export const updateTrip = (trip) => {
+  return async (dispatch) => {
+    try {
+      console.log('trip', trip);
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const { data: updated } = await axios.put(
+          `/api/trips/${trip.id}`,
+          trip,
+          {
+            headers: {
+              authorization: userToken,
+            },
+          }
+        );
+        dispatch(_updateTrip(updated));
+      }
+    } catch (error) {
+      console.log('Unable to update item right now: ', error);
+      throw error;
+    }
+  };
+};
 export const deleteTrip = (id) => {
   return async (dispatch) => {
     try {
@@ -79,7 +108,7 @@ export const deleteTrip = (id) => {
         dispatch(_deleteTrip(trip));
       }
     } catch (error) {
-      console.log('Unable to add item to wishlist right now: ', error);
+      console.log('Unable to delete item right now: ', error);
       throw error;
     }
   };
@@ -94,6 +123,8 @@ export default function (state = initialState, action) {
       return action.trips;
     case CREATE_TRIP:
       return [...state, action.trip];
+    // case UPDATE_TRIP:
+    //   return [...state, action.trip];
     case DELETE_TRIP:
       return state.filter((trip) => trip.id !== action.trip.id);
     default:
