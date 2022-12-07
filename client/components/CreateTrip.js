@@ -6,48 +6,69 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import { createTrip } from '../store/alltrips';
+import { createTrip, updateTrip } from '../store/alltrips';
 import { fetchWishlist } from '../store/wishlist';
+import { fetchSingleTrip } from '../store/singleTrip';
 
 /**
  * COMPONENT
  */
 export const CreateTrip = (props) => {
   const [myTripName, setTripName] = useState();
-  const [myEvents, setMyEvents] = useState(
-    props.trip.activities.map((activity) => ({
-      start: activity.dateOfActivity,
-      end: activity.dateOfActivity,
-      title: activity.activity_name,
-      isDraggable: true,
-    }))
-  );
+  const [myEvents, setMyEvents] = useState([]);
+
   useEffect(() => {
+    if (props.match.params.tripId) {
+      props.getSingleTrip(props.match.params.tripId);
+    }
+
     props.getWishlist(props.id);
   }, []);
+
+  useEffect(() => {
+    if (props.trip.tripName) {
+      setTripName(props.trip.tripName);
+    }
+  }, [props.trip.tripName]);
+
+  useEffect(() => {
+    setMyEvents(
+      props.trip.activities.map((activity) => ({
+        start: activity.dateOfActivity,
+        end: activity.dateOfActivity,
+        title: activity.activity_name,
+        isDraggable: true,
+        id: activity.id,
+      }))
+    );
+  }, [props.trip.activities]);
+
   const handleChange = (event) => {
     setTripName(event.target.value);
   };
   const handleClick = () => {
-    let matchActivities = [];
-    for (let i = 0; i < myEvents.length; i++) {
-      for (let j = 0; j < props.wishlist.length; j++) {
-        if (props.wishlist[j].activity.activity_name === myEvents[i].title) {
-          matchActivities[i] = {
-            activityId: props.wishlist[j].activityId,
-            dateOfActivity: myEvents[i].start,
-          };
-        }
-      }
+    let matchActivities = myEvents.map((item) => ({
+      activityId: item.id,
+      dateOfActivity: item.start,
+    }));
+    if (props.match.params.mode !== 'edit') {
+      props.createTrip({
+        tripName: myTripName,
+        userId: props.id,
+        startDate: myEvents[0].start,
+        endDate: myEvents[myEvents.length - 1].end,
+        activities: matchActivities,
+      });
     }
-    console.log(matchActivities);
-    props.createTrip({
-      tripName: myTripName,
-      userId: props.id,
-      startDate: myEvents[0].start,
-      endDate: myEvents[myEvents.length - 1].end,
-      activities: matchActivities,
-    });
+    if (props.match.params.mode === 'edit') {
+      props.updateTrip({
+        id: props.trip.id,
+        tripName: myTripName,
+        startDate: myEvents[0].start,
+        endDate: myEvents[myEvents.length - 1].end,
+        activities: matchActivities,
+      });
+    }
     props.history.push('/my-planner');
   };
 
@@ -57,9 +78,7 @@ export const CreateTrip = (props) => {
   const newEvent = useCallback(
     (event) => {
       setMyEvents((prev) => {
-        const idList = prev.map((item) => item.id);
-        const newId = Math.max(...idList) + 1;
-        return [...prev, { ...event, id: newId }];
+        return [...prev, event];
       });
     },
     [setMyEvents]
@@ -71,9 +90,10 @@ export const CreateTrip = (props) => {
         return;
       }
 
-      const { name } = draggedEvent;
+      const { name, id } = draggedEvent;
       const event = {
         title: name,
+        id,
         start,
         end,
         isAllDay,
@@ -135,6 +155,8 @@ export const CreateTrip = (props) => {
             value={myTripName}
             onChange={handleChange}
             variant="filled"
+            autoFocus
+            required
           />
         </Grid>
         <Grid item lg={1}>
@@ -185,7 +207,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, { history }) => ({
   createTrip: (trip) => dispatch(createTrip(trip, history)),
+  updateTrip: (trip) => dispatch(updateTrip(trip, history)),
   getWishlist: (id) => dispatch(fetchWishlist(id)),
+  getSingleTrip: (id) => dispatch(fetchSingleTrip(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTrip);
