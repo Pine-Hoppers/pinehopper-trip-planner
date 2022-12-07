@@ -30,7 +30,6 @@ export class Home extends React.Component {
   render() {
     const { trips } = this.props;
     const { firstName } = this.props;
-    let tripArr = [];
     let pastTripArr = [];
     let upcomingTripArr = [];
 
@@ -40,34 +39,15 @@ export class Home extends React.Component {
       return date < today;
     };
 
-    const makeTripsArr = function () {
-      if (trips.length > 0) {
-        trips.map((trip) => tripArr.push(trip));
-        return tripArr;
-      }
-    };
-
-    const handlePastVsUpcoming = function () {
-      if (trips.length > 0) {
-        trips.map((trip) => {
-          if (checkIfPast(new Date(trip.endDate))) {
-            pastTripArr.push(trip);
-          } else {
-            upcomingTripArr.push(trip);
-          }
-        });
-      }
-    };
-
-    makeTripsArr();
-    handlePastVsUpcoming();
-
-    console.log('TRIPARR', tripArr);
-    console.log('PASTTRIPARR', pastTripArr);
-    console.log('UPCOMINGTRIPARR', upcomingTripArr);
-
-    // console.log('DATE CHECK: FALSE', checkIfPast(new Date()));
-    // console.log('DATE CHECK: TRUE', checkIfPast(new Date('2022-01-25')));
+    if (trips.length > 0) {
+      trips.map((trip) => {
+        if (checkIfPast(new Date(trip.endDate))) {
+          pastTripArr.push(trip);
+        } else {
+          upcomingTripArr.push(trip);
+        }
+      });
+    }
 
     return (
       <div>
