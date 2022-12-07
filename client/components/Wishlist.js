@@ -2,10 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
+import { removeItemFromWishlist } from '../store';
 
 export class Wishlist extends React.Component {
   constructor(props) {
     super(props);
+    this.removeFromWishlist = this.removeFromWishlist.bind(this);
+  }
+
+  async removeFromWishlist(event, itemId) {
+    event.preventDefault();
+    const { removeItemFromWishlist } = this.props;
+    await removeItemFromWishlist(itemId);
   }
 
   render() {
@@ -26,26 +34,32 @@ export class Wishlist extends React.Component {
               const image = JSON.parse(item.activity.images);
 
               return (
-                <div
-                  key={item.id}
-                  className="each-activity-layout"
-                  draggable="true"
-                  onDragStart={() =>
-                    this.props.handleDragStart({
-                      title: item.activity.activity_name,
-                      name: item.activity.activity_name,
-                    })
-                  }
-                >
-                  <Link
-                    to={`/explore/${item.activity.parkCode}/activities/${item.activity.activity_id}`}
+                <section key={item.id} id="wishlist-section">
+                  <CloseIcon
+                    id="remove-icon"
+                    style={{ fontSize: 30 }}
+                    onClick={(event) => this.removeFromWishlist(event, item.id)}
+                  />
+                  <div
+                    className="each-activity-layout"
+                    draggable="true"
+                    onDragStart={() =>
+                      this.props.handleDragStart({
+                        title: item.activity.activity_name,
+                        name: item.activity.activity_name,
+                      })
+                    }
                   >
-                    <img className="all-activities-img" src={image.url} />
-                    <div className="each-activity-detail">
-                      <p>{item.activity.activity_name}</p>
-                    </div>
-                  </Link>
-                </div>
+                    <Link
+                      to={`/explore/${item.activity.parkCode}/activities/${item.activity.activity_id}`}
+                    >
+                      <img className="all-activities-img" src={image.url} />
+                      <div className="each-activity-detail">
+                        <p>{item.activity.activity_name}</p>
+                      </div>
+                    </Link>
+                  </div>
+                </section>
               );
             })
           )}
@@ -61,4 +75,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Wishlist);
+const mapDispatch = (dispatch) => {
+  return {
+    removeItemFromWishlist: (itemId) =>
+      dispatch(removeItemFromWishlist(itemId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatch)(Wishlist);
