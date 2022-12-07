@@ -3,6 +3,7 @@ const {
   models: { User, Wishlist, Activity },
 } = require('../db/index');
 const { Op } = require('sequelize');
+
 // MIDDLEWARE FUNCTION to check for auth headers and attach user to req
 const requireToken = async (req, res, next) => {
   try {
@@ -15,6 +16,7 @@ const requireToken = async (req, res, next) => {
   }
 };
 
+// GET /api/wishlist
 router.get('/', requireToken, async (req, res, next) => {
   try {
     const wishlists = await Wishlist.findAll({
@@ -77,6 +79,23 @@ router.post('/', requireToken, async (req, res, next) => {
 
       res.status(201).send(item);
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// DELETE /api/wishlist/:itemId
+router.delete('/:itemId', async (req, res, next) => {
+  try {
+    const removedItem = await Wishlist.findByPk(req.params.itemId);
+
+    // remove the associated row in Activity table
+    const removedActivity = await Activity.findByPk(removedItem.activityId);
+    await removedActivity.destroy();
+
+    // remove item from Wishlist table
+    await removedItem.destroy();
+    res.send(removedItem);
   } catch (error) {
     next(error);
   }

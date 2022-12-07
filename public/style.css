@@ -55,14 +55,19 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin: 1em; */
-  margin: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 30px;
   font-size: 11pt;
   width: 350px;
   border-radius: 9px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: transform 300ms, box-shadow 300ms;
+}
+
+#wishlist-section .each-activity-layout {
+  margin-left: 28px;
+  margin-right: 25px;
 }
 
 .each-activity-layout:hover {
@@ -123,12 +128,10 @@ button.button-create-new-trip {
 
 #bookmark:hover {
   transform: scale(1.081);
-  /* background-color: rgb(138, 95, 54); */
 }
 
 #bookmark:active {
   transform: scale(0.95);
-  /* background-color: rgb(138, 95, 54); */
 }
 
 #activity-img {
@@ -206,4 +209,17 @@ button.button-create-new-trip {
 /* Details Component */
 #accordion p {
   margin-top: 0;
+}
+
+/* Wishlist Component */
+#remove-icon {
+  margin-bottom: -20px;
+}
+
+#remove-icon:hover {
+  transform: scale(1.095);
+}
+
+#remove-icon:active {
+  transform: scale(0.95);
 }
