@@ -60,72 +60,62 @@ export class Home extends React.Component {
           >
             Create New Trip
           </Button>
-          <TableContainer component={Paper} className="trip-table">
-            <h4 id="trips">Upcoming Trips</h4>
-            <Table>
-              <TableBody>
-                {upcomingTripArr.map((trip) =>
-                  this.state.editId === trip.id ? (
-                    <TableRow
-                      key={trip.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <EditTrip
-                        trip={trip}
-                        onClickUpdate={this.isEditClicked}
-                      />
-                    </TableRow>
-                  ) : (
-                    <TableRow
-                      key={trip.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <Link to={`/my-planner/${trip.id}`}>
-                          {trip.tripName}
-                        </Link>
-                      </TableCell>
-                      <TableCell align="right"></TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <TableContainer component={Paper} className="trip-table">
-            <h4 id="trips">Past Trips</h4>
-            <Table>
-              <TableBody>
-                {pastTripArr.map((trip) =>
-                  this.state.editId === trip.id ? (
-                    <TableRow
-                      key={trip.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <EditTrip
-                        trip={trip}
-                        onClickUpdate={this.isEditClicked}
-                      />
-                    </TableRow>
-                  ) : (
-                    <TableRow
-                      key={trip.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <Link to={`/my-planner/${trip.id}`}>
-                          {trip.tripName}
-                        </Link>
-                      </TableCell>
-                      <TableCell align="right"></TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
         </Link>
+        <TableContainer component={Paper} className="trip-table">
+          <h4 id="trips">Upcoming Trips</h4>
+          <Table>
+            <TableBody>
+              {upcomingTripArr.map((trip) =>
+                this.state.editId === trip.id ? (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <EditTrip trip={trip} onClickUpdate={this.isEditClicked} />
+                  </TableRow>
+                ) : (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
+                    </TableCell>
+                    <TableCell align="right"></TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TableContainer component={Paper} className="trip-table">
+          <h4 id="trips">Past Trips</h4>
+          <Table>
+            <TableBody>
+              {pastTripArr.map((trip) =>
+                this.state.editId === trip.id ? (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <EditTrip trip={trip} onClickUpdate={this.isEditClicked} />
+                  </TableRow>
+                ) : (
+                  <TableRow
+                    key={trip.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Link to={`/my-planner/${trip.id}`}>{trip.tripName}</Link>
+                    </TableCell>
+                    <TableCell align="right"></TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     );
   }
