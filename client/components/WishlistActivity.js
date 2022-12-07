@@ -6,13 +6,25 @@ import Wishlist from './Wishlist';
 export class WishlistActivity extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true,
+    };
   }
   async componentDidMount() {
     await this.props.getWishlist(this.props.id);
+    this.setState({ loading: false });
   }
   render() {
-    const { wishlist } = this.props;
-    return <Wishlist wishlist={wishlist} />;
+    if (this.state.loading) {
+      return (
+        <main>
+          <h3>Loading...</h3>
+        </main>
+      );
+    } else {
+      const { wishlist } = this.props;
+      return <Wishlist wishlist={wishlist} />;
+    }
   }
 }
 

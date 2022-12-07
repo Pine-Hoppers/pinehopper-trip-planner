@@ -6,6 +6,7 @@ const TOKEN = 'token';
  * ACTION TYPES
  */
 const SET_WISHLIST_ITEM = 'SET_WISHLIST_ITEM';
+const RM_WISHLIST_ITEM = 'RM_WISHLIST_ITEM';
 const SET_WISHLIST = 'SET_WISHLIST';
 const CREATE_TRIP = 'CREATE_TRIP';
 
@@ -13,6 +14,11 @@ const CREATE_TRIP = 'CREATE_TRIP';
  * ACTION CREATORS
  */
 const setWishlistItem = (item) => ({ type: SET_WISHLIST_ITEM, item });
+
+const removeWishlistItem = (removedItem) => ({
+  type: RM_WISHLIST_ITEM,
+  removedItem,
+});
 
 export const setWishlist = (wishlist) => {
   return {
@@ -38,6 +44,25 @@ export const addItemToWishlist = (activityInfo) => {
       }
     } catch (error) {
       console.log('Unable to add item to wishlist right now: ', error);
+      throw error;
+    }
+  };
+};
+
+export const removeItemFromWishlist = (itemId) => {
+  return async (dispatch) => {
+    try {
+      const userToken = window.localStorage.getItem(TOKEN);
+      if (userToken) {
+        const res = await axios.delete(`/api/wishlist/${itemId}`, {
+          headers: {
+            authorization: userToken,
+          },
+        });
+        dispatch(removeWishlistItem(res.data));
+      }
+    } catch (error) {
+      console.log('Unable to remove item from wishlist right now: ', error);
       throw error;
     }
   };
@@ -69,6 +94,8 @@ export default function (state = [], action) {
       return [];
     case SET_WISHLIST_ITEM:
       return [...state, action.item];
+    case RM_WISHLIST_ITEM:
+      return state.filter((item) => item.id !== action.removedItem.id);
     case SET_WISHLIST:
       return action.wishlist;
     default:
