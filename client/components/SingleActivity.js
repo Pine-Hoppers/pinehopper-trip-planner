@@ -7,6 +7,7 @@ import {
   addItemToWishlist,
   removeItemFromWishlist,
 } from '../store';
+import wishlist from '../store/wishlist';
 import Details from './Details';
 
 // bookmark icon: https://iconscout.com/unicons/explore/line
@@ -56,7 +57,6 @@ export class SingleActivity extends React.Component {
 
   async removeFromWishlist(event) {
     event.preventDefault();
-
     const { removeItemFromWishlist } = this.props;
     await removeItemFromWishlist(this.state.wishlistId);
   }
@@ -66,9 +66,10 @@ export class SingleActivity extends React.Component {
     await this.props.fetchWishlist(this.props.id);
 
     // check if this activity is already bookmarked
+    let isBookmarked = false;
     const { wishlist } = this.props;
     if (wishlist.length > 0) {
-      const isBookmarked = wishlist.some((item) => {
+      isBookmarked = wishlist.some((item) => {
         if (item.activity.activity_id === activityId) {
           this.setState({ wishlistId: item.id });
           return true;
@@ -76,8 +77,8 @@ export class SingleActivity extends React.Component {
           return false;
         }
       });
-      this.setState({ bookmarked: isBookmarked });
     }
+    this.setState({ bookmarked: isBookmarked });
   }
 
   render() {
