@@ -126,11 +126,13 @@ button.button-create-new-trip {
   font-size: 1.8em;
 }
 
-#bookmark:hover {
+#bookmark:hover,
+#bookmark-solid:hover {
   transform: scale(1.081);
 }
 
-#bookmark:active {
+#bookmark:active,
+#bookmark-solid:active {
   transform: scale(0.95);
 }
 
