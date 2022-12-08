@@ -46,6 +46,7 @@ export class Wishlist extends React.Component {
                       this.props.handleDragStart({
                         title: item.activity.activity_name,
                         name: item.activity.activity_name,
+                        id: item.activity.id,
                       })
                     }
                   >

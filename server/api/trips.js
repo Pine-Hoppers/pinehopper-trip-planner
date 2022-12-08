@@ -52,10 +52,23 @@ router.post('/', requireToken, async (req, res, next) => {
 
 router.put('/:tripId', requireToken, async (req, res, next) => {
   try {
-    const trip = await Trip.findByPk(req.params.tripId, {
-      include: { model: Activity },
+    const trip = await Trip.findByPk(req.params.tripId);
+
+    await trip.update({
+      tripName: req.body.tripName,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
     });
-    res.send(await trip.update(req.body));
+
+    req.body.activities.map(async (activity) => {
+      let activityRow = await Activity.findByPk(activity.activityId);
+
+      await activityRow.update({
+        tripId: trip.id,
+        dateOfActivity: activity.dateOfActivity,
+      });
+    });
+    res.send(trip);
   } catch (error) {
     next(error);
   }
