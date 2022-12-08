@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchActivity, addItemToWishlist, fetchWishlist } from '../store';
+import {
+  fetchActivity,
+  fetchWishlist,
+  addItemToWishlist,
+  removeItemFromWishlist,
+} from '../store';
 import Details from './Details';
 
 // bookmark icon: https://iconscout.com/unicons/explore/line
@@ -16,8 +21,10 @@ export class SingleActivity extends React.Component {
     this.state = {
       loading: true,
       bookmarked: false,
+      wishlistId: 0,
     };
     this.handleAddToWishlist = this.handleAddToWishlist.bind(this);
+    this.removeFromWishlist = this.removeFromWishlist.bind(this);
     this.setBookmarkIcon = this.setBookmarkIcon.bind(this);
   }
 
@@ -47,6 +54,13 @@ export class SingleActivity extends React.Component {
     await addItemToWishlist(activityInfo);
   }
 
+  async removeFromWishlist(event) {
+    event.preventDefault();
+
+    const { removeItemFromWishlist } = this.props;
+    await removeItemFromWishlist(this.state.wishlistId);
+  }
+
   async setBookmarkIcon(activityId) {
     // load wishlist
     await this.props.fetchWishlist(this.props.id);
@@ -54,10 +68,15 @@ export class SingleActivity extends React.Component {
     // check if this activity is already bookmarked
     const { wishlist } = this.props;
     if (wishlist.length > 0) {
-      const isBookmarked = wishlist.some(
-        (item) => item.activity.activity_id === activityId
-      );
-      if (isBookmarked) this.setState({ bookmarked: isBookmarked });
+      const isBookmarked = wishlist.some((item) => {
+        if (item.activity.activity_id === activityId) {
+          this.setState({ wishlistId: item.id });
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.setState({ bookmarked: isBookmarked });
     }
   }
 
@@ -103,7 +122,11 @@ export class SingleActivity extends React.Component {
                 // />
               )}
               {this.state.bookmarked && (
-                <i id="bookmark-solid" className="uis uis-bookmark"></i>
+                <i
+                  id="bookmark-solid"
+                  className="uis uis-bookmark"
+                  onClick={(event) => this.removeFromWishlist(event)}
+                ></i>
               )}
               <a className="activity-title" href={singleActivity.data[0].url}>
                 {singleActivity.data[0].title}
@@ -163,9 +186,11 @@ const mapDispatch = (dispatch) => {
   return {
     fetchActivity: (parkCode, activityId) =>
       dispatch(fetchActivity(parkCode, activityId)),
+    fetchWishlist: (userId) => dispatch(fetchWishlist(userId)),
     addItemToWishlist: (activityInfo) =>
       dispatch(addItemToWishlist(activityInfo)),
-    fetchWishlist: (userId) => dispatch(fetchWishlist(userId)),
+    removeItemFromWishlist: (itemId) =>
+      dispatch(removeItemFromWishlist(itemId)),
   };
 };
 
