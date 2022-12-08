@@ -26,7 +26,7 @@ export class Wishlist extends React.Component {
           {wishlist.length === 0 ? (
             <p>
               Your wishlist is empty now! <a href="/explore">Explore</a> another
-              park & Add activities into your wishlist!
+              park & add activities into your wishlist!
             </p>
           ) : (
             wishlist.map((item) => {
