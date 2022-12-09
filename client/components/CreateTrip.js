@@ -166,7 +166,7 @@ export const CreateTrip = (props) => {
             size="large"
             onClick={handleClick}
             startIcon={<SaveIcon />}
-            disabled={!myTripName}
+            disabled={!myTripName || !myEvents.length}
           >
             Save
           </Button>
