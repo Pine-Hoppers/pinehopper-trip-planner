@@ -18,7 +18,6 @@ function Dnd(props) {
         dragFromOutsideItem={props.dragFromOutsideItem}
         onDropFromOutside={props.onDropFromOutside}
         onDragOver={props.customOnDragOver}
-        onSelectSlot={props.newEvent}
         draggableAccessor="isDraggable"
         defaultDate={props.trip.startDate}
         defaultView="month"
