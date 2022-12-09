@@ -114,7 +114,6 @@ export const Wishlist = (props) => {
     });
   };
 
-  console.log('wishlistArray: ', wishlistArray);
   return (
     <main>
       <h1> Wishlist</h1>
