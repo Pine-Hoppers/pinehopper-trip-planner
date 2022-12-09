@@ -35,6 +35,42 @@ main {
   align-items: center;
 }
 
+/* Home Page */
+.all-trips-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 2em;
+  margin-bottom: 50px;
+}
+
+.each-trip-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  font-size: 11pt;
+  width: 350px;
+  height: 350px;
+  border-radius: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: transform 300ms, box-shadow 300ms;
+  background-color: #ced0ce;
+}
+
+.each-trip-layout:hover {
+  transform: scale(1.065);
+  box-shadow: 0 0.25em 2.5em rgba(0, 0, 0, 0.25);
+}
+
+.each-trip-detail {
+  color: black;
+  text-align: center;
+  padding: 160px 0;
+}
+
 /* Explore Page */
 #explore-page {
   display: flex;
