@@ -9,6 +9,7 @@ import {
 } from '../store';
 import wishlist from '../store/wishlist';
 import Details from './Details';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // bookmark icon: https://iconscout.com/unicons/explore/line
 // import { UilBookmark } from '@iconscout/react-unicons';
@@ -106,13 +107,15 @@ export class SingleActivity extends React.Component {
 
             <div id="bookmark-title">
               {!this.state.bookmarked && (
-                <i
-                  id="bookmark"
-                  className="uil uil-bookmark"
-                  onClick={(event) =>
-                    this.handleAddToWishlist(event, singleActivity)
-                  }
-                ></i>
+                <Tooltip title="Add to Wishlist" placement="left-start" arrow>
+                  <i
+                    id="bookmark"
+                    className="uil uil-bookmark"
+                    onClick={(event) =>
+                      this.handleAddToWishlist(event, singleActivity)
+                    }
+                  ></i>
+                </Tooltip>
                 // <UilBookmark
                 //   id="bookmark"
                 //   size="30"
@@ -123,11 +126,17 @@ export class SingleActivity extends React.Component {
                 // />
               )}
               {this.state.bookmarked && (
-                <i
-                  id="bookmark-solid"
-                  className="uis uis-bookmark"
-                  onClick={(event) => this.removeFromWishlist(event)}
-                ></i>
+                <Tooltip
+                  title="Remove from Wishlist"
+                  placement="left-start"
+                  arrow
+                >
+                  <i
+                    id="bookmark-solid"
+                    className="uis uis-bookmark"
+                    onClick={(event) => this.removeFromWishlist(event)}
+                  ></i>
+                </Tooltip>
               )}
               <a className="activity-title" href={singleActivity.data[0].url}>
                 {singleActivity.data[0].title}
