@@ -9,6 +9,7 @@ const SET_WISHLIST_ITEM = 'SET_WISHLIST_ITEM';
 const RM_WISHLIST_ITEM = 'RM_WISHLIST_ITEM';
 const SET_WISHLIST = 'SET_WISHLIST';
 const CREATE_TRIP = 'CREATE_TRIP';
+const DRAG_ACTIVITY = 'DRAG_ACTIVITY';
 
 /**
  * ACTION CREATORS
@@ -18,6 +19,11 @@ const setWishlistItem = (item) => ({ type: SET_WISHLIST_ITEM, item });
 const removeWishlistItem = (removedItem) => ({
   type: RM_WISHLIST_ITEM,
   removedItem,
+});
+
+const dragActivity = (activity) => ({
+  type: DRAG_ACTIVITY,
+  activity,
 });
 
 export const setWishlist = (wishlist) => {
@@ -67,7 +73,16 @@ export const removeItemFromWishlist = (itemId) => {
     }
   };
 };
-
+export const dragActivityFromWishlist = (activity) => {
+  return async (dispatch) => {
+    try {
+      dispatch(dragActivity(activity));
+    } catch (error) {
+      console.log('Unable to drag item from wishlist right now: ', error);
+      throw error;
+    }
+  };
+};
 export const fetchWishlist = (id) => {
   return async (dispatch) => {
     try {
@@ -98,6 +113,10 @@ export default function (state = [], action) {
       return state.filter((item) => item.id !== action.removedItem.id);
     case SET_WISHLIST:
       return action.wishlist;
+    case DRAG_ACTIVITY:
+      return state.filter((item) => {
+        return item.activityId !== action.activity.id;
+      });
     default:
       return state;
   }

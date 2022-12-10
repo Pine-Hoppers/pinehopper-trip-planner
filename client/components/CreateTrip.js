@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { createTrip, updateTrip } from '../store/alltrips';
-import { fetchWishlist } from '../store/wishlist';
+import { fetchWishlist, removeItemFromWishlist } from '../store/wishlist';
 import { fetchSingleTrip } from '../store/singleTrip';
 
 /**
@@ -112,7 +112,7 @@ export const CreateTrip = (props) => {
       // allow draggable items to be dropped on cal, based on
       // whether event.preventDefault is called
       if (draggedEvent !== 'undroppable') {
-        console.log('preventDefault');
+        // console.log('preventDefault');
         dragEvent.preventDefault();
       }
     },
