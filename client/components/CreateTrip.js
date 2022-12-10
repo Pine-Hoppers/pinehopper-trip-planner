@@ -112,7 +112,7 @@ export const CreateTrip = (props) => {
       // allow draggable items to be dropped on cal, based on
       // whether event.preventDefault is called
       if (draggedEvent !== 'undroppable') {
-        console.log('preventDefault');
+        // console.log('preventDefault');
         dragEvent.preventDefault();
       }
     },
@@ -166,7 +166,7 @@ export const CreateTrip = (props) => {
             size="large"
             onClick={handleClick}
             startIcon={<SaveIcon />}
-            disabled={!myTripName}
+            disabled={!myTripName || !myEvents.length}
           >
             Save
           </Button>
