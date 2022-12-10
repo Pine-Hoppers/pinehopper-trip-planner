@@ -36,10 +36,36 @@ main {
 }
 
 /* Explore Page */
-#explore-page {
+.explore-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#explore {
+  width: 100vw;
+}
+
+#suggestions {
+  width: 100vw;
+  height: 600px;
+  background-color: pink;
+}
+
+.caption {
+  position: absolute;
+  right: 15%;
+  top: 15.25rem;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  color: #fffdf8;
+  text-align: center;
+}
+
+.caption h3 {
+  margin-bottom: 27px;
 }
 
 /* Explore -- Park Activities Page */
