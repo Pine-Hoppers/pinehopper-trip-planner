@@ -124,7 +124,7 @@ export const Explore = (props) => {
               src={'arches.jpg'}
               alt="First slide"
             />
-            <Carousel.Caption className="caption">
+            <Carousel.Caption>
               <h3>EXPLORE</h3>
               <div className="explore-page">
                 <Autocomplete
@@ -137,7 +137,6 @@ export const Explore = (props) => {
                   getOptionLabel={(option) => option.parkName}
                   getOptionSelected={(option, value) => option.id === value.id}
                   style={{ width: 300 }}
-                  disablePortal={true}
                   onChange={async (event, newValue) => {
                     if (newValue !== null) {
                       setTimeout(() => {
@@ -167,7 +166,7 @@ export const Explore = (props) => {
               src={'bryce_canyon.jpg'}
               alt="Second slide"
             />
-            <Carousel.Caption className="caption">
+            <Carousel.Caption>
               <h3>EXPLORE</h3>
               <div className="explore-page">
                 <Autocomplete
@@ -209,7 +208,7 @@ export const Explore = (props) => {
               src={'yosemite.jpg'}
               alt="Third slide"
             />
-            <Carousel.Caption className="caption">
+            <Carousel.Caption>
               <h3>EXPLORE</h3>
               <div className="explore-page">
                 <Autocomplete
