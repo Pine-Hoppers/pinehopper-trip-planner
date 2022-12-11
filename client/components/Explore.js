@@ -7,6 +7,15 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
+// Material UI: toggle menu
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+
 // react-bootstrap
 import Carousel from 'react-bootstrap/Carousel';
 
@@ -80,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
     '&.Mui-focused .MuiInputLabel-outlined': {
       color: '#fdf9ec',
     },
+    display: 'flex',
   },
   inputRoot: {
     color: '#fdf9ec',
@@ -99,11 +109,14 @@ const useStyles = makeStyles((theme) => ({
   popupIndicator: {
     color: '#fffdf8',
   },
+  paper: {
+    marginRight: theme.spacing(2),
+  },
 }));
 
 // COMPONENT
 export const Explore = (props) => {
-  const { username } = props;
+  const { firstName } = props;
   const classes = useStyles();
 
   const options = nationalParks.map((option) => {
@@ -116,8 +129,42 @@ export const Explore = (props) => {
 
   return (
     <main>
+      <div id="header-bar">
+        <p>Welcome, {firstName}</p>
+      </div>
       <section id="explore">
-        <Carousel fade>
+        <h3>EXPLORE</h3>
+        <div className="explore-page">
+          <Autocomplete
+            id="grouped-demo"
+            classes={classes}
+            options={options.sort(
+              (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+            )}
+            groupBy={(option) => option.firstLetter}
+            getOptionLabel={(option) => option.parkName}
+            getOptionSelected={(option, value) => option.id === value.id}
+            style={{ width: 300 }}
+            onChange={async (event, newValue) => {
+              if (newValue !== null) {
+                setTimeout(() => {
+                  history.push(`/explore/${newValue.parkCode}/activities`);
+                }, 450);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select a national park..."
+                variant="outlined"
+                InputLabelProps={{
+                  style: { color: '#fffdf8' },
+                }}
+              />
+            )}
+          />
+        </div>
+        {/* <Carousel>
           <Carousel.Item>
             <img
               className="d-block w-100"
@@ -244,7 +291,7 @@ export const Explore = (props) => {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
-        </Carousel>
+        </Carousel> */}
 
         {/* <Autocomplete
         id="grouped-demo"
@@ -282,7 +329,7 @@ export const Explore = (props) => {
 // CONTAINER
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
   };
 };
 

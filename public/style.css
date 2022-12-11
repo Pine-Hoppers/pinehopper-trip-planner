@@ -10,7 +10,7 @@ label {
   display: block;
 }
 
-nav a {
+#navbar nav a {
   display: inline-block;
   margin: 1em;
 }
@@ -35,20 +35,76 @@ main {
   align-items: center;
 }
 
+/* Sidebar */
+.with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 1rem; */
+}
+
+.sidebar-css {
+  /* flex-basis: 20rem; */
+  /* flex-basis: 17rem; */
+  flex-grow: 1;
+}
+
+.app-content {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+}
+
+.app-content a {
+  text-decoration: none;
+}
+
+/* header-bar */
+#header-bar {
+  width: 100%;
+  height: 75px;
+  background-color: #344e41;
+  color: #fffefb;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+#header-bar p {
+  margin-bottom: 0;
+  padding-right: 30px;
+}
+
 /* Explore Page */
+#explore {
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  width: 70%;
+  height: 350px;
+  /* margin-top: 20px;
+  width: 90%;
+  height: 550px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url('bryce_canyon.jpg');
+}
+
+#explore h3 {
+  color: white;
+  margin-bottom: 27px;
+}
+
 .explore-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#explore {
-  width: 100vw;
-}
-
 #suggestions {
-  width: 100vw;
-  height: 600px;
+  /* width: 100vw; */
+  height: 335px;
   background-color: pink;
 }
 
@@ -126,7 +182,8 @@ button.button-create-new-trip {
 
 /* Single Activity Page */
 .single-activity {
-  width: 50%;
+  /* width: 50%; */
+  width: 80%;
 }
 
 .single-activity h3 {
@@ -135,6 +192,10 @@ button.button-create-new-trip {
   margin-top: 25px;
   margin-bottom: 5px;
 }
+
+/* .single-activity a {
+  text-decoration: none;
+} */
 
 #activity-header {
   display: flex;
@@ -251,4 +312,10 @@ button.button-create-new-trip {
 
 #remove-icon:active {
   transform: scale(0.95);
+}
+
+#wishlist-layout {
+  display: 'flex';
+  height: '100vh';
+  overflow: 'scroll initial';
 }

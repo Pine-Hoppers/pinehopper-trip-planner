@@ -23,7 +23,7 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
+      <div className="app-content">
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
