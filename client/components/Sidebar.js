@@ -26,7 +26,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
               className="text-decoration-none"
               style={{ color: 'inherit' }}
             >
-              Sidebar
+              PINEHOPPER
             </a>
           </CDBSidebarHeader>
 
