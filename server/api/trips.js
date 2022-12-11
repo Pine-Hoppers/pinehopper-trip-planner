@@ -60,6 +60,14 @@ router.put('/:tripId', requireToken, async (req, res, next) => {
       endDate: req.body.endDate,
     });
 
+    req.body.removedActivities.map(async (activity) => {
+      let activityRow = await Activity.findByPk(activity.id);
+      await activityRow.update({
+        tripId: null,
+        dateOfActivity: null,
+      });
+    });
+
     req.body.activities.map(async (activity) => {
       let activityRow = await Activity.findByPk(activity.activityId);
 
