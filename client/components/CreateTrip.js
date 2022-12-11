@@ -113,7 +113,6 @@ export const CreateTrip = (props) => {
       // allow draggable items to be dropped on cal, based on
       // whether event.preventDefault is called
       if (draggedEvent !== 'undroppable') {
-        // console.log('preventDefault');
         dragEvent.preventDefault();
       }
     },

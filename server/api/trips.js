@@ -10,6 +10,7 @@ router.get('/', requireToken, async (req, res, next) => {
       where: {
         userId: req.query.id,
       },
+      include: { model: Activity },
     });
     res.json(allTrips);
   } catch (error) {

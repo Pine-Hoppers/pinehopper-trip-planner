@@ -278,3 +278,12 @@ button.button-create-new-trip {
   margin-top: 4em;
   margin-right: 2em;
 }
+.myplanner-card-container {
+  display:inline-block;
+  margin-right: 2em;
+  
+}
+.myplanner-card {
+  max-width:260px;
+  height:180px;
+}
