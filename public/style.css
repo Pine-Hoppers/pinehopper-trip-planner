@@ -33,13 +33,14 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
 }
 
 /* Sidebar */
 .with-sidebar {
   display: flex;
   flex-wrap: wrap;
-  /* gap: 1rem; */
+  gap: 1rem;
 }
 
 .sidebar-css {
@@ -52,6 +53,7 @@ main {
   flex-basis: 0;
   flex-grow: 999;
   min-inline-size: 50%;
+  min-height: 100vh;
 }
 
 .app-content a {
@@ -59,12 +61,12 @@ main {
 }
 
 /* header-bar */
-#header-bar {
+/* #header-bar {
   width: 100%;
   height: 75px;
-  background-color: #344e41;
-  color: #fffefb;
-  margin-bottom: 30px;
+  background-color: #f6f7f6;
+  color: #4f514f;
+  margin-bottom: 55px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -73,12 +75,12 @@ main {
 #header-bar p {
   margin-bottom: 0;
   padding-right: 30px;
-}
+} */
 
 /* Explore Page */
 #explore {
   border-radius: 10px;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 60px;
   width: 70%;
   height: 350px;
@@ -103,9 +105,22 @@ main {
 }
 
 #suggestions {
-  /* width: 100vw; */
-  height: 335px;
-  background-color: pink;
+  border-radius: 10px;
+  width: 70%;
+  height: 450px;
+  /* background-color: pink; */
+  margin-bottom: 60px;
+}
+
+#suggestions h4 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#suggested-parks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Carousel: center the carousel caption on slide */
@@ -172,6 +187,14 @@ main {
 .each-activity-detail {
   color: black;
   text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.each-activity-detail p {
+  margin-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
 }

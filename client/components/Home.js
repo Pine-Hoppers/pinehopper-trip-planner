@@ -50,8 +50,7 @@ export class Home extends React.Component {
     }
 
     return (
-      <div>
-        <h3>Welcome, {firstName}</h3>
+      <main>
         <Link to="./my-planner/create-trip">
           <Button
             className="button-create-new-trip"
@@ -116,7 +115,7 @@ export class Home extends React.Component {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </main>
     );
   }
 }

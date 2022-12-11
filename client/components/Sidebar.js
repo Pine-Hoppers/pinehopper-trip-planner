@@ -15,11 +15,11 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = ({ handleClick, isLoggedIn }) => {
+const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
   if (isLoggedIn) {
     return (
       <div className="sidebar-css">
-        <CDBSidebar textColor="#fff" backgroundColor="#344E41">
+        <CDBSidebar textColor="#fff" backgroundColor="#4f514f">
           <CDBSidebarHeader prefix={<i className="fa-solid fa-bars"></i>}>
             <a
               href="/home"
@@ -32,6 +32,10 @@ const Sidebar = ({ handleClick, isLoggedIn }) => {
 
           <CDBSidebarContent className="sidebar-content">
             <CDBSidebarMenu>
+              <CDBSidebarMenuItem icon="user">
+                Welcome, {firstName}
+              </CDBSidebarMenuItem>
+
               <NavLink exact to="/home" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="house">Home</CDBSidebarMenuItem>
               </NavLink>
@@ -60,16 +64,6 @@ const Sidebar = ({ handleClick, isLoggedIn }) => {
               {/* <a href="#" onClick={handleClick}>
                 Logout
               </a> */}
-              <NavLink
-                exact
-                to="/hero404"
-                target="_blank"
-                activeClassName="activeClicked"
-              >
-                <CDBSidebarMenuItem icon="exclamation-circle">
-                  404 page
-                </CDBSidebarMenuItem>
-              </NavLink>
             </CDBSidebarMenu>
           </CDBSidebarContent>
 
@@ -107,6 +101,7 @@ const Sidebar = ({ handleClick, isLoggedIn }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    firstName: state.auth.firstName,
   };
 };
 

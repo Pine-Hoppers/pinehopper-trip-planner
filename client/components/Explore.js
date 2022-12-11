@@ -1,20 +1,12 @@
 import React from 'react';
 import history from '../history';
 import { connect } from 'react-redux';
+import SuggestedParks from './SuggestedParks';
 
 // Material UI Autocomplete
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-
-// Material UI: toggle menu
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
 
 // react-bootstrap
 import Carousel from 'react-bootstrap/Carousel';
@@ -89,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
     '&.Mui-focused .MuiInputLabel-outlined': {
       color: '#fdf9ec',
     },
-    display: 'flex',
   },
   inputRoot: {
     color: '#fdf9ec',
@@ -109,9 +100,6 @@ const useStyles = makeStyles((theme) => ({
   popupIndicator: {
     color: '#fffdf8',
   },
-  paper: {
-    marginRight: theme.spacing(2),
-  },
 }));
 
 // COMPONENT
@@ -129,9 +117,6 @@ export const Explore = (props) => {
 
   return (
     <main>
-      <div id="header-bar">
-        <p>Welcome, {firstName}</p>
-      </div>
       <section id="explore">
         <h3>EXPLORE</h3>
         <div className="explore-page">
@@ -320,7 +305,8 @@ export const Explore = (props) => {
       </section>
 
       <section id="suggestions">
-        <p>Hello</p>
+        <h4>SUGGESTED PARKS:</h4>
+        <SuggestedParks />
       </section>
     </main>
   );
