@@ -63,10 +63,10 @@ export class MyPlanner extends React.Component {
   render() {
     const { trips } = this.props;
     const pastTrips = trips.filter((trip) => {
-      return moment(trip.startDate).isBefore(moment());
+      return moment(trip.endDate).isBefore(moment());
     });
     const upcomingTrips = trips.filter((trip) => {
-      return moment(trip.startDate).isAfter(moment());
+      return moment(trip.endDate).isAfter(moment());
     });
     return (
       <div id="trips" className="column">

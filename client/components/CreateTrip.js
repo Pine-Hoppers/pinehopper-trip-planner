@@ -57,7 +57,7 @@ export const CreateTrip = (props) => {
         tripName: myTripName,
         userId: props.id,
         startDate: myEvents[0].start,
-        endDate: myEvents[myEvents.length - 1].end,
+        endDate: myEvents[myEvents.length - 1].start,
         activities: matchActivities,
       });
     }
@@ -66,7 +66,7 @@ export const CreateTrip = (props) => {
         id: props.trip.id,
         tripName: myTripName,
         startDate: myEvents[0].start,
-        endDate: myEvents[myEvents.length - 1].end,
+        endDate: myEvents[myEvents.length - 1].start,
         activities: matchActivities,
         removedActivities: myRemovedActivities,
       });
