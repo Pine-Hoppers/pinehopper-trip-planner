@@ -11,7 +11,6 @@ const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 function Dnd(props) {
   return (
     <div className="calendar-container">
-      <h1>{props.trip.tripName}</h1>
       <DragAndDropCalendar
         resizable
         dragFromOutsideItem={props.dragFromOutsideItem}

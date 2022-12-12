@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchTrips, deleteTrip } from '../store/alltrips';
 import Button from '@material-ui/core/Button';
-import { ThemeProvider } from '@material-ui/styles';
 import { createTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -99,19 +98,18 @@ export class MyPlanner extends React.Component {
               Create New Trip
             </Button>
           </Link>
-          <ThemeProvider theme={theme}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              variant="fullWidth"
-              indicatorColor="secondary"
-              textColor="secondary"
-              aria-label="icon label tabs example"
-            >
-              <Tab icon={<UpdateIcon />} label="Upcoming" />
-              <Tab icon={<AllInboxIcon />} label="Past" />
-            </Tabs>
-          </ThemeProvider>
+
+          <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            variant="fullWidth"
+            indicatorColor="secondary"
+            textColor="secondary"
+            aria-label="icon label tabs example"
+          >
+            <Tab icon={<UpdateIcon />} label="Upcoming" />
+            <Tab icon={<AllInboxIcon />} label="Past" />
+          </Tabs>
 
           <TabPanel value={this.state.value} index={0}>
             {upcomingTrips.map((trip) => {
@@ -157,16 +155,12 @@ export class MyPlanner extends React.Component {
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <Link to={`/my-planner/${trip.id}`}>
-                      <Button size="small" color="primary">
-                        Details
-                      </Button>
-                    </Link>
-                    <Link to={`/my-planner/${trip.id}/edit`}>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
-                    </Link>
+                    <Button size="small" color="primary">
+                      <Link to={`/my-planner/${trip.id}`}>Details</Link>
+                    </Button>
+                    <Button size="small" color="primary">
+                      <Link to={`/my-planner/${trip.id}/edit`}>Edit</Link>
+                    </Button>
 
                     <Button
                       size="small"
@@ -197,7 +191,7 @@ export class MyPlanner extends React.Component {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
-                        ⛺ {trip.tripName}{' '}
+                        {trip.tripName}
                       </Typography>
                       <Typography gutterBottom variant="h6" component="h2">
                         <Badge pill bg="light" text="dark">
@@ -215,16 +209,13 @@ export class MyPlanner extends React.Component {
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <Link to={`/my-planner/${trip.id}`}>
-                      <Button size="small" color="primary">
-                        Details
-                      </Button>
-                    </Link>
-                    <Link to={`/my-planner/${trip.id}/edit`}>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
-                    </Link>
+                    <Button size="small" color="primary">
+                      <Link to={`/my-planner/${trip.id}`}>Details</Link>
+                    </Button>
+
+                    <Button size="small" color="primary">
+                      <Link to={`/my-planner/${trip.id}/edit`}>Edit</Link>
+                    </Button>
 
                     <Button
                       size="small"
