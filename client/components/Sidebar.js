@@ -71,7 +71,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
                 padding: '20px 5px',
               }}
             >
-              Sidebar Footer
+              <img src="pine.png" style={{ width: '60px' }} />
             </div>
           </CDBSidebarFooter>
         </CDBSidebar>
