@@ -10,6 +10,7 @@ router.get('/', requireToken, async (req, res, next) => {
       where: {
         userId: req.query.id,
       },
+      include: { model: Activity },
     });
     res.json(allTrips);
   } catch (error) {
@@ -58,6 +59,14 @@ router.put('/:tripId', requireToken, async (req, res, next) => {
       tripName: req.body.tripName,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
+    });
+
+    req.body.removedActivities.map(async (activity) => {
+      let activityRow = await Activity.findByPk(activity.id);
+      await activityRow.update({
+        tripId: null,
+        dateOfActivity: null,
+      });
     });
 
     req.body.activities.map(async (activity) => {
