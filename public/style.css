@@ -137,23 +137,6 @@ main {
   cursor: none;
 }
 
-/* header-bar */
-/* #header-bar {
-  width: 100%;
-  height: 75px;
-  background-color: #f6f7f6;
-  color: #4f514f;
-  margin-bottom: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-#header-bar p {
-  margin-bottom: 0;
-  padding-right: 30px;
-} */
-
 /* Explore Page */
 #explore {
   border-radius: 10px;
@@ -165,6 +148,9 @@ main {
   flex-direction: column;
   justify-content: center;
   background-image: url('bryce_canyon.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 #explore h3 {
@@ -214,6 +200,51 @@ main {
 }
 
 /* Explore -- Park Activities Page */
+#no-park-activities {
+  background-image: url('park-activity.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 70%;
+  min-width: 725px;
+  max-width: 970px;
+  height: 400px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  color: #e6e8e6;
+  padding-top: 135px;
+  margin-top: 40px;
+  font-size: 19px;
+}
+
+/* selects the first child element where the parent is an element with #no-park-activities */
+#no-park-activities > :first-child {
+  margin-bottom: 10px;
+}
+
+a#back-to-explore:link {
+  color: #dad7cd;
+}
+
+/* visited link */
+a#back-to-explore:visited {
+  color: #dad7cd;
+}
+
+/* mouse over link */
+a#back-to-explore:hover {
+  color: #e6e8e6;
+}
+
+/* selected link */
+a#back-to-explore:active {
+  color: #dad7cd;
+}
+
+/* ParkActivities Component */
 .all-activities-layout {
   display: flex;
   flex-wrap: wrap;
@@ -442,12 +473,6 @@ h2.activity-title {
   align-self: flex-end;
 }
 
-/* #wishlist-layout {
-  display: 'flex';
-  height: '100vh';
-  overflow: 'scroll initial';
-} */
-
 .button-margin {
   display: inline-block;
   margin-top: 4em;
@@ -475,14 +500,12 @@ h2.activity-title {
 }
 
 .auth-content {
-  /* background-color: #dad7cd; */
   background-color: #fff;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   margin-top: 65px;
 }
 
@@ -493,7 +516,6 @@ h2.activity-title {
   width: 70%;
   min-width: 750px;
   height: 630px;
-  /* background-color: #d0dac1; */
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -592,8 +614,6 @@ h2.activity-title {
 
 /* form link styling */
 a.auth-links {
-  /* margin-top: 25px;
-  font-size: 16px; */
   text-decoration: none;
 }
 
