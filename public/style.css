@@ -453,6 +453,11 @@ h2.activity-title {
   width: 100vw;
 }
 
+#no-sidebar img {
+  padding-bottom: 5px;
+  margin-right: 11px;
+}
+
 .auth-content {
   /* background-color: #dad7cd; */
   background-color: #fff;

@@ -82,6 +82,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
       <div id="no-sidebar">
         <h1>
           <Link className="top-bar-logo" to="/">
+            <img src="pine.png" style={{ width: '45px' }} />
             PINEHOPPER
           </Link>
         </h1>
