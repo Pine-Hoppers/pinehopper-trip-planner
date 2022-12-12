@@ -138,9 +138,10 @@ export class SingleActivity extends React.Component {
                   ></i>
                 </Tooltip>
               )}
-              <a className="activity-title" href={singleActivity.data[0].url}>
+              {/* <a className="activity-title" href={singleActivity.data[0].url}>
                 {singleActivity.data[0].title}
-              </a>
+              </a> */}
+              <h2 className="activity-title">{singleActivity.data[0].title}</h2>
             </div>
             <a className="park-title" href={singleActivity.parkUrl}>
               {singleActivity.parkName}
