@@ -123,8 +123,13 @@ export default function (state = initialState, action) {
       return action.trips;
     case CREATE_TRIP:
       return [...state, action.trip];
-    // case UPDATE_TRIP:
-    //   return [...state, action.trip];
+    case UPDATE_TRIP:
+      const findIndex = state.findIndex((trip) => trip.id === action.trip.id);
+      return [
+        ...state.slice(0, findIndex),
+        action.trip,
+        ...state.slice(findIndex + 1),
+      ];
     case DELETE_TRIP:
       return state.filter((trip) => trip.id !== action.trip.id);
     default:

@@ -214,14 +214,76 @@ button.button-create-new-trip {
 }
 
 /* Wishlist Component */
-#remove-icon {
-  margin-bottom: -20px;
+.createTrip main {
+  margin-left: 2em;
 }
 
-#remove-icon:hover {
-  transform: scale(1.095);
+.createTrip main .all-activities-img {
+  height: 180px;
+  width: 250px;
 }
 
-#remove-icon:active {
-  transform: scale(0.95);
+.createTrip main .each-activity-layout {
+  width: 250px;
+}
+
+.createTrip main .all-activities-layout {
+  margin: 0;
+  margin-top: 2em;
+  justify-content: space-around;
+  gap: 2em;
+}
+
+.createTrip main #wishlist-section .each-activity-layout {
+  margin-left: 0;
+  margin-right:0;
+  align-items: flex-start;
+}
+
+#wishlist-section {
+  position: relative;
+}
+.remove-fab.MuiFab-root {
+  position: absolute;
+  top: -1em;
+  right: 0;
+  z-index: 3;
+}
+
+.createTrip .remove-fab.MuiFab-root {
+  position: absolute;
+  top: -1em;
+  right: -1em;
+  z-index: 3;
+}
+.margin-top-4em {
+  margin-top: 4em;
+}
+
+.margin-left-2em {
+  margin-left: 2em;
+}
+
+.calendar-container {
+  margin-right: 2em;
+}
+
+.button-container {
+  display: flex;
+  align-self: flex-end;
+}
+
+.button-margin {
+  display: inline-block;
+  margin-top: 4em;
+  margin-right: 2em;
+}
+.myplanner-card-container {
+  display:inline-block;
+  margin-right: 2em;
+  
+}
+.myplanner-card {
+  max-width:260px;
+  height:180px;
 }

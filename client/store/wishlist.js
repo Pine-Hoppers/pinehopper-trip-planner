@@ -10,6 +10,7 @@ const RM_WISHLIST_ITEM = 'RM_WISHLIST_ITEM';
 const SET_WISHLIST = 'SET_WISHLIST';
 const CREATE_TRIP = 'CREATE_TRIP';
 const DRAG_ACTIVITY = 'DRAG_ACTIVITY';
+const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY';
 
 /**
  * ACTION CREATORS
@@ -24,6 +25,11 @@ const removeWishlistItem = (removedItem) => ({
 const dragActivity = (activity) => ({
   type: DRAG_ACTIVITY,
   activity,
+});
+
+const removeActivity = (item) => ({
+  type: REMOVE_ACTIVITY,
+  item,
 });
 
 export const setWishlist = (wishlist) => {
@@ -83,6 +89,17 @@ export const dragActivityFromWishlist = (activity) => {
     }
   };
 };
+export const removeActivityFromCalendar = (item) => {
+  return async (dispatch) => {
+    try {
+      dispatch(removeActivity(item));
+    } catch (error) {
+      console.log('Unable to delete item from Calendar right now: ', error);
+      throw error;
+    }
+  };
+};
+
 export const fetchWishlist = (id) => {
   return async (dispatch) => {
     try {
@@ -117,6 +134,8 @@ export default function (state = [], action) {
       return state.filter((item) => {
         return item.activityId !== action.activity.id;
       });
+    case REMOVE_ACTIVITY:
+      return [action.item, ...state];
     default:
       return state;
   }
