@@ -64,10 +64,14 @@ export class ParkActivities extends React.Component {
           />
           {<h3>{activities.parkName}</h3>}
           {!hasActivities && (
-            <p>
-              Activities info is not available for this park currently.{' '}
-              <a href="/explore">Explore another park!</a>
-            </p>
+            <div id="no-park-activities">
+              <p>Activities info is not available for this park currently. </p>
+              <p>
+                <a id="back-to-explore" href="/explore">
+                  Explore another park!
+                </a>
+              </p>
+            </div>
           )}
           <div className="all-activities-layout">
             {hasActivities &&
