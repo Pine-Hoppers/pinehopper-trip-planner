@@ -37,7 +37,10 @@ main h5 {
   letter-spacing: 0.03em;
 }
 
-#longDesc strong {
+#longDesc b,
+#longDesc strong,
+#details b,
+#details strong {
   font-weight: 500;
 }
 
@@ -287,7 +290,7 @@ button.button-create-new-trip {
 
 #bookmark,
 #bookmark-solid {
-  color: #b68d40;
+  color: #475841;
   font-size: 1.8em;
 }
 
@@ -328,22 +331,22 @@ button.button-create-new-trip {
 } */
 
 .single-activity a:link {
-  color: #b68d40;
+  color: #475841;
 }
 
 /* visited link */
 .single-activity a:visited {
-  color: #b68d40;
+  color: #475841;
 }
 
 /* mouse over link */
 .single-activity a:hover {
-  color: rgb(138, 95, 54);
+  color: #9fb8ad;
 }
 
 /* selected link */
 .single-activity a:active {
-  color: rgb(194, 137, 84);
+  color: #475841;
 }
 
 .activity-title {
