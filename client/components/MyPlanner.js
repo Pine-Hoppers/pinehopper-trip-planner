@@ -50,6 +50,12 @@ export class MyPlanner extends React.Component {
     this.props.getTrips(this.props.id);
   }
 
+  async componentDidUpdate(prevProps) {
+    if (this.props.trips.length !== prevProps.trips.length) {
+      this.props.getTrips(this.props.id);
+    }
+  }
+
   handleChange(event, newValue) {
     this.setState({ value: newValue });
   }
@@ -92,7 +98,7 @@ export class MyPlanner extends React.Component {
             const image =
               trip.activities && trip.activities[0]
                 ? JSON.parse(trip.activities[0].images[0]).url
-                : 'https://via.placeholder.com/150';
+                : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjjuxwyT22--xXK-GljMugRxSfO0mFZOYnhxvh2at3shT6zB6L5fYPoseyfozTG0pVYFA&usqp=CAU';
             var start = moment(trip.startDate);
             var end = moment(trip.endDate);
             return (
@@ -158,7 +164,7 @@ export class MyPlanner extends React.Component {
             const image =
               trip.activities && trip.activities[0]
                 ? JSON.parse(trip.activities[0].images[0]).url
-                : 'https://via.placeholder.com/150';
+                : 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fnpca.s3.amazonaws.com%2Fimages%2F10407%2F1512c733-fb36-4be2-be1d-352f507aa1f6-banner.jpg%3F1469813638&imgrefurl=https%3A%2F%2Fwww.npca.org%2Farticles%2F1282-the-14-parks-you-can-t-get-enough-of&tbnid=AvK3WcKmKY9fgM&vet=12ahUKEwir3Yqj5vL7AhWylXIEHQOICCgQMygJegUIARCkAw..i&docid=EuT6jZ0_5kWSEM&w=1600&h=900&q=national%20park%20pictures&ved=2ahUKEwir3Yqj5vL7AhWylXIEHQOICCgQMygJegUIARCkAw';
 
             return (
               <Card className="myplanner-card-container" key={trip.id}>
