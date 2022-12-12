@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -6,6 +6,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import RemoveIcon from '@material-ui/icons/Remove';
+import Joyride, { STATUS } from 'react-joyride';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ControlledAccordions(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [{ run, steps }, setState] = useState({
+    run: !localStorage.getItem('exploreDetailActivityTourComplete'),
+    steps: [
+      {
+        target: '#bookmark',
+        content:
+          'Click the bookmark to add this park activity into your wishlist! Then, click on Wishlist in the sidebar, or go to My Planner in the sidebar to plan your trip!',
+      },
+    ],
+  });
   const { singleActivity } = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -38,8 +49,27 @@ export default function ControlledAccordions(props) {
     singleActivity.data[0].timeOfDay &&
     singleActivity.data[0].timeOfDay.length > 0;
 
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setState({ run: false });
+    }
+    if (data.action === 'reset') {
+      localStorage.setItem('exploreDetailActivityTourComplete', true);
+    }
+  };
   return (
     <div id="accordion" className={classes.root}>
+      <Joyride
+        run={run}
+        callback={handleJoyrideCallback}
+        steps={steps}
+        hideBackButton={true}
+        hideCloseButton={true}
+        showProgress
+      />
       {singleActivity.data[0].activities && (
         <Accordion
           expanded={expanded === 'panel1'}

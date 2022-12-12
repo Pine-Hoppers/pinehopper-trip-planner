@@ -23,7 +23,13 @@ export class WishlistActivity extends React.Component {
       );
     } else {
       const { wishlist } = this.props;
-      return <Wishlist wishlist={wishlist} />;
+
+      return (
+        <Wishlist
+          wishlist={wishlist}
+          className={'wishlist-activity-in-wishlist'}
+        />
+      );
     }
   }
 }

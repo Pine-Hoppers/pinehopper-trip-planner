@@ -6,6 +6,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { setTrips } from '../store/alltrips';
 import history from '../history';
+import Joyride, { STATUS } from 'react-joyride';
 
 const mLocalizer = momentLocalizer(moment);
 
@@ -15,9 +16,18 @@ class SingleTrip extends React.Component {
     this.state = {
       hasForm: false,
       selectedEvent: undefined,
+      run: true,
+      steps: [
+        {
+          target: '#bookmark',
+          content:
+            'Click the bookmark to add this park activity into your wishlist!',
+        },
+      ],
     };
     this.handleSelected = this.handleSelected.bind(this);
     this.isClicked = this.isClicked.bind(this);
+    this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
   }
 
   async componentDidMount() {
@@ -46,7 +56,14 @@ class SingleTrip extends React.Component {
   isClicked() {
     this.setState({ hasForm: true });
   }
+  handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
 
+    if (finishedStatuses.includes(status)) {
+      this.setState({ run: false });
+    }
+  };
   render() {
     const trip = this.props.trip;
     const myEvents = this.props.trip.activities.map((activity) => ({
@@ -56,21 +73,31 @@ class SingleTrip extends React.Component {
     }));
 
     return (
-      <div id="single-trip" className="column calendar-container">
-        <h1>{trip.tripName}</h1>
+      <main>
+        <Joyride
+          run={this.state.run}
+          callback={this.handleJoyrideCallback}
+          steps={this.state.steps}
+          hideBackButton={true}
+          hideCloseButton={true}
+          showProgress
+        />
+        <div id="single-trip" className="column calendar-container">
+          <h1>{trip.tripName}</h1>
 
-        {trip.activities.length === 0 ? (
-          <CircularProgress />
-        ) : (
-          <Calendar
-            selected={this.state.selectedEvent}
-            onSelectEvent={this.handleSelected}
-            defaultDate={trip.startDate}
-            events={myEvents}
-            localizer={mLocalizer}
-          />
-        )}
-      </div>
+          {trip.activities.length === 0 ? (
+            <CircularProgress />
+          ) : (
+            <Calendar
+              selected={this.state.selectedEvent}
+              onSelectEvent={this.handleSelected}
+              defaultDate={trip.startDate}
+              events={myEvents}
+              localizer={mLocalizer}
+            />
+          )}
+        </div>
+      </main>
     );
   }
 }

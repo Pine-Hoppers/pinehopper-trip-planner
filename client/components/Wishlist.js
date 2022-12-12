@@ -116,7 +116,7 @@ export const Wishlist = (props) => {
   };
 
   return (
-    <main>
+    <main className={props.className}>
       <h1>Wishlist</h1>
 
       {wishlistArray.length !== 0 && (
@@ -180,7 +180,11 @@ export const Wishlist = (props) => {
                   <Link
                     to={`/explore/${item.activity.parkCode}/activities/${item.activity.activity_id}`}
                   >
-                    <img className="all-activities-img" src={image.url} />
+                    <img
+                      className="all-activities-img"
+                      src={image.url}
+                      loading="lazy"
+                    />
                     <div className="each-activity-detail">
                       <p>{item.activity.activity_name}</p>
                     </div>

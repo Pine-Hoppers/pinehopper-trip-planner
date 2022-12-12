@@ -43,6 +43,8 @@
     "react-bootstrap": "^2.7.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
+    "react-joyride": "^2.5.3",
+    "react-use": "^17.4.0",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
