@@ -116,7 +116,7 @@ export const Wishlist = (props) => {
   };
 
   return (
-    <main>
+    <main className={props.className}>
       <h1>Wishlist</h1>
 
       {wishlistArray.length !== 0 && (

@@ -9,6 +9,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import { createTrip, updateTrip } from '../store/alltrips';
 import { fetchWishlist, removeActivityFromCalendar } from '../store/wishlist';
 import { fetchSingleTrip } from '../store/singleTrip';
+import Joyride, { STATUS } from 'react-joyride';
 
 /**
  * COMPONENT
@@ -17,6 +18,23 @@ export const CreateTrip = (props) => {
   const [myTripName, setTripName] = useState();
   const [myEvents, setMyEvents] = useState([]);
   const [myRemovedActivities, setRemovedActivities] = useState([]);
+  const [{ run, steps }, setState] = useState({
+    run: !localStorage.getItem('createTripTourComplete'),
+    steps: [
+      {
+        target: '.trip-name-textfield',
+        content: 'Enter your trip name here!',
+      },
+      {
+        target: '#wishlist-section',
+        content: 'Drag the activity to the calendar on your right!',
+      },
+      {
+        target: '.save-button-here',
+        content: 'Click here to save your trip!',
+      },
+    ],
+  });
 
   useEffect(() => {
     if (props.match.params.tripId) {
@@ -171,9 +189,29 @@ export const CreateTrip = (props) => {
       });
     }
   };
+  const handleJoyrideCallback = (data) => {
+    console.log('data', data);
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setState({ run: false });
+    }
+    if (data.action === 'reset') {
+      localStorage.setItem('createTripTourComplete', true);
+    }
+  };
 
   return (
     <div className="createTrip">
+      <Joyride
+        run={run}
+        callback={handleJoyrideCallback}
+        steps={steps}
+        hideCloseButton={true}
+        showProgress
+        continuous
+      />
       <Grid container spacing={3}>
         <Grid item lg={10}>
           <div className="margin-top-4em margin-left-2em">
@@ -185,6 +223,7 @@ export const CreateTrip = (props) => {
               variant="filled"
               autoFocus
               required
+              className="trip-name-textfield"
             />
           </div>
         </Grid>
@@ -202,6 +241,7 @@ export const CreateTrip = (props) => {
               onClick={handleClick}
               startIcon={<SaveIcon />}
               disabled={!myTripName || !myEvents.length}
+              className="save-button-here"
             >
               Save
             </Button>
@@ -212,22 +252,26 @@ export const CreateTrip = (props) => {
       <Grid container spacing={3}>
         <Grid item xs={12} m={12} lg={5}>
           <Wishlist
+            className="My-planner-wishlist-container"
             handleDragStart={handleDragStart}
             wishlist={props.wishlist}
           />
         </Grid>
         <Grid item xs={12} m={12} lg={7}>
-          <Calendar
-            onDropFromOutside={onDropFromOutside}
-            dragFromOutsideItem={dragFromOutsideItem}
-            newEvent={newEvent}
-            customOnDragOver={customOnDragOver}
-            myEvents={myEvents}
-            resizeEvent={resizeEvent}
-            moveEvent={moveEvent}
-            trip={props.trip}
-            onSelectEvent={onSelectEvent}
-          />
+          <section>
+            <h1 className="Calendar-title">Trip Calendar</h1>
+            <Calendar
+              onDropFromOutside={onDropFromOutside}
+              dragFromOutsideItem={dragFromOutsideItem}
+              newEvent={newEvent}
+              customOnDragOver={customOnDragOver}
+              myEvents={myEvents}
+              resizeEvent={resizeEvent}
+              moveEvent={moveEvent}
+              trip={props.trip}
+              onSelectEvent={onSelectEvent}
+            />
+          </section>
         </Grid>
       </Grid>
     </div>

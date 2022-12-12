@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import history from '../history';
 import { connect } from 'react-redux';
 import SuggestedParks from './SuggestedParks';
@@ -7,9 +7,7 @@ import SuggestedParks from './SuggestedParks';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-
-// react-bootstrap
-import Carousel from 'react-bootstrap/Carousel';
+import Joyride, { STATUS } from 'react-joyride';
 
 const nationalParks = [
   { parkName: 'Acadia National Park', parkCode: 'acad' },
@@ -76,7 +74,7 @@ const nationalParks = [
   { parkName: 'Zion National Park', parkCode: 'zion' },
 ];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     '&.Mui-focused .MuiInputLabel-outlined': {
       color: '#fdf9ec',
@@ -104,7 +102,24 @@ const useStyles = makeStyles((theme) => ({
 
 // COMPONENT
 export const Explore = (props) => {
-  const { firstName } = props;
+  const [{ run, steps }, setState] = useState({
+    run: !localStorage.getItem('exploreTourComplete'),
+    steps: [
+      {
+        target: '.my-first-step',
+        content: 'Select a national park to begin exploring!',
+      },
+      {
+        target: '#suggested-parks',
+        content: 'Or check out our suggested parks!',
+      },
+      {
+        target: '.yellowstone-activities',
+        content:
+          'Click on See Activities to see the park details and activities.',
+      },
+    ],
+  });
   const classes = useStyles();
 
   const options = nationalParks.map((option) => {
@@ -115,8 +130,28 @@ export const Explore = (props) => {
     };
   });
 
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setState({ run: false });
+    }
+    if (data.action === 'reset') {
+      localStorage.setItem('exploreTourComplete', true);
+    }
+  };
+
   return (
     <main>
+      <Joyride
+        run={run}
+        callback={handleJoyrideCallback}
+        steps={steps}
+        hideCloseButton={true}
+        showProgress
+        continuous
+      />
       <section id="explore">
         <h3>EXPLORE</h3>
         <div className="explore-page">
@@ -145,6 +180,7 @@ export const Explore = (props) => {
                 InputLabelProps={{
                   style: { color: '#fffdf8' },
                 }}
+                className="my-first-step"
               />
             )}
           />

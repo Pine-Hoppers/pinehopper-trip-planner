@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchParkActivities } from '../store';
+import Joyride, { STATUS } from 'react-joyride';
 
 // COMPONENT
 export class ParkActivities extends React.Component {
@@ -9,7 +10,15 @@ export class ParkActivities extends React.Component {
     super();
     this.state = {
       loading: true,
+      run: !localStorage.getItem('exploreParkTourComplete'),
+      steps: [
+        {
+          target: '.each-activity-layout',
+          content: 'Select a park activity to view the details!',
+        },
+      ],
     };
+    this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
   }
 
   async componentDidMount() {
@@ -18,6 +27,17 @@ export class ParkActivities extends React.Component {
     this.setState({ loading: false });
   }
 
+  handleJoyrideCallback = (data) => {
+    const { status } = data;
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      this.setState({ run: false });
+    }
+    if (data.action === 'reset') {
+      localStorage.setItem('exploreParkTourComplete', true);
+    }
+  };
   render() {
     if (this.state.loading) {
       return (
@@ -34,6 +54,14 @@ export class ParkActivities extends React.Component {
 
       return (
         <main>
+          <Joyride
+            run={this.state.run}
+            callback={this.handleJoyrideCallback}
+            steps={this.state.steps}
+            hideBackButton={true}
+            hideCloseButton={true}
+            showProgress
+          />
           {<h3>{activities.parkName}</h3>}
           {!hasActivities && (
             <p>

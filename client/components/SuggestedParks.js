@@ -46,7 +46,11 @@ export const SuggestedParks = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button
+            className="yellowstone-activities"
+            size="small"
+            color="primary"
+          >
             <Link to="/explore/yell/activities">See Activities</Link>
           </Button>
         </CardActions>

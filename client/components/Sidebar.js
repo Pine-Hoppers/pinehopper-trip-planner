@@ -45,7 +45,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
                 </CDBSidebarMenuItem>
               </NavLink>
               <NavLink exact to="/wishlist" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="bookmark">
+                <CDBSidebarMenuItem className="wishlist-link" icon="bookmark">
                   Wishlist
                 </CDBSidebarMenuItem>
               </NavLink>
