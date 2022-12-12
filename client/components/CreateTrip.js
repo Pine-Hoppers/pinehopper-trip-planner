@@ -168,21 +168,35 @@ export const CreateTrip = (props) => {
     );
     let removedEvent;
     if (r === true) {
+      // edit has trip activities
+      const isEdit = props.trip.activities[0];
       setMyEvents((prevState) => {
         const events = [...prevState];
-        const idx = events.indexOf(pEvent);
+        const idx = events.findIndex((event) => event.id === pEvent.id);
+
         removedEvent = events.splice(idx, 1);
         return events;
       });
-      let a = props.trip.activities.find((item) => {
-        return removedEvent[0].id === item.id;
+      const activities = isEdit
+        ? props.trip.activities
+        : props.originalWishlist;
+      let a = activities.find((item) => {
+        if (isEdit) {
+          return removedEvent[0].id === item.id;
+        } else {
+          return pEvent.id === item.activityId;
+        }
       });
 
-      props.removeActivityFromCalendar({
-        activityId: a.id,
-        activity: a,
-        userId: props.id,
-      });
+      if (isEdit) {
+        props.removeActivityFromCalendar({
+          activityId: a.id,
+          activity: a,
+          userId: props.id,
+        });
+      } else {
+        props.removeActivityFromCalendar(a);
+      }
 
       setRemovedActivities((prevState) => {
         return [...prevState, a];
@@ -190,7 +204,6 @@ export const CreateTrip = (props) => {
     }
   };
   const handleJoyrideCallback = (data) => {
-    console.log('data', data);
     const { status } = data;
     const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
 
@@ -280,6 +293,7 @@ export const CreateTrip = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    originalWishlist: state.originalWishlist,
     wishlist: state.wishlist,
     trip: state.singleTrip,
     id: state.auth.id,

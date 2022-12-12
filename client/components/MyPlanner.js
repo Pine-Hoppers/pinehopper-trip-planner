@@ -131,7 +131,7 @@ export class MyPlanner extends React.Component {
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
-                        ⛺ {trip.tripName}
+                        {trip.tripName}
                       </Typography>
                       <Typography gutterBottom variant="h6" component="h2">
                         <Badge pill bg="light" text="dark">

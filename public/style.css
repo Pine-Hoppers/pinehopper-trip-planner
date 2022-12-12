@@ -388,19 +388,19 @@ button.button-create-new-trip {
 }
 
 .createTrip main .all-activities-img {
-  height: 180px;
-  width: 250px;
+  height: 160px;
+  width: 210px;
 }
 
 .createTrip main .each-activity-layout {
-  width: 250px;
+  width: 210px;
 }
 
 .createTrip main .all-activities-layout {
   margin: 0;
   margin-top: 2em;
   justify-content: space-around;
-  gap: 2em;
+  gap: 1em;
 }
 
 .createTrip main #wishlist-section .each-activity-layout {
@@ -458,12 +458,12 @@ button.button-create-new-trip {
   display:inline-block;
   margin-right: 4em;
   margin-top:3em;
-  width:300px
+  width:260px
 }
 
 .myplanner-card {
   max-width:350px;
-  height:250px;
+  height:220px;
 
 }
 
@@ -490,7 +490,7 @@ button.button-create-new-trip {
 }
 
 .calendar-container {
-  width: 80%
+  width: 70%
 }
 .calendar-container h1 {
   margin-top:1em;
@@ -517,4 +517,9 @@ button.button-create-new-trip {
   border-radius: 4px;
   background-color: rgba(73, 64, 64, 0.42);
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.wishlist-activity-in-wishlist {
+  width:80%;
+  margin: 0 auto;
 }
