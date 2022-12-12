@@ -10,7 +10,7 @@ label {
   display: block;
 }
 
-nav a {
+#navbar nav a {
   display: inline-block;
   margin: 1em;
 }
@@ -33,13 +33,111 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
 }
 
+/* Sidebar */
+.with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sidebar-css {
+  /* flex-basis: 20rem; */
+  /* flex-basis: 17rem; */
+  flex-grow: 1;
+}
+
+.app-content {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+  min-height: 100vh;
+}
+
+.app-content a {
+  text-decoration: none;
+}
+
+/* header-bar */
+/* #header-bar {
+  width: 100%;
+  height: 75px;
+  background-color: #f6f7f6;
+  color: #4f514f;
+  margin-bottom: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+#header-bar p {
+  margin-bottom: 0;
+  padding-right: 30px;
+} */
+
 /* Explore Page */
-#explore-page {
+#explore {
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  width: 70%;
+  height: 350px;
+  /* margin-top: 20px;
+  width: 90%;
+  height: 550px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url('bryce_canyon.jpg');
+}
+
+#explore h3 {
+  color: white;
+  margin-bottom: 27px;
+}
+
+.explore-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#suggestions {
+  border-radius: 10px;
+  width: 70%;
+  height: 450px;
+  /* background-color: pink; */
+  margin-bottom: 60px;
+}
+
+#suggestions h4 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#suggested-parks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Carousel: center the carousel caption on slide */
+.item {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.carousel-caption {
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: initial;
+}
+
+.carousel-caption h3 {
+  margin-bottom: 27px;
 }
 
 /* Explore -- Park Activities Page */
@@ -93,13 +191,22 @@ main {
   padding-right: 5px;
 }
 
+.each-activity-detail p {
+  margin-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 button.button-create-new-trip {
   margin-bottom: 15px;
 }
 
 /* Single Activity Page */
 .single-activity {
-  width: 50%;
+  /* width: 50%; */
+  width: 80%;
 }
 
 .single-activity h3 {
@@ -108,6 +215,10 @@ button.button-create-new-trip {
   margin-top: 25px;
   margin-bottom: 5px;
 }
+
+/* .single-activity a {
+  text-decoration: none;
+} */
 
 #activity-header {
   display: flex;
@@ -271,6 +382,12 @@ button.button-create-new-trip {
 .button-container {
   display: flex;
   align-self: flex-end;
+}
+
+#wishlist-layout {
+  display: 'flex';
+  height: '100vh';
+  overflow: 'scroll initial';
 }
 
 .button-margin {

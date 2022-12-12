@@ -1,8 +1,15 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import history from '../history';
 import { connect } from 'react-redux';
+import SuggestedParks from './SuggestedParks';
+
+// Material UI Autocomplete
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+// react-bootstrap
+import Carousel from 'react-bootstrap/Carousel';
 
 const nationalParks = [
   { parkName: 'Acadia National Park', parkCode: 'acad' },
@@ -69,9 +76,36 @@ const nationalParks = [
   { parkName: 'Zion National Park', parkCode: 'zion' },
 ];
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '&.Mui-focused .MuiInputLabel-outlined': {
+      color: '#fdf9ec',
+    },
+  },
+  inputRoot: {
+    color: '#fdf9ec',
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#fffdf8',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#DAD7CD',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#fdf9ec',
+    },
+  },
+  clearIndicator: {
+    color: '#fffdf8',
+  },
+  popupIndicator: {
+    color: '#fffdf8',
+  },
+}));
+
 // COMPONENT
 export const Explore = (props) => {
-  const { username } = props;
+  const { firstName } = props;
+  const classes = useStyles();
 
   const options = nationalParks.map((option) => {
     const firstLetter = option.parkName[0].toUpperCase();
@@ -82,40 +116,53 @@ export const Explore = (props) => {
   });
 
   return (
-    <div id="explore-page">
-      <h3>EXPLORE</h3>
-      <Autocomplete
-        id="grouped-demo"
-        options={options.sort(
-          (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-        )}
-        groupBy={(option) => option.firstLetter}
-        getOptionLabel={(option) => option.parkName}
-        getOptionSelected={(option, value) => option.id === value.id}
-        style={{ width: 300 }}
-        onChange={async (event, newValue) => {
-          if (newValue !== null) {
-            setTimeout(() => {
-              history.push(`/explore/${newValue.parkCode}/activities`);
-            }, 450);
-          }
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Select a national park..."
-            variant="outlined"
+    <main>
+      <section id="explore">
+        <h3>EXPLORE</h3>
+        <div className="explore-page">
+          <Autocomplete
+            id="grouped-demo"
+            classes={classes}
+            options={options.sort(
+              (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+            )}
+            groupBy={(option) => option.firstLetter}
+            getOptionLabel={(option) => option.parkName}
+            getOptionSelected={(option, value) => option.id === value.id}
+            style={{ width: 300 }}
+            onChange={async (event, newValue) => {
+              if (newValue !== null) {
+                setTimeout(() => {
+                  history.push(`/explore/${newValue.parkCode}/activities`);
+                }, 450);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select a national park..."
+                variant="outlined"
+                InputLabelProps={{
+                  style: { color: '#fffdf8' },
+                }}
+              />
+            )}
           />
-        )}
-      />
-    </div>
+        </div>
+      </section>
+
+      <section id="suggestions">
+        <h4>SUGGESTED PARKS:</h4>
+        <SuggestedParks />
+      </section>
+    </main>
   );
 };
 
 // CONTAINER
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
   };
 };
 
