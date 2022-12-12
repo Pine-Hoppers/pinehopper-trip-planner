@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
-import { removeItemFromWishlist } from '../store';
+import { removeItemFromWishlist, dragActivityFromWishlist } from '../store';
+import Fab from '@material-ui/core/Fab';
 
 // Material UI: NativeSelect
 import { makeStyles } from '@material-ui/core/styles';
@@ -116,7 +117,7 @@ export const Wishlist = (props) => {
 
   return (
     <main>
-      <h1> Wishlist</h1>
+      <h1>Wishlist</h1>
 
       {wishlistArray.length !== 0 && (
         <div>
@@ -153,21 +154,28 @@ export const Wishlist = (props) => {
 
             return (
               <section key={item.id} id="wishlist-section">
-                <CloseIcon
-                  id="remove-icon"
-                  style={{ fontSize: 30 }}
-                  onClick={(event) => removeFromWishlist(event, item.id)}
-                />
+                <Fab
+                  color="extended"
+                  aria-label="remove"
+                  className="remove-fab"
+                  size="small"
+                >
+                  <CloseIcon
+                    fontSize="small"
+                    onClick={(event) => removeFromWishlist(event, item.id)}
+                  />
+                </Fab>
                 <div
                   className="each-activity-layout"
                   draggable="true"
-                  onDragStart={() =>
+                  onDragStart={() => {
+                    props.dragActivityFromWishlist(item.activity);
                     props.handleDragStart({
                       title: item.activity.activity_name,
                       name: item.activity.activity_name,
                       id: item.activity.id,
-                    })
-                  }
+                    });
+                  }}
                 >
                   <Link
                     to={`/explore/${item.activity.parkCode}/activities/${item.activity.activity_id}`}
@@ -192,11 +200,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     removeItemFromWishlist: (itemId) =>
       dispatch(removeItemFromWishlist(itemId)),
+    dragActivityFromWishlist: (activity) =>
+      dispatch(dragActivityFromWishlist(activity)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatch)(Wishlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Wishlist);

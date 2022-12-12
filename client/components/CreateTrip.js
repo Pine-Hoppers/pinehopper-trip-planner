@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { createTrip, updateTrip } from '../store/alltrips';
-import { fetchWishlist } from '../store/wishlist';
+import { fetchWishlist, removeActivityFromCalendar } from '../store/wishlist';
 import { fetchSingleTrip } from '../store/singleTrip';
 
 /**
@@ -16,6 +16,7 @@ import { fetchSingleTrip } from '../store/singleTrip';
 export const CreateTrip = (props) => {
   const [myTripName, setTripName] = useState();
   const [myEvents, setMyEvents] = useState([]);
+  const [myRemovedActivities, setRemovedActivities] = useState([]);
 
   useEffect(() => {
     if (props.match.params.tripId) {
@@ -56,7 +57,7 @@ export const CreateTrip = (props) => {
         tripName: myTripName,
         userId: props.id,
         startDate: myEvents[0].start,
-        endDate: myEvents[myEvents.length - 1].end,
+        endDate: myEvents[myEvents.length - 1].start,
         activities: matchActivities,
       });
     }
@@ -65,8 +66,9 @@ export const CreateTrip = (props) => {
         id: props.trip.id,
         tripName: myTripName,
         startDate: myEvents[0].start,
-        endDate: myEvents[myEvents.length - 1].end,
+        endDate: myEvents[myEvents.length - 1].start,
         activities: matchActivities,
+        removedActivities: myRemovedActivities,
       });
     }
     props.history.push('/my-planner');
@@ -89,7 +91,6 @@ export const CreateTrip = (props) => {
         setDraggedEvent(null);
         return;
       }
-
       const { name, id } = draggedEvent;
       const event = {
         title: name,
@@ -112,7 +113,6 @@ export const CreateTrip = (props) => {
       // allow draggable items to be dropped on cal, based on
       // whether event.preventDefault is called
       if (draggedEvent !== 'undroppable') {
-        console.log('preventDefault');
         dragEvent.preventDefault();
       }
     },
@@ -144,43 +144,79 @@ export const CreateTrip = (props) => {
     },
     [setMyEvents]
   );
+  const onSelectEvent = (pEvent) => {
+    const r = window.confirm(
+      'Would you like to move this activity back to wishlist?'
+    );
+    let removedEvent;
+    if (r === true) {
+      setMyEvents((prevState) => {
+        const events = [...prevState];
+        const idx = events.indexOf(pEvent);
+        removedEvent = events.splice(idx, 1);
+        return events;
+      });
+      let a = props.trip.activities.find((item) => {
+        return removedEvent[0].id === item.id;
+      });
+
+      props.removeActivityFromCalendar({
+        activityId: a.id,
+        activity: a,
+        userId: props.id,
+      });
+
+      setRemovedActivities((prevState) => {
+        return [...prevState, a];
+      });
+    }
+  };
 
   return (
-    <div>
+    <div className="createTrip">
       <Grid container spacing={3}>
-        <Grid item lg={11}>
-          <TextField
-            id="filled-basic"
-            label="Trip Name"
-            value={myTripName}
-            onChange={handleChange}
-            variant="filled"
-            autoFocus
-            required
-          />
+        <Grid item lg={10}>
+          <div className="margin-top-4em margin-left-2em">
+            <TextField
+              id="filled-basic"
+              label="Trip Name"
+              value={myTripName}
+              onChange={handleChange}
+              variant="filled"
+              autoFocus
+              required
+            />
+          </div>
         </Grid>
-        <Grid item lg={1}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleClick}
-            startIcon={<SaveIcon />}
-            disabled={!myTripName}
-          >
-            Save
-          </Button>
+        <Grid
+          item
+          lg={2}
+          justifyContent="flex-end"
+          className="button-container"
+        >
+          <div className="button-margin">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handleClick}
+              startIcon={<SaveIcon />}
+              disabled={!myTripName || !myEvents.length}
+            >
+              Save
+            </Button>
+          </div>
         </Grid>
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} m={12} lg={3}>
+        <Grid item xs={12} m={12} lg={5}>
           <Wishlist
             handleDragStart={handleDragStart}
             wishlist={props.wishlist}
           />
         </Grid>
-        <Grid item xs={12} m={12} lg={9}>
+        <Grid item xs={12} m={12} lg={7}>
           <Calendar
             onDropFromOutside={onDropFromOutside}
             dragFromOutsideItem={dragFromOutsideItem}
@@ -190,6 +226,7 @@ export const CreateTrip = (props) => {
             resizeEvent={resizeEvent}
             moveEvent={moveEvent}
             trip={props.trip}
+            onSelectEvent={onSelectEvent}
           />
         </Grid>
       </Grid>
@@ -210,6 +247,8 @@ const mapDispatchToProps = (dispatch, { history }) => ({
   updateTrip: (trip) => dispatch(updateTrip(trip, history)),
   getWishlist: (id) => dispatch(fetchWishlist(id)),
   getSingleTrip: (id) => dispatch(fetchSingleTrip(id)),
+  removeActivityFromCalendar: (activity) =>
+    dispatch(removeActivityFromCalendar(activity)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTrip);

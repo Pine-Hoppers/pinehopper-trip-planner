@@ -13,12 +13,10 @@ function Dnd(props) {
     <div className="calendar-container">
       <h1>{props.trip.tripName}</h1>
       <DragAndDropCalendar
-        selectable
         resizable
         dragFromOutsideItem={props.dragFromOutsideItem}
         onDropFromOutside={props.onDropFromOutside}
         onDragOver={props.customOnDragOver}
-        onSelectSlot={props.newEvent}
         draggableAccessor="isDraggable"
         defaultDate={props.trip.startDate}
         defaultView="month"
@@ -26,6 +24,7 @@ function Dnd(props) {
         onEventDrop={props.moveEvent}
         localizer={localizer}
         onEventResize={props.resizeEvent}
+        onSelectEvent={props.onSelectEvent}
       />
     </div>
   );
