@@ -161,7 +161,6 @@ export class MyPlanner extends React.Component {
                     <Button size="small" color="primary">
                       <Link to={`/my-planner/${trip.id}/edit`}>Edit</Link>
                     </Button>
-
                     <Button
                       size="small"
                       color="primary"

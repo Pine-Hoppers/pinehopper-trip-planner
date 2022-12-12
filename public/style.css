@@ -502,6 +502,7 @@ h2.activity-title {
   overflow-y:scroll;
   padding-top:2em;
   padding-right:1em;
+  width:100%;
 }
 
 .Calendar-title {
@@ -758,3 +759,13 @@ footer {
   margin-top: 10px;
 } */
 
+/* .app-content span {
+  color: #475841;
+} */
+
+.app-content span:hover {
+  color: #9FB8AD;
+} 
+/* .app-content span:active {
+  color: #475841;
+} */
