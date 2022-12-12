@@ -502,6 +502,7 @@ h2.activity-title {
   overflow-y:scroll;
   padding-top:2em;
   padding-right:1em;
+  width:100%;
 }
 
 .Calendar-title {
@@ -754,7 +755,7 @@ footer {
   margin-bottom: 0;
 }
 
-/* #auth-content footer {
-  margin-top: 10px;
-} */
+.delete-button-myplanner:hover {
+  color: #9FB8AD;
+} 
 

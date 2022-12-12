@@ -31,7 +31,7 @@ const theme = createTheme({
         color: '#ebeceb',
       },
       textPrimary: {
-        color: '#0d6efd',
+        color: '#475841',
       },
     },
   },
