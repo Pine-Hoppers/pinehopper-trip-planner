@@ -145,7 +145,9 @@ export const CreateTrip = (props) => {
     [setMyEvents]
   );
   const onSelectEvent = (pEvent) => {
-    const r = window.confirm('Would you like to remove this event?');
+    const r = window.confirm(
+      'Would you like to move this activity back to wishlist?'
+    );
     let removedEvent;
     if (r === true) {
       setMyEvents((prevState) => {
