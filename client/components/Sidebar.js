@@ -32,7 +32,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
 
           <CDBSidebarContent className="sidebar-content">
             <CDBSidebarMenu>
-              <CDBSidebarMenuItem icon="user">
+              <CDBSidebarMenuItem icon="user" id="welcome-msg">
                 Welcome, {firstName}
               </CDBSidebarMenuItem>
 
