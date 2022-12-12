@@ -85,7 +85,7 @@ main {
   margin-right: 0.5rem;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 .with-sidebar {
   display: flex;
   flex-wrap: wrap;
@@ -116,6 +116,11 @@ main {
   font-size: 1.1em;
 }
 
+/* Welcome Msg in Sidebar */
+#welcome-msg > div {
+  cursor: none;
+}
+
 /* header-bar */
 /* #header-bar {
   width: 100%;
@@ -140,9 +145,6 @@ main {
   margin-bottom: 60px;
   width: 70%;
   height: 350px;
-  /* margin-top: 20px;
-  width: 90%;
-  height: 550px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +166,6 @@ main {
   border-radius: 10px;
   width: 70%;
   height: 450px;
-  /* background-color: pink; */
   margin-bottom: 60px;
 }
 
@@ -235,9 +236,6 @@ main {
   width: 350px;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  /* border-radius: 9px; */
-  /* margin: 1em auto;
-  box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.25); */
 }
 
 .each-activity-detail {
@@ -261,7 +259,6 @@ button.button-create-new-trip {
 
 /* Single Activity Page */
 .single-activity {
-  /* width: 50%; */
   width: 80%;
 }
 
@@ -271,10 +268,6 @@ button.button-create-new-trip {
   margin-top: 25px;
   margin-bottom: 5px;
 }
-
-/* .single-activity a {
-  text-decoration: none;
-} */
 
 #activity-header {
   display: flex;
@@ -297,19 +290,19 @@ button.button-create-new-trip {
 #bookmark:hover,
 #bookmark-solid:hover {
   transform: scale(1.081);
+  color: #9fb8ad;
+  cursor: pointer;
 }
 
 #bookmark:active,
 #bookmark-solid:active {
   transform: scale(0.95);
+  color: #475841;
+  cursor: pointer;
 }
 
 #activity-img {
   width: 100%;
-  /* max-width: 950px;
-  max-height: 535px;
-  min-width: 262px;
-  min-height: 175px; */
 }
 
 .single-activity figcaption {
@@ -317,18 +310,6 @@ button.button-create-new-trip {
   font-style: italic;
   padding-top: 7px;
 }
-
-/* #box {
-  position: relative;
-}
-
-#bookmark {
-  width: 37px;
-  height: 37px;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-} */
 
 .single-activity a:link {
   color: #475841;
@@ -350,9 +331,13 @@ button.button-create-new-trip {
 }
 
 .activity-title {
-  font-size: 25px;
   margin-bottom: 11px;
   padding-left: 5px;
+}
+
+h2.activity-title {
+  font-size: 25px;
+  color: #475841;
 }
 
 .park-title {
@@ -404,7 +389,7 @@ button.button-create-new-trip {
 
 .createTrip main #wishlist-section .each-activity-layout {
   margin-left: 0;
-  margin-right:0;
+  margin-right: 0;
   align-items: flex-start;
 }
 
@@ -441,11 +426,11 @@ button.button-create-new-trip {
   align-self: flex-end;
 }
 
-#wishlist-layout {
+/* #wishlist-layout {
   display: 'flex';
   height: '100vh';
   overflow: 'scroll initial';
-}
+} */
 
 .button-margin {
   display: inline-block;
@@ -453,11 +438,193 @@ button.button-create-new-trip {
   margin-right: 2em;
 }
 .myplanner-card-container {
-  display:inline-block;
+  display: inline-block;
   margin-right: 2em;
-  
 }
 .myplanner-card {
-  max-width:260px;
-  height:180px;
+  max-width: 260px;
+  height: 180px;
+}
+
+/* Login / Signup Pages */
+#no-sidebar {
+  height: 60px;
+  background-color: #4f514f;
+  width: 100vw;
+}
+
+.auth-content {
+  /* background-color: #dad7cd; */
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 65px;
+}
+
+.auth-div {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 70%;
+  height: 630px;
+  /* background-color: #d0dac1; */
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#auth-image {
+  background-image: url('auth-pic.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60%;
+  z-index: 1;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+/* Form & Button Styling */
+#auth-form-section {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  width: 40%;
+  background-color: #e3e1d8;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#auth-form-section h2 {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: #333;
+}
+
+#auth-form-section p {
+  margin-top: 5px;
+}
+
+.auth-form div {
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-form input {
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  width: 240px;
+  /* border-color: #475841; */
+  border-color: #79766d;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border: 2px solid #9fb8ad;
+}
+
+/* login / sign up button */
+.auth-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+  height: 45px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  background-color: #475841;
+  color: #ebeceb;
+  line-height: 1.2;
+  border: none;
+  border-radius: 30px;
+  box-shadow: #9fb8ad 2px 2px 0 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.auth-btn:hover {
+  background-color: #9fb8ad;
+  transform: scale(1.09);
+}
+
+.auth-btn:active {
+  background-color: #9fb8ad;
+  transform: scale(0.95);
+}
+
+/* form link styling */
+a.auth-links {
+  /* margin-top: 25px;
+  font-size: 16px; */
+  text-decoration: none;
+}
+
+a.auth-links:link {
+  color: #475841;
+}
+
+/* visited link */
+a.auth-links:visited {
+  color: #475841;
+}
+
+/* mouse over link */
+a.auth-links:hover {
+  color: #9fb8ad;
+}
+
+/* selected link */
+a.auth-links:active {
+  color: #475841;
+}
+
+/* login / signup error msg */
+#login-error-msg,
+#signup-error-msg {
+  margin-bottom: 5px;
+  color: #9c9b95;
+}
+
+/* login/signup top bar */
+a.top-bar-logo {
+  text-decoration: none;
+  color: #e6e8e6;
+  font-family: 'Overpass', sans-serif;
+  letter-spacing: 0.12em;
+  font-size: 0.6em;
+  margin-left: 1em;
+}
+
+a.top-bar-logo:link {
+  color: #fff;
+}
+
+/* visited link */
+a.top-bar-logo:visited {
+  color: #fff;
+}
+
+/* mouse over link */
+a.top-bar-logo:hover {
+  color: #fff;
+}
+
+/* selected link */
+a.top-bar-logo:active {
+  color: #fff;
 }

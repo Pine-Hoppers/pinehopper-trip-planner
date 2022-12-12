@@ -23,47 +23,51 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div className="app-content">
+      <>
         {isLoggedIn ? (
-          <Switch>
-            {/* <Route path="/home" component={Home} /> */}
-            <Route exact path="/explore" component={Explore} />
-            <Route exact path="/wishlist" component={WishlistActivity} />
-            <Route
-              path="/explore/:parkCode/activities/:activityId"
-              component={SingleActivity}
-            />
-            <Route
-              path="/explore/:parkCode/activities"
-              component={ParkActivities}
-            />
-            <Route exact path="/my-planner" component={MyPlanner} />
-            <Route
-              exact
-              path="/my-planner/create-trip"
-              component={CreateTrip}
-            />
-            <Route
-              exact
-              path="/my-planner/:tripId"
-              component={MySinglePlanner}
-            />
-            <Route
-              exact
-              path="/my-planner/:tripId/:mode"
-              component={CreateTrip}
-            />
+          <div className="app-content">
+            <Switch>
+              {/* <Route path="/home" component={Home} /> */}
+              <Route exact path="/explore" component={Explore} />
+              <Route exact path="/wishlist" component={WishlistActivity} />
+              <Route
+                path="/explore/:parkCode/activities/:activityId"
+                component={SingleActivity}
+              />
+              <Route
+                path="/explore/:parkCode/activities"
+                component={ParkActivities}
+              />
+              <Route exact path="/my-planner" component={MyPlanner} />
+              <Route
+                exact
+                path="/my-planner/create-trip"
+                component={CreateTrip}
+              />
+              <Route
+                exact
+                path="/my-planner/:tripId"
+                component={MySinglePlanner}
+              />
+              <Route
+                exact
+                path="/my-planner/:tripId/:mode"
+                component={CreateTrip}
+              />
 
-            <Redirect to="/explore" />
-          </Switch>
+              <Redirect to="/explore" />
+            </Switch>
+          </div>
         ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
+          <div className="auth-content">
+            <Switch>
+              <Route path="/" exact component={Login} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+            </Switch>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }

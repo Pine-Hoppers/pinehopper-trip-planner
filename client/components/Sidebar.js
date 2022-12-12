@@ -79,16 +79,12 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
     );
   } else {
     return (
-      <div id="navbar">
-        <h1>pinehopper</h1>
-        {/* The navbar will show these links before you log in */}
-        {/* <nav>
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        </nav> */}
-        <hr />
+      <div id="no-sidebar">
+        <h1>
+          <Link className="top-bar-logo" to="/">
+            PINEHOPPER
+          </Link>
+        </h1>
       </div>
     );
   }
