@@ -162,6 +162,7 @@ export class MyPlanner extends React.Component {
                       <Link to={`/my-planner/${trip.id}/edit`}>Edit</Link>
                     </Button>
                     <Button
+                      className="delete-button-myplanner"
                       size="small"
                       color="primary"
                       onClick={() => this.props.deleteTrip(trip.id)}

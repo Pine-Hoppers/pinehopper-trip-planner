@@ -755,17 +755,7 @@ footer {
   margin-bottom: 0;
 }
 
-/* #auth-content footer {
-  margin-top: 10px;
-} */
-
-/* .app-content span {
-  color: #475841;
-} */
-
-.app-content span:hover {
+.delete-button-myplanner:hover {
   color: #9FB8AD;
 } 
-/* .app-content span:active {
-  color: #475841;
-} */
+
