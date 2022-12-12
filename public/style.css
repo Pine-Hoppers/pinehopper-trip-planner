@@ -134,7 +134,7 @@ main {
 
 /* Welcome Msg in Sidebar */
 #welcome-msg > div {
-  cursor: none;
+  cursor: default;
 }
 
 /* Explore Page */
