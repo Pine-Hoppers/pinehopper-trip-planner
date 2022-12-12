@@ -215,7 +215,7 @@ main {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  color: #e6e8e6;
+  color: white;
   padding-top: 135px;
   margin-top: 40px;
   font-size: 19px;
@@ -237,7 +237,7 @@ a#back-to-explore:visited {
 
 /* mouse over link */
 a#back-to-explore:hover {
-  color: #e6e8e6;
+  color: white;
 }
 
 /* selected link */
