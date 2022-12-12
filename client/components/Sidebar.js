@@ -22,7 +22,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
         <CDBSidebar textColor="#fff" backgroundColor="#4f514f">
           <CDBSidebarHeader prefix={<i className="fa-solid fa-bars"></i>}>
             <a
-              href="/home"
+              href="/explore"
               className="text-decoration-none"
               style={{ color: 'inherit' }}
             >
@@ -32,13 +32,10 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
 
           <CDBSidebarContent className="sidebar-content">
             <CDBSidebarMenu>
-              <CDBSidebarMenuItem icon="user">
+              <CDBSidebarMenuItem icon="user" id="welcome-msg">
                 Welcome, {firstName}
               </CDBSidebarMenuItem>
 
-              <NavLink exact to="/home" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="house">Home</CDBSidebarMenuItem>
-              </NavLink>
               <NavLink exact to="/explore" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="magnifying-glass">
                   Explore
@@ -74,7 +71,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
                 padding: '20px 5px',
               }}
             >
-              Sidebar Footer
+              <img src="pine.png" style={{ width: '60px' }} />
             </div>
           </CDBSidebarFooter>
         </CDBSidebar>
@@ -82,16 +79,13 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
     );
   } else {
     return (
-      <div id="navbar">
-        <h1>pinehopper</h1>
-        {/* The navbar will show these links before you log in */}
-        {/* <nav>
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        </nav> */}
-        <hr />
+      <div id="no-sidebar">
+        <h1>
+          <Link className="top-bar-logo" to="/">
+            <img src="pine.png" style={{ width: '45px' }} />
+            PINEHOPPER
+          </Link>
+        </h1>
       </div>
     );
   }

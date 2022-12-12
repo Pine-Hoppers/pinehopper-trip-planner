@@ -8,47 +8,62 @@ const SignupForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
-          <input name="firstName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name</small>
-          </label>
-          <input name="lastName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <h4>Already have an account?</h4>
-      <Link to="/login">
-        <button>Login Here</button>
-      </Link>
+    <div className="auth-div">
+      <div id="auth-image"></div>
+      <div id="auth-form-section">
+        <h2>SIGN UP</h2>
+        <form className="auth-form" onSubmit={handleSubmit} name={name}>
+          <div>
+            <input
+              name="firstName"
+              placeholder="First Name *"
+              type="text"
+              required
+            />
+          </div>
+          <div>
+            <input
+              name="lastName"
+              placeholder="Last Name *"
+              type="text"
+              required
+            />
+          </div>
+          <div>
+            <input name="email" placeholder="Email *" type="email" required />
+          </div>
+          <div>
+            <input
+              name="username"
+              placeholder="Username *"
+              type="text"
+              required
+            />
+          </div>
+          <div>
+            <input
+              name="password"
+              placeholder="Password *"
+              type="password"
+              required
+            />
+          </div>
+          <div>
+            <button className="auth-btn" type="submit">
+              {displayName}
+            </button>
+          </div>
+          {error && error.response && (
+            <div id="signup-error-msg"> {error.response.data} </div>
+          )}
+        </form>
+        <p>
+          Already have an account?{' '}
+          <Link className="auth-links" to="/login">
+            Login Here
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

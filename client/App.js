@@ -6,7 +6,6 @@ import Routes from './Routes';
 
 const App = () => {
   return (
-    // <div style={{ height: '100vh', display: 'flex' }}>
     <div>
       <div className="with-sidebar">
         <Sidebar />
