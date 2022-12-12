@@ -110,6 +110,22 @@ main {
   text-decoration: none;
 }
 
+.app-content a:link {
+  color: #475841;
+}
+
+.app-content a:visited {
+  color: #475841;
+}
+
+.app-content a:hover {
+  color: #9fb8ad;
+}
+
+.app-content a:active {
+  color: #475841;
+}
+
 .head-div a {
   font-family: 'Overpass', sans-serif;
   letter-spacing: 0.15em;
@@ -475,6 +491,7 @@ h2.activity-title {
   align-items: stretch;
   flex-wrap: wrap;
   width: 70%;
+  min-width: 750px;
   height: 630px;
   /* background-color: #d0dac1; */
   border-radius: 20px;
