@@ -11,6 +11,7 @@ import ParkActivities from './components/ParkActivities';
 import SingleActivity from './components/SingleActivity';
 import CreateTrip from './components/CreateTrip';
 import WishlistActivity from './components/WishlistActivity';
+import Footer from './components/Footer';
 import { me } from './store';
 
 // COMPONENT
@@ -57,6 +58,7 @@ class Routes extends Component {
 
               <Redirect to="/explore" />
             </Switch>
+            <Footer />
           </div>
         ) : (
           <div className="auth-content">
@@ -65,6 +67,7 @@ class Routes extends Component {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
             </Switch>
+            <Footer />
           </div>
         )}
       </>
