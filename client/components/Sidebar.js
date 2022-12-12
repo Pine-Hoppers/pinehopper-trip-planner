@@ -22,7 +22,7 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
         <CDBSidebar textColor="#fff" backgroundColor="#4f514f">
           <CDBSidebarHeader prefix={<i className="fa-solid fa-bars"></i>}>
             <a
-              href="/home"
+              href="/explore"
               className="text-decoration-none"
               style={{ color: 'inherit' }}
             >
@@ -36,9 +36,6 @@ const Sidebar = ({ handleClick, isLoggedIn, firstName }) => {
                 Welcome, {firstName}
               </CDBSidebarMenuItem>
 
-              <NavLink exact to="/home" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="house">Home</CDBSidebarMenuItem>
-              </NavLink>
               <NavLink exact to="/explore" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="magnifying-glass">
                   Explore

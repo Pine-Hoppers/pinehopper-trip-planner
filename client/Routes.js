@@ -26,7 +26,7 @@ class Routes extends Component {
       <div className="app-content">
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
+            {/* <Route path="/home" component={Home} /> */}
             <Route exact path="/explore" component={Explore} />
             <Route exact path="/wishlist" component={WishlistActivity} />
             <Route
@@ -54,7 +54,7 @@ class Routes extends Component {
               component={CreateTrip}
             />
 
-            <Redirect to="/home" />
+            <Redirect to="/explore" />
           </Switch>
         ) : (
           <Switch>
