@@ -506,6 +506,7 @@ h2.activity-title {
   font-weight: 650;
   letter-spacing: 0.02em;
   color: #333;
+  margin-top: 5px;
 }
 
 #auth-form-section p {

@@ -85,9 +85,9 @@ export class SingleActivity extends React.Component {
   render() {
     if (this.state.loading) {
       return (
-        <div>
+        <main>
           <h3>Loading...</h3>
-        </div>
+        </main>
       );
     } else {
       const { singleActivity } = this.props;
