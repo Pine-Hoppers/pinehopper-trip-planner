@@ -28,6 +28,11 @@ Deployed link: https://pinehopper.onrender.com/
 - [React](https://reactjs.org)
 - [Redux](https://redux.js.org)
 - [National Park Service API](https://www.nps.gov/subjects/developer/api-documentation.htm#/)
+- [React-big-calendar](https://github.com/jquense/react-big-calendar)
+- [React Joyride](https://react-joyride.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Material-UI](https://v4.mui.com/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
 - [Render.com](https://www.render.com/)
 - [Bit.io](https://bit.io/)
 
