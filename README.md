@@ -42,7 +42,7 @@ Deployed link: https://pinehopper.onrender.com/
 [Lu Miao](https://www.linkedin.com/in/lu-miao-6o6/)<br />
 [Nadia Khristean Harris](https://www.linkedin.com/in/nadia-khristean-harris/)
 
-## Pinehopper Profile Page
+## Preview of Pinehopper
 
 <div align="center">
     <img src="./images/wireframe1.png" alt="Pinehopper Wireframe" width="500" />
