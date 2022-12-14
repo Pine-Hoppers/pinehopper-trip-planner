@@ -1,7 +1,7 @@
 {
   "name": "PineHopper",
   "version": "2.0.0",
-  "description": "PineHopper: app for planning national parks",
+  "description": "A national park trip-planner web application that allows users to create an itinerary of park activities",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

@@ -1,18 +1,18 @@
 <div align="center">
-  <img src="./images/PINEHOPPER.png" alt="Pinehopper Logo" width="300" />
+  <img src="./images/PINEHOPPER.png" alt="Pinehopper Logo" />
 </div>
 
 ## Pinehopper Deployed Website
 
 This repo is home for the codebase that powers Pinehopper, a national park trip-planner web application. Users will be able to:
 
-- saerch and browse park activities
+- search and browse park activities
 - view more details about each activity and bookmark it to their wishlist
 - users will be able to plan and create trips with their bookmarked items
 
 Deployed link: https://pinehopper.onrender.com/
 
-## Project setup
+## Project Setup
 
 1. Install NPM packages `npm install`
 2. Create database `createdb PineHopper` and seed file `npm run seed`
