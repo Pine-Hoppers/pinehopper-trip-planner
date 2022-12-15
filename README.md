@@ -44,11 +44,14 @@ Deployed link: https://pinehopper.onrender.com/
 
 ## Preview of Pinehopper
 
+Explore / Park Activities / Wishlist view:
+
 <div align="center">
-    Explore / Park Activities / Wishlist view:
-    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper, part 1" width="650"/>
+    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper, part 1" width="650" />
+</div>
 
-    My Planner / Create Trip view:
-    <img src="./images/pinehopper-preview-2.gif" alt="Preview of Pinehopper, part 2" width="650"/>
+My Planner / Create Trip view:
 
+<div align="center">
+    <img src="./images/pinehopper-preview-2.gif" alt="Preview of Pinehopper, part 2" width="650" />
 </div>
