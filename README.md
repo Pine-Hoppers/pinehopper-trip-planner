@@ -7,8 +7,8 @@
 This repo is home for the codebase that powers Pinehopper, a national park trip-planner web application. Users will be able to:
 
 - search and browse park activities
-- view more details about each activity and bookmark it to their wishlist
-- users will be able to plan and create trips with their bookmarked items
+- view details about each activity and bookmark it to their wishlist
+- drag and drop any bookmarked activity from their wishlist to the Calendar to create trips
 
 Deployed link: https://pinehopper.onrender.com/
 
@@ -45,5 +45,6 @@ Deployed link: https://pinehopper.onrender.com/
 ## Preview of Pinehopper
 
 <div align="center">
-    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper" width="650"/>
+    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper, part 1" width="650"/>
+    <img src="./images/pinehopper-preview-2.gif" alt="Preview of Pinehopper, part 2" width="650"/>
 </div>
