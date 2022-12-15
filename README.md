@@ -45,5 +45,5 @@ Deployed link: https://pinehopper.onrender.com/
 ## Preview of Pinehopper
 
 <div align="center">
-    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper" width="500" />
+    <img src="./images/pinehopper-preview.gif" alt="Preview of Pinehopper" />
 </div>
