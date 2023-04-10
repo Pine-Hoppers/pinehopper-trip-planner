@@ -6,30 +6,20 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 
 export class Home extends React.Component {
   constructor() {
     super();
-    this.state = {
-      hasForm: false,
-    };
-    this.isClicked = this.isClicked.bind(this);
   }
   async componentDidMount() {
     await this.props.getTrips(this.props.id);
   }
-  isClicked() {
-    this.setState({ hasForm: true });
-  }
 
   render() {
     const { trips } = this.props;
-    const { firstName } = this.props;
     let pastTripArr = [];
     let upcomingTripArr = [];
 
@@ -122,7 +112,6 @@ export class Home extends React.Component {
 
 const mapState = (state) => {
   return {
-    firstName: state.auth.firstName,
     trips: state.trips,
     id: state.auth.id,
   };

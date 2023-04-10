@@ -15,11 +15,8 @@ describe('User routes', () => {
   });
 
   describe('/api/users/', () => {
-    it('GET /api/users', async () => {
-      const res = await request(app).get('/api/users').expect(200);
-
-      expect(res.body).to.be.an('array');
-      expect(res.body.length).to.equal(2);
+    it('GET /api/users - 401 Unauthorized', async () => {
+      await request(app).get('/api/users').expect(401);
     });
   }); // End describe('/api/users')
 }); // End describe('User routes')

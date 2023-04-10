@@ -10,13 +10,11 @@ const adapter = new Adapter();
 enzyme.configure({ adapter });
 
 describe('Home', () => {
-  let home;
+  let home = shallow(<Home getTrips={() => {}} trips={[]} id={1} />);
 
-  beforeEach(() => {
-    home = shallow(<Home username="cody" />);
-  });
-
-  it('renders the email in an h3', () => {
-    expect(home.find('h3').text()).to.be.equal('Welcome, cody');
+  it('renders button to create new trip', () => {
+    expect(home.find('.button-create-new-trip').text()).to.be.equal(
+      'Create New Trip'
+    );
   });
 });

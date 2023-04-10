@@ -14,7 +14,6 @@ class SingleTrip extends React.Component {
   constructor() {
     super();
     this.state = {
-      hasForm: false,
       selectedEvent: undefined,
       run: true,
       steps: [
@@ -26,7 +25,6 @@ class SingleTrip extends React.Component {
       ],
     };
     this.handleSelected = this.handleSelected.bind(this);
-    this.isClicked = this.isClicked.bind(this);
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
   }
 
@@ -51,10 +49,6 @@ class SingleTrip extends React.Component {
 
     // redirect user to the SingleActivity page
     history.push(`/explore/${parkCode}/activities/${activityId}`);
-  }
-
-  isClicked() {
-    this.setState({ hasForm: true });
   }
   handleJoyrideCallback = (data) => {
     const { status } = data;
